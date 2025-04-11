@@ -1,0 +1,985 @@
+-- Merging decision tree log ---
+application
+INJECTED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:21:5-52:19
+INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml
+MERGED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-46:19
+MERGED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-46:19
+MERGED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:5-26:19
+MERGED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:5-26:19
+MERGED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-33:19
+MERGED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-33:19
+MERGED from [:url_launcher_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-12:19
+MERGED from [:url_launcher_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-12:19
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3104d796b1a3ed91fafcc9a1f11d7f54\transformed\material-1.4.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3104d796b1a3ed91fafcc9a1f11d7f54\transformed\material-1.4.0\AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8f1dc66eedc2cdc2450ed7958c082188\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8f1dc66eedc2cdc2450ed7958c082188\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
+MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:28:5-143:19
+MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:28:5-143:19
+MERGED from [androidx.window:window:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d4b97dc46916357cdc34e74a3ad5e8d\transformed\jetified-window-1.2.0\AndroidManifest.xml:22:5-29:19
+MERGED from [androidx.window:window:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d4b97dc46916357cdc34e74a3ad5e8d\transformed\jetified-window-1.2.0\AndroidManifest.xml:22:5-29:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1c28dc2cb03551257b6d6eff62fa91bd\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1c28dc2cb03551257b6d6eff62fa91bd\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8c39e131cd6360ca62152b34472b0942\transformed\lifecycle-extensions-2.2.0\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8c39e131cd6360ca62152b34472b0942\transformed\lifecycle-extensions-2.2.0\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b6f594cb9222328dc4747c839d8c7a\transformed\jetified-lifecycle-process-2.8.6\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b6f594cb9222328dc4747c839d8c7a\transformed\jetified-lifecycle-process-2.8.6\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8e8ba6e30032914062c4f80277bc4918\transformed\room-runtime-2.5.0\AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8e8ba6e30032914062c4f80277bc4918\transformed\room-runtime-2.5.0\AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f3a7fb2c42ad819c806b7f36dee41bee\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f3a7fb2c42ad819c806b7f36dee41bee\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c2e3a0c4e56e44eaacb069092cbd41f0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c2e3a0c4e56e44eaacb069092cbd41f0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+	android:extractNativeLibs
+		INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+	android:name
+		INJECTED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml
+manifest
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:1:1-64:12
+MERGED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:1:1-64:12
+INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+MERGED from [:just_audio] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\just_audio-0.9.43\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:audio_session] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\audio_session-0.1.23\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:connectivity_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\connectivity_plus-6.1.2\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:device_info_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\device_info_plus-11.2.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:external_path] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\external_path-2.0.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_downloader] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_downloader-1.11.8\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-16:12
+MERGED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-48:12
+MERGED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-28:12
+MERGED from [:fluttertoast] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\fluttertoast-8.2.10\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:wakelock_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\wakelock_plus-1.2.10\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:package_info_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\package_info_plus-8.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:path_provider_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.15\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:permission_handler_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\permission_handler_android-12.0.13\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-35:12
+MERGED from [:shared_preferences_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\shared_preferences_android-2.4.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:sqflite_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\sqflite_android-2.4.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:url_launcher_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-14:12
+MERGED from [:video_player_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\video_player_android-2.7.17\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:webview_flutter_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\webview_flutter_android-4.3.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.preference:preference:1.2.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\e894efafcbee88dd0c4bfa561c2e31d1\transformed\preference-1.2.1\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.dagger:dagger-android-support:2.52] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d31391eacfbb92757567311ec1235e23\transformed\jetified-dagger-android-support-2.52\AndroidManifest.xml:16:1-19:12
+MERGED from [androidx.navigation:navigation-common:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5239deb6a99cf1d256454d7bb9517404\transformed\navigation-common-2.8.3\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\cdae1b9194a1712cf652fffc3f7a2679\transformed\navigation-common-ktx-2.8.3\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-runtime:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8dbbddd500b6017f96b1bfc88c4f4d83\transformed\navigation-runtime-2.8.3\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2aa6d313fdb164838bbc4da10becfb67\transformed\navigation-runtime-ktx-2.8.3\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-fragment:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\052551a3b50f2ea06b444dd6122f6486\transformed\navigation-fragment-2.8.3\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\16d02602ecd66d4393b522caca2f224f\transformed\navigation-fragment-ktx-2.8.3\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-ui-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ac1dc39feaa39d7c8ca9aea3b12dc3a7\transformed\navigation-ui-ktx-2.8.3\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigation:navigation-ui:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\0386f16b8ebda566c501b10b4b1c6a41\transformed\navigation-ui-2.8.3\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3104d796b1a3ed91fafcc9a1f11d7f54\transformed\material-1.4.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8f1dc66eedc2cdc2450ed7958c082188\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\25d30b92ffaeac86623c5ed922e54535\transformed\jetified-appcompat-resources-1.7.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.appcompat:appcompat:1.7.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c1b3ce3820076a842afff0014c166658\transformed\appcompat-1.7.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d0ea881e02b26d52998ed41ec0a263f8\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.7.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1f5a7aeba581cb025bc79760e85a1846\transformed\media-1.7.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:17:1-145:12
+MERGED from [androidx.browser:browser:1.8.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\567594e663fca228c53643bfc1d9fe2e\transformed\browser-1.8.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\12de58488c97388785d5613b170736b0\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\efce1b8ff39cf902ed3780ce7b6678f9\transformed\swiperefreshlayout-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-extractor:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\0142c7a48abad18127146d61bc173368\transformed\jetified-media3-extractor-1.4.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-container:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ff5dab06934cb97d96b618568acda975\transformed\jetified-media3-container-1.4.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-datasource:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d148f53c50f57a059fb1d1b678749ea9\transformed\jetified-media3-datasource-1.4.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-decoder:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\65c162d64f6620aad492d17b34615a13\transformed\jetified-media3-decoder-1.4.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-database:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b14f54df05e405fb0076359cf1e9dd\transformed\jetified-media3-database-1.4.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-common:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c5c75bcde712257ce7f3b4dfaa6da06d\transformed\jetified-media3-common-1.4.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.media3:media3-exoplayer-dash:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2915edd177b1b006d9902e7d2ae16f17\transformed\jetified-media3-exoplayer-dash-1.4.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-exoplayer-hls:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ff2921844eccb78c8e8040babb38572d\transformed\jetified-media3-exoplayer-hls-1.4.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-exoplayer-smoothstreaming:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\84b2c63447abf3b12b1543f6858d745b\transformed\jetified-media3-exoplayer-smoothstreaming-1.4.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-exoplayer-rtsp:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\66427af9d7deec7a00699b2a120ccbf1\transformed\jetified-media3-exoplayer-rtsp-1.4.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\082430a14f45436f46f3e33fafd04c96\transformed\jetified-media3-exoplayer-1.4.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.webkit:webkit:1.12.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\805a4017ba41219860e20e1baf76a3af\transformed\webkit-1.12.1\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8383e5e5f6ea562e6b8bb6f2eba8fb9a\transformed\slidingpanelayout-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.window:window:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d4b97dc46916357cdc34e74a3ad5e8d\transformed\jetified-window-1.2.0\AndroidManifest.xml:17:1-31:12
+MERGED from [androidx.window:window-java:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c126c69d7fb51d1b57b69ff03dd43f4e\transformed\jetified-window-java-1.2.0\AndroidManifest.xml:17:1-21:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a520715ab20adf304b2489976ad6c900\transformed\jetified-emoji2-views-helper-1.3.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1c28dc2cb03551257b6d6eff62fa91bd\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\24be661a2c7341677b5d3190b65d0770\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c2ea7ebb0ff1d6f4341a31a37465d280\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8c39e131cd6360ca62152b34472b0942\transformed\lifecycle-extensions-2.2.0\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.fragment:fragment-ktx:1.7.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\305d22f84cc4d20ea2ace689f1d728d8\transformed\jetified-fragment-ktx-1.7.1\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a34b4fe85cff8c592e18fb2e610d58ee\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.7.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8ebb0f057801b8ad84c4e499a88f331b\transformed\fragment-1.7.1\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity-ktx:1.8.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a4fe4420c5a0d891647c3fb355fe6c9f\transformed\jetified-activity-ktx-1.8.1\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity:1.8.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\15fa9b3a14c59a232ee883099e452adf\transformed\jetified-activity-1.8.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f023ef3246752c06737a77138cb71930\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5788cc091472dd2fdeba6f920ddaa3ff\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\6552c918599845a3f65cc7faf0f6cc2c\transformed\drawerlayout-1.1.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3c0a96e61c274434000b98a785d27320\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\9e6e3e7d97b033fe4939c51c9fcfd57f\transformed\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f86c3f02bf3c7c96292f5a5b6a43a36a\transformed\customview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c938b05e4b27b4c30160dcffea5bc4e9\transformed\transition-1.4.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f9a223c42eae48f7444a197d374b74e6\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a29d6b02937a3859babe3d7e56aadc84\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\245b9b9bfad277aca5e6e22fc2e99af8\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1fc5a5f4ba6440b87580967a6cfdede8\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2606d52d5ea9bfd2e96d9785b6d5b5de\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5d758d26ecb589ba20950307bf503261\transformed\jetified-lifecycle-runtime-ktx-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ff978c769d71dc8d5dd63c57f9d78bbf\transformed\lifecycle-runtime-2.8.6\AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\b931cb4c6d55f3685dc4e7f47263b5d3\transformed\jetified-lifecycle-runtime-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\7d3be90d9dcd85e38bdbf52791451254\transformed\jetified-lifecycle-livedata-core-ktx-2.8.6\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\b8b17c8f0623b77c04870c7311578e62\transformed\lifecycle-viewmodel-2.8.6\AndroidManifest.xml:2:1-5:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\b0f73e13f9a7be1c2d10755dc39be951\transformed\jetified-lifecycle-viewmodel-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\bfc7751ebee204331d0b224bee4a318a\transformed\lifecycle-livedata-core-2.8.6\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\71a4d29b59bf47e352e53113d4be9bb8\transformed\jetified-lifecycle-service-2.8.6\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b6f594cb9222328dc4747c839d8c7a\transformed\jetified-lifecycle-process-2.8.6\AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\99adfa4407da0033f0543f9214317540\transformed\lifecycle-livedata-2.8.6\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\6ce4f1ca1abd926e3586a699179c555b\transformed\jetified-lifecycle-viewmodel-ktx-2.8.6\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\76df22bcb18e9c18b3c5939ba25c8bc1\transformed\jetified-lifecycle-viewmodel-savedstate-2.8.6\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core-ktx:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\08ec7daa2a5028b79063bbcfd7dbbfd9\transformed\jetified-core-ktx-1.13.1\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.flexbox:flexbox:3.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5b93b9d48d046704468f0d77f4139cab\transformed\jetified-flexbox-3.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.room:room-ktx:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\7b7176111b16dcc48c408f48f2935599\transformed\jetified-room-ktx-2.5.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8e8ba6e30032914062c4f80277bc4918\transformed\room-runtime-2.5.0\AndroidManifest.xml:17:1-31:12
+MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\67ea23b9421c4c3801d0901c86672814\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.databinding:viewbinding:8.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\7bdeb52046efd50685e4dd4a0d2267d9\transformed\jetified-viewbinding-8.1.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f3a7fb2c42ad819c806b7f36dee41bee\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1e9d9a2e7ee806b6d15cb974ee2066fb\transformed\jetified-tracing-1.2.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\0df5d7675080b63cf1ea6357277c373e\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\4dea69ab33c7ad16845ef1c610b0fdcc\transformed\exifinterface-1.3.6\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\dc3a79bde6d7b815469c0036ba231bb6\transformed\jetified-datastore-core-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a125b78ea402facc0db20ad1a598038e\transformed\jetified-datastore-preferences-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.datastore:datastore-android:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\47b447522a81a6765552c400a12c5ccb\transformed\jetified-datastore-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\67cc450f4389270270bc871ffc402c47\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.dagger:dagger-android:2.52] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ed899af99c25cf24f5f6b6a46c6a9f30\transformed\jetified-dagger-android-2.52\AndroidManifest.xml:16:1-19:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c2e3a0c4e56e44eaacb069092cbd41f0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\76480ead07efed027bd472b8c76f71d6\transformed\sqlite-2.3.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1aca3f286748d3638b8d1e162626e4c6\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a44edc2b5b4af465d2f5592aee02655c\transformed\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\9b3d6ca6e073efec290a9a3bb163c4e0\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\db292d791a215123f5e8dd9a7f856766\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.window.extensions.core:core:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c77a3e70456e73527307b0b7e235374b\transformed\jetified-core-1.0.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d6c05d428b8fb09f14a53d3d830e462\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1edc01dbbabbb30d514fcc6c21e40a6a\transformed\jetified-annotation-experimental-1.4.1\AndroidManifest.xml:2:1-7:12
+MERGED from [com.getkeepsafe.relinker:relinker:1.4.5] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\9866931242a77bebad853daf84d59a19\transformed\jetified-relinker-1.4.5\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2c0d6f6d4ad876e52dad9d0f6c9df69c\transformed\jetified-dagger-lint-aar-2.52\AndroidManifest.xml:16:1-19:12
+	package
+		INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:2:5-51
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:2:5-51
+	android:versionCode
+		INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:3:5-67
+MERGED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:3:5-67
+MERGED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:3:5-67
+MERGED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-67
+MERGED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-67
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:3:22-64
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:4:5-76
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:4:22-73
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:5:5-79
+MERGED from [:connectivity_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\connectivity_plus-6.1.2\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-79
+MERGED from [:connectivity_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\connectivity_plus-6.1.2\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-79
+MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:24:5-79
+MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:24:5-79
+MERGED from [androidx.media3:media3-common:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c5c75bcde712257ce7f3b4dfaa6da06d\transformed\jetified-media3-common-1.4.1\AndroidManifest.xml:22:5-79
+MERGED from [androidx.media3:media3-common:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c5c75bcde712257ce7f3b4dfaa6da06d\transformed\jetified-media3-common-1.4.1\AndroidManifest.xml:22:5-79
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\082430a14f45436f46f3e33fafd04c96\transformed\jetified-media3-exoplayer-1.4.1\AndroidManifest.xml:22:5-79
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\082430a14f45436f46f3e33fafd04c96\transformed\jetified-media3-exoplayer-1.4.1\AndroidManifest.xml:22:5-79
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:5:22-76
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:6:5-80
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:6:22-77
+uses-permission#android.permission.CAMERA
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:7:5-65
+MERGED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-65
+MERGED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-65
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:7:22-62
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:8:22-78
+uses-permission#android.permission.READ_MEDIA_IMAGES
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:9:5-76
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:9:22-73
+uses-permission#android.permission.READ_MEDIA_VIDEO
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:10:5-75
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:10:22-72
+uses-permission#android.permission.READ_MEDIA_AUDIO
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:11:5-75
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:11:22-72
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:12:5-81
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:12:22-78
+uses-permission#android.permission.RECORD_AUDIO
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:13:5-71
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:13:22-68
+uses-permission#android.permission.BLUETOOTH_ADMIN
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:14:5-74
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:14:22-71
+uses-permission#android.permission.BLUETOOTH_CONNECT
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:15:5-76
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:15:22-73
+uses-permission#android.permission.BLUETOOTH
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:16:5-68
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:16:22-65
+uses-permission#android.permission.NEARBY_WIFI_DEVICES
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:17:5-19:58
+	android:usesPermissionFlags
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:19:9-55
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:18:9-62
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:20:5-79
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:20:22-76
+queries
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:58:5-63:15
+MERGED from [:flutter_downloader] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_downloader-1.11.8\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:5-12:15
+MERGED from [:flutter_downloader] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_downloader-1.11.8\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:5-12:15
+MERGED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-11:15
+MERGED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-11:15
+intent#action:name:android.intent.action.PROCESS_TEXT+data:mimeType:text/plain
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:59:9-62:18
+action#android.intent.action.PROCESS_TEXT
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:60:13-72
+	android:name
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:60:21-70
+data
+ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:61:13-50
+	android:mimeType
+		ADDED from C:\flutter projects\elite_tiers\android\app\src\main\AndroidManifest.xml:61:19-48
+uses-sdk
+INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml
+INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml
+MERGED from [:just_audio] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\just_audio-0.9.43\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:just_audio] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\just_audio-0.9.43\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:audio_session] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\audio_session-0.1.23\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:audio_session] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\audio_session-0.1.23\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:connectivity_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\connectivity_plus-6.1.2\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:connectivity_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\connectivity_plus-6.1.2\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:device_info_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\device_info_plus-11.2.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:device_info_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\device_info_plus-11.2.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:external_path] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\external_path-2.0.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:external_path] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\external_path-2.0.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_downloader] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_downloader-1.11.8\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_downloader] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_downloader-1.11.8\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:fluttertoast] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\fluttertoast-8.2.10\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:fluttertoast] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\fluttertoast-8.2.10\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:wakelock_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\wakelock_plus-1.2.10\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:wakelock_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\wakelock_plus-1.2.10\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:package_info_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\package_info_plus-8.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:package_info_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\package_info_plus-8.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.15\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\path_provider_android-2.2.15\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:permission_handler_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\permission_handler_android-12.0.13\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:permission_handler_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\permission_handler_android-12.0.13\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\shared_preferences_android-2.4.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\shared_preferences_android-2.4.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:sqflite_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\sqflite_android-2.4.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:sqflite_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\sqflite_android-2.4.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:video_player_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\video_player_android-2.7.17\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:video_player_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\video_player_android-2.7.17\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\webview_flutter_android-4.3.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\webview_flutter_android-4.3.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [androidx.preference:preference:1.2.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\e894efafcbee88dd0c4bfa561c2e31d1\transformed\preference-1.2.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.preference:preference:1.2.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\e894efafcbee88dd0c4bfa561c2e31d1\transformed\preference-1.2.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.dagger:dagger-android-support:2.52] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d31391eacfbb92757567311ec1235e23\transformed\jetified-dagger-android-support-2.52\AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:dagger-android-support:2.52] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d31391eacfbb92757567311ec1235e23\transformed\jetified-dagger-android-support-2.52\AndroidManifest.xml:18:3-42
+MERGED from [androidx.navigation:navigation-common:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5239deb6a99cf1d256454d7bb9517404\transformed\navigation-common-2.8.3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5239deb6a99cf1d256454d7bb9517404\transformed\navigation-common-2.8.3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\cdae1b9194a1712cf652fffc3f7a2679\transformed\navigation-common-ktx-2.8.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-common-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\cdae1b9194a1712cf652fffc3f7a2679\transformed\navigation-common-ktx-2.8.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8dbbddd500b6017f96b1bfc88c4f4d83\transformed\navigation-runtime-2.8.3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8dbbddd500b6017f96b1bfc88c4f4d83\transformed\navigation-runtime-2.8.3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2aa6d313fdb164838bbc4da10becfb67\transformed\navigation-runtime-ktx-2.8.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-runtime-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2aa6d313fdb164838bbc4da10becfb67\transformed\navigation-runtime-ktx-2.8.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-fragment:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\052551a3b50f2ea06b444dd6122f6486\transformed\navigation-fragment-2.8.3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-fragment:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\052551a3b50f2ea06b444dd6122f6486\transformed\navigation-fragment-2.8.3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\16d02602ecd66d4393b522caca2f224f\transformed\navigation-fragment-ktx-2.8.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-fragment-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\16d02602ecd66d4393b522caca2f224f\transformed\navigation-fragment-ktx-2.8.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-ui-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ac1dc39feaa39d7c8ca9aea3b12dc3a7\transformed\navigation-ui-ktx-2.8.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-ui-ktx:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ac1dc39feaa39d7c8ca9aea3b12dc3a7\transformed\navigation-ui-ktx-2.8.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigation:navigation-ui:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\0386f16b8ebda566c501b10b4b1c6a41\transformed\navigation-ui-2.8.3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.navigation:navigation-ui:2.8.3] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\0386f16b8ebda566c501b10b4b1c6a41\transformed\navigation-ui-2.8.3\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3104d796b1a3ed91fafcc9a1f11d7f54\transformed\material-1.4.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3104d796b1a3ed91fafcc9a1f11d7f54\transformed\material-1.4.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8f1dc66eedc2cdc2450ed7958c082188\transformed\constraintlayout-2.1.4\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8f1dc66eedc2cdc2450ed7958c082188\transformed\constraintlayout-2.1.4\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\25d30b92ffaeac86623c5ed922e54535\transformed\jetified-appcompat-resources-1.7.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\25d30b92ffaeac86623c5ed922e54535\transformed\jetified-appcompat-resources-1.7.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c1b3ce3820076a842afff0014c166658\transformed\appcompat-1.7.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c1b3ce3820076a842afff0014c166658\transformed\appcompat-1.7.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d0ea881e02b26d52998ed41ec0a263f8\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d0ea881e02b26d52998ed41ec0a263f8\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.7.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1f5a7aeba581cb025bc79760e85a1846\transformed\media-1.7.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.media:media:1.7.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1f5a7aeba581cb025bc79760e85a1846\transformed\media-1.7.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.browser:browser:1.8.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\567594e663fca228c53643bfc1d9fe2e\transformed\browser-1.8.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.browser:browser:1.8.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\567594e663fca228c53643bfc1d9fe2e\transformed\browser-1.8.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\12de58488c97388785d5613b170736b0\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\12de58488c97388785d5613b170736b0\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\efce1b8ff39cf902ed3780ce7b6678f9\transformed\swiperefreshlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\efce1b8ff39cf902ed3780ce7b6678f9\transformed\swiperefreshlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.media3:media3-extractor:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\0142c7a48abad18127146d61bc173368\transformed\jetified-media3-extractor-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-extractor:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\0142c7a48abad18127146d61bc173368\transformed\jetified-media3-extractor-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-container:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ff5dab06934cb97d96b618568acda975\transformed\jetified-media3-container-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-container:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ff5dab06934cb97d96b618568acda975\transformed\jetified-media3-container-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-datasource:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d148f53c50f57a059fb1d1b678749ea9\transformed\jetified-media3-datasource-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-datasource:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d148f53c50f57a059fb1d1b678749ea9\transformed\jetified-media3-datasource-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-decoder:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\65c162d64f6620aad492d17b34615a13\transformed\jetified-media3-decoder-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-decoder:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\65c162d64f6620aad492d17b34615a13\transformed\jetified-media3-decoder-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-database:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b14f54df05e405fb0076359cf1e9dd\transformed\jetified-media3-database-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-database:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b14f54df05e405fb0076359cf1e9dd\transformed\jetified-media3-database-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-common:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c5c75bcde712257ce7f3b4dfaa6da06d\transformed\jetified-media3-common-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-common:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c5c75bcde712257ce7f3b4dfaa6da06d\transformed\jetified-media3-common-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer-dash:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2915edd177b1b006d9902e7d2ae16f17\transformed\jetified-media3-exoplayer-dash-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer-dash:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2915edd177b1b006d9902e7d2ae16f17\transformed\jetified-media3-exoplayer-dash-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer-hls:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ff2921844eccb78c8e8040babb38572d\transformed\jetified-media3-exoplayer-hls-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer-hls:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ff2921844eccb78c8e8040babb38572d\transformed\jetified-media3-exoplayer-hls-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer-smoothstreaming:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\84b2c63447abf3b12b1543f6858d745b\transformed\jetified-media3-exoplayer-smoothstreaming-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer-smoothstreaming:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\84b2c63447abf3b12b1543f6858d745b\transformed\jetified-media3-exoplayer-smoothstreaming-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer-rtsp:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\66427af9d7deec7a00699b2a120ccbf1\transformed\jetified-media3-exoplayer-rtsp-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer-rtsp:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\66427af9d7deec7a00699b2a120ccbf1\transformed\jetified-media3-exoplayer-rtsp-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\082430a14f45436f46f3e33fafd04c96\transformed\jetified-media3-exoplayer-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media3:media3-exoplayer:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\082430a14f45436f46f3e33fafd04c96\transformed\jetified-media3-exoplayer-1.4.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.webkit:webkit:1.12.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\805a4017ba41219860e20e1baf76a3af\transformed\webkit-1.12.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.webkit:webkit:1.12.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\805a4017ba41219860e20e1baf76a3af\transformed\webkit-1.12.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8383e5e5f6ea562e6b8bb6f2eba8fb9a\transformed\slidingpanelayout-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8383e5e5f6ea562e6b8bb6f2eba8fb9a\transformed\slidingpanelayout-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.window:window:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d4b97dc46916357cdc34e74a3ad5e8d\transformed\jetified-window-1.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.window:window:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d4b97dc46916357cdc34e74a3ad5e8d\transformed\jetified-window-1.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.window:window-java:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c126c69d7fb51d1b57b69ff03dd43f4e\transformed\jetified-window-java-1.2.0\AndroidManifest.xml:19:5-44
+MERGED from [androidx.window:window-java:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c126c69d7fb51d1b57b69ff03dd43f4e\transformed\jetified-window-java-1.2.0\AndroidManifest.xml:19:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a520715ab20adf304b2489976ad6c900\transformed\jetified-emoji2-views-helper-1.3.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a520715ab20adf304b2489976ad6c900\transformed\jetified-emoji2-views-helper-1.3.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1c28dc2cb03551257b6d6eff62fa91bd\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1c28dc2cb03551257b6d6eff62fa91bd\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\24be661a2c7341677b5d3190b65d0770\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\24be661a2c7341677b5d3190b65d0770\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c2ea7ebb0ff1d6f4341a31a37465d280\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c2ea7ebb0ff1d6f4341a31a37465d280\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8c39e131cd6360ca62152b34472b0942\transformed\lifecycle-extensions-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-extensions:2.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8c39e131cd6360ca62152b34472b0942\transformed\lifecycle-extensions-2.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment-ktx:1.7.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\305d22f84cc4d20ea2ace689f1d728d8\transformed\jetified-fragment-ktx-1.7.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.fragment:fragment-ktx:1.7.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\305d22f84cc4d20ea2ace689f1d728d8\transformed\jetified-fragment-ktx-1.7.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a34b4fe85cff8c592e18fb2e610d58ee\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a34b4fe85cff8c592e18fb2e610d58ee\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.7.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8ebb0f057801b8ad84c4e499a88f331b\transformed\fragment-1.7.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.fragment:fragment:1.7.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8ebb0f057801b8ad84c4e499a88f331b\transformed\fragment-1.7.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.8.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a4fe4420c5a0d891647c3fb355fe6c9f\transformed\jetified-activity-ktx-1.8.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.8.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a4fe4420c5a0d891647c3fb355fe6c9f\transformed\jetified-activity-ktx-1.8.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity:1.8.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\15fa9b3a14c59a232ee883099e452adf\transformed\jetified-activity-1.8.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.8.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\15fa9b3a14c59a232ee883099e452adf\transformed\jetified-activity-1.8.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f023ef3246752c06737a77138cb71930\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f023ef3246752c06737a77138cb71930\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5788cc091472dd2fdeba6f920ddaa3ff\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5788cc091472dd2fdeba6f920ddaa3ff\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\6552c918599845a3f65cc7faf0f6cc2c\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\6552c918599845a3f65cc7faf0f6cc2c\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3c0a96e61c274434000b98a785d27320\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3c0a96e61c274434000b98a785d27320\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\9e6e3e7d97b033fe4939c51c9fcfd57f\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\9e6e3e7d97b033fe4939c51c9fcfd57f\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f86c3f02bf3c7c96292f5a5b6a43a36a\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f86c3f02bf3c7c96292f5a5b6a43a36a\transformed\customview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c938b05e4b27b4c30160dcffea5bc4e9\transformed\transition-1.4.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c938b05e4b27b4c30160dcffea5bc4e9\transformed\transition-1.4.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f9a223c42eae48f7444a197d374b74e6\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f9a223c42eae48f7444a197d374b74e6\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a29d6b02937a3859babe3d7e56aadc84\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a29d6b02937a3859babe3d7e56aadc84\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\245b9b9bfad277aca5e6e22fc2e99af8\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\245b9b9bfad277aca5e6e22fc2e99af8\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1fc5a5f4ba6440b87580967a6cfdede8\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.2.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1fc5a5f4ba6440b87580967a6cfdede8\transformed\jetified-savedstate-ktx-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2606d52d5ea9bfd2e96d9785b6d5b5de\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2606d52d5ea9bfd2e96d9785b6d5b5de\transformed\jetified-savedstate-1.2.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5d758d26ecb589ba20950307bf503261\transformed\jetified-lifecycle-runtime-ktx-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5d758d26ecb589ba20950307bf503261\transformed\jetified-lifecycle-runtime-ktx-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ff978c769d71dc8d5dd63c57f9d78bbf\transformed\lifecycle-runtime-2.8.6\AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ff978c769d71dc8d5dd63c57f9d78bbf\transformed\lifecycle-runtime-2.8.6\AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\b931cb4c6d55f3685dc4e7f47263b5d3\transformed\jetified-lifecycle-runtime-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\b931cb4c6d55f3685dc4e7f47263b5d3\transformed\jetified-lifecycle-runtime-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\7d3be90d9dcd85e38bdbf52791451254\transformed\jetified-lifecycle-livedata-core-ktx-2.8.6\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\7d3be90d9dcd85e38bdbf52791451254\transformed\jetified-lifecycle-livedata-core-ktx-2.8.6\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\b8b17c8f0623b77c04870c7311578e62\transformed\lifecycle-viewmodel-2.8.6\AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\b8b17c8f0623b77c04870c7311578e62\transformed\lifecycle-viewmodel-2.8.6\AndroidManifest.xml:4:5-43
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\b0f73e13f9a7be1c2d10755dc39be951\transformed\jetified-lifecycle-viewmodel-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\b0f73e13f9a7be1c2d10755dc39be951\transformed\jetified-lifecycle-viewmodel-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\bfc7751ebee204331d0b224bee4a318a\transformed\lifecycle-livedata-core-2.8.6\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\bfc7751ebee204331d0b224bee4a318a\transformed\lifecycle-livedata-core-2.8.6\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\71a4d29b59bf47e352e53113d4be9bb8\transformed\jetified-lifecycle-service-2.8.6\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\71a4d29b59bf47e352e53113d4be9bb8\transformed\jetified-lifecycle-service-2.8.6\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b6f594cb9222328dc4747c839d8c7a\transformed\jetified-lifecycle-process-2.8.6\AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b6f594cb9222328dc4747c839d8c7a\transformed\jetified-lifecycle-process-2.8.6\AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\99adfa4407da0033f0543f9214317540\transformed\lifecycle-livedata-2.8.6\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\99adfa4407da0033f0543f9214317540\transformed\lifecycle-livedata-2.8.6\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\6ce4f1ca1abd926e3586a699179c555b\transformed\jetified-lifecycle-viewmodel-ktx-2.8.6\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\6ce4f1ca1abd926e3586a699179c555b\transformed\jetified-lifecycle-viewmodel-ktx-2.8.6\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\76df22bcb18e9c18b3c5939ba25c8bc1\transformed\jetified-lifecycle-viewmodel-savedstate-2.8.6\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\76df22bcb18e9c18b3c5939ba25c8bc1\transformed\jetified-lifecycle-viewmodel-savedstate-2.8.6\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\08ec7daa2a5028b79063bbcfd7dbbfd9\transformed\jetified-core-ktx-1.13.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\08ec7daa2a5028b79063bbcfd7dbbfd9\transformed\jetified-core-ktx-1.13.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.flexbox:flexbox:3.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5b93b9d48d046704468f0d77f4139cab\transformed\jetified-flexbox-3.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.flexbox:flexbox:3.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\5b93b9d48d046704468f0d77f4139cab\transformed\jetified-flexbox-3.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.room:room-ktx:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\7b7176111b16dcc48c408f48f2935599\transformed\jetified-room-ktx-2.5.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-ktx:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\7b7176111b16dcc48c408f48f2935599\transformed\jetified-room-ktx-2.5.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8e8ba6e30032914062c4f80277bc4918\transformed\room-runtime-2.5.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8e8ba6e30032914062c4f80277bc4918\transformed\room-runtime-2.5.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\67ea23b9421c4c3801d0901c86672814\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\67ea23b9421c4c3801d0901c86672814\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.databinding:viewbinding:8.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\7bdeb52046efd50685e4dd4a0d2267d9\transformed\jetified-viewbinding-8.1.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.databinding:viewbinding:8.1.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\7bdeb52046efd50685e4dd4a0d2267d9\transformed\jetified-viewbinding-8.1.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f3a7fb2c42ad819c806b7f36dee41bee\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f3a7fb2c42ad819c806b7f36dee41bee\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1e9d9a2e7ee806b6d15cb974ee2066fb\transformed\jetified-tracing-1.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1e9d9a2e7ee806b6d15cb974ee2066fb\transformed\jetified-tracing-1.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\0df5d7675080b63cf1ea6357277c373e\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\0df5d7675080b63cf1ea6357277c373e\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\4dea69ab33c7ad16845ef1c610b0fdcc\transformed\exifinterface-1.3.6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\4dea69ab33c7ad16845ef1c610b0fdcc\transformed\exifinterface-1.3.6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\dc3a79bde6d7b815469c0036ba231bb6\transformed\jetified-datastore-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-core-android:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\dc3a79bde6d7b815469c0036ba231bb6\transformed\jetified-datastore-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a125b78ea402facc0db20ad1a598038e\transformed\jetified-datastore-preferences-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-preferences-android:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a125b78ea402facc0db20ad1a598038e\transformed\jetified-datastore-preferences-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\47b447522a81a6765552c400a12c5ccb\transformed\jetified-datastore-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.datastore:datastore-android:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\47b447522a81a6765552c400a12c5ccb\transformed\jetified-datastore-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\67cc450f4389270270bc871ffc402c47\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\67cc450f4389270270bc871ffc402c47\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.dagger:dagger-android:2.52] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ed899af99c25cf24f5f6b6a46c6a9f30\transformed\jetified-dagger-android-2.52\AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:dagger-android:2.52] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\ed899af99c25cf24f5f6b6a46c6a9f30\transformed\jetified-dagger-android-2.52\AndroidManifest.xml:18:3-42
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c2e3a0c4e56e44eaacb069092cbd41f0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c2e3a0c4e56e44eaacb069092cbd41f0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\76480ead07efed027bd472b8c76f71d6\transformed\sqlite-2.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\76480ead07efed027bd472b8c76f71d6\transformed\sqlite-2.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1aca3f286748d3638b8d1e162626e4c6\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1aca3f286748d3638b8d1e162626e4c6\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a44edc2b5b4af465d2f5592aee02655c\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\a44edc2b5b4af465d2f5592aee02655c\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\9b3d6ca6e073efec290a9a3bb163c4e0\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\9b3d6ca6e073efec290a9a3bb163c4e0\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\db292d791a215123f5e8dd9a7f856766\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\db292d791a215123f5e8dd9a7f856766\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.window.extensions.core:core:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c77a3e70456e73527307b0b7e235374b\transformed\jetified-core-1.0.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.window.extensions.core:core:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\c77a3e70456e73527307b0b7e235374b\transformed\jetified-core-1.0.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d6c05d428b8fb09f14a53d3d830e462\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d6c05d428b8fb09f14a53d3d830e462\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1edc01dbbabbb30d514fcc6c21e40a6a\transformed\jetified-annotation-experimental-1.4.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1edc01dbbabbb30d514fcc6c21e40a6a\transformed\jetified-annotation-experimental-1.4.1\AndroidManifest.xml:5:5-44
+MERGED from [com.getkeepsafe.relinker:relinker:1.4.5] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\9866931242a77bebad853daf84d59a19\transformed\jetified-relinker-1.4.5\AndroidManifest.xml:5:5-43
+MERGED from [com.getkeepsafe.relinker:relinker:1.4.5] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\9866931242a77bebad853daf84d59a19\transformed\jetified-relinker-1.4.5\AndroidManifest.xml:5:5-43
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2c0d6f6d4ad876e52dad9d0f6c9df69c\transformed\jetified-dagger-lint-aar-2.52\AndroidManifest.xml:18:3-42
+MERGED from [com.google.dagger:dagger-lint-aar:2.52] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\2c0d6f6d4ad876e52dad9d0f6c9df69c\transformed\jetified-dagger-lint-aar-2.52\AndroidManifest.xml:18:3-42
+	android:targetSdkVersion
+		INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\flutter projects\elite_tiers\android\app\src\debug\AndroidManifest.xml
+intent#action:name:android.intent.action.VIEW
+ADDED from [:flutter_downloader] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_downloader-1.11.8\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:9-11:18
+action#android.intent.action.VIEW
+ADDED from [:flutter_downloader] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_downloader-1.11.8\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-65
+	android:name
+		ADDED from [:flutter_downloader] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_downloader-1.11.8\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:21-62
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from [:flutter_downloader] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_downloader-1.11.8\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:5-77
+	android:name
+		ADDED from [:flutter_downloader] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_downloader-1.11.8\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:22-74
+intent#action:name:android.support.customtabs.action.CustomTabsService
+ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-10:18
+action#android.support.customtabs.action.CustomTabsService
+ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-90
+	android:name
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:21-87
+activity#com.pichillilorenzo.flutter_inappwebview_android.in_app_browser.InAppBrowserActivity
+ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-18:47
+	android:exported
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-37
+	android:configChanges
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-137
+	android:theme
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-44
+	android:name
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-112
+activity#com.pichillilorenzo.flutter_inappwebview_android.chrome_custom_tabs.ChromeCustomTabsActivity
+ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:9-22:55
+	android:exported
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-37
+	android:theme
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-52
+	android:name
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-120
+activity#com.pichillilorenzo.flutter_inappwebview_android.chrome_custom_tabs.TrustedWebActivity
+ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:9-26:55
+	android:exported
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:13-52
+	android:name
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-114
+activity#com.pichillilorenzo.flutter_inappwebview_android.chrome_custom_tabs.ChromeCustomTabsActivitySingleInstance
+ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:9-31:55
+	android:launchMode
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-48
+	android:exported
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-37
+	android:theme
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-52
+	android:name
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-134
+activity#com.pichillilorenzo.flutter_inappwebview_android.chrome_custom_tabs.TrustedWebActivitySingleInstance
+ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:32:9-36:55
+	android:launchMode
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:35:13-48
+	android:exported
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:13-37
+	android:theme
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:36:13-52
+	android:name
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:33:13-128
+receiver#com.pichillilorenzo.flutter_inappwebview_android.chrome_custom_tabs.ActionBroadcastReceiver
+ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:38:9-41:40
+	android:enabled
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:40:13-35
+	android:exported
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:41:13-37
+	android:name
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:39:13-119
+meta-data#io.flutter.embedded_views_preview
+ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:43:9-45:36
+	android:value
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:45:13-33
+	android:name
+		ADDED from [:flutter_inappwebview_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\flutter_inappwebview_android-1.1.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:44:13-61
+uses-feature#android.hardware.camera
+ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-9:35
+	android:required
+		ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:9-32
+	android:name
+		ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-47
+uses-feature#android.hardware.camera.autofocus
+ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:5-70
+	android:name
+		ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:19-67
+activity#co.tamara.sdk.TamaraPaymentActivity
+ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:9-19:53
+	android:theme
+		ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-50
+	android:name
+		ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-63
+activity#co.tamara.sdk.TamaraInformationActivity
+ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:9-22:53
+	android:theme
+		ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-50
+	android:name
+		ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-67
+activity#co.tamara.sdk.TamaraWidgetActivity
+ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:9-25:53
+	android:theme
+		ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-50
+	android:name
+		ADDED from [:tamara_flutter_sdk] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\tamara_flutter_sdk-1.0.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-62
+provider#dev.fluttercommunity.plus.share.ShareFileProvider
+ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:9-21:20
+	android:grantUriPermissions
+		ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-47
+	android:authorities
+		ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-74
+	android:exported
+		ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-37
+	android:name
+		ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-77
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-20:68
+	android:resource
+		ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:17-65
+	android:name
+		ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:17-67
+receiver#dev.fluttercommunity.plus.share.SharePlusPendingIntent
+ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:9-32:20
+	android:exported
+		ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-37
+	android:name
+		ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-82
+intent-filter#action:name:EXTRA_CHOSEN_COMPONENT
+ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-31:29
+action#EXTRA_CHOSEN_COMPONENT
+ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:17-65
+	android:name
+		ADDED from [:share_plus] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\share_plus-10.1.4\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:25-62
+activity#io.flutter.plugins.urllauncher.WebViewActivity
+ADDED from [:url_launcher_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-11:74
+	android:exported
+		ADDED from [:url_launcher_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-37
+	android:theme
+		ADDED from [:url_launcher_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-71
+	android:name
+		ADDED from [:url_launcher_android] C:\Users\Lahore Laptop\AppData\Local\Pub\Cache\hosted\pub.dev\url_launcher_android-6.3.14\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-74
+uses-permission#android.permission.WAKE_LOCK
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:23:5-68
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:23:22-65
+uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:25:5-81
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:25:22-78
+uses-permission#android.permission.FOREGROUND_SERVICE
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:26:5-77
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:26:22-74
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:29:9-37:20
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1c28dc2cb03551257b6d6eff62fa91bd\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1c28dc2cb03551257b6d6eff62fa91bd\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b6f594cb9222328dc4747c839d8c7a\transformed\jetified-lifecycle-process-2.8.6\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b6f594cb9222328dc4747c839d8c7a\transformed\jetified-lifecycle-process-2.8.6\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f3a7fb2c42ad819c806b7f36dee41bee\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\f3a7fb2c42ad819c806b7f36dee41bee\transformed\jetified-startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:33:13-31
+	android:authorities
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:31:13-68
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:32:13-37
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:30:13-67
+meta-data#androidx.work.WorkManagerInitializer
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:34:13-36:52
+	android:value
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:36:17-49
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:35:17-68
+service#androidx.work.impl.background.systemalarm.SystemAlarmService
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:39:9-45:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:42:13-72
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:43:13-37
+	tools:ignore
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:44:13-60
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:45:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:41:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:40:13-88
+service#androidx.work.impl.background.systemjob.SystemJobService
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:46:9-52:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:49:13-70
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:50:13-36
+	android:permission
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:51:13-69
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:52:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:48:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:47:13-84
+service#androidx.work.impl.foreground.SystemForegroundService
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:53:9-59:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:56:13-77
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:57:13-37
+	tools:ignore
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:58:13-60
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:59:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:55:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:54:13-81
+receiver#androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:61:9-66:35
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:64:13-35
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:65:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:66:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:63:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:62:13-88
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:67:9-77:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:70:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:71:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:72:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:69:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:68:13-106
+intent-filter#action:name:android.intent.action.ACTION_POWER_CONNECTED+action:name:android.intent.action.ACTION_POWER_DISCONNECTED
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:73:13-76:29
+action#android.intent.action.ACTION_POWER_CONNECTED
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:74:17-87
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:74:25-84
+action#android.intent.action.ACTION_POWER_DISCONNECTED
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:75:17-90
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:75:25-87
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:78:9-88:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:81:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:82:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:83:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:80:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:79:13-104
+intent-filter#action:name:android.intent.action.BATTERY_LOW+action:name:android.intent.action.BATTERY_OKAY
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:84:13-87:29
+action#android.intent.action.BATTERY_OKAY
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:85:17-77
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:85:25-74
+action#android.intent.action.BATTERY_LOW
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:86:17-76
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:86:25-73
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:89:9-99:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:92:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:93:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:94:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:91:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:90:13-104
+intent-filter#action:name:android.intent.action.DEVICE_STORAGE_LOW+action:name:android.intent.action.DEVICE_STORAGE_OK
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:95:13-98:29
+action#android.intent.action.DEVICE_STORAGE_LOW
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:96:17-83
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:96:25-80
+action#android.intent.action.DEVICE_STORAGE_OK
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:97:17-82
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:97:25-79
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:100:9-109:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:103:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:104:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:105:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:102:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:101:13-103
+intent-filter#action:name:android.net.conn.CONNECTIVITY_CHANGE
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:106:13-108:29
+action#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:107:17-79
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:107:25-76
+receiver#androidx.work.impl.background.systemalarm.RescheduleReceiver
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:110:9-121:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:113:13-36
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:114:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:115:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:112:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:111:13-88
+intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.TIMEZONE_CHANGED+action:name:android.intent.action.TIME_SET
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:116:13-120:29
+action#android.intent.action.BOOT_COMPLETED
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:117:17-79
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:117:25-76
+action#android.intent.action.TIME_SET
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:118:17-73
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:118:25-70
+action#android.intent.action.TIMEZONE_CHANGED
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:119:17-81
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:119:25-78
+receiver#androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:122:9-131:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:125:13-72
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:126:13-37
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:127:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:124:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:123:13-99
+intent-filter#action:name:androidx.work.impl.background.systemalarm.UpdateProxies
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:128:13-130:29
+action#androidx.work.impl.background.systemalarm.UpdateProxies
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:129:17-98
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:129:25-95
+receiver#androidx.work.impl.diagnostics.DiagnosticsReceiver
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:132:9-142:20
+	android:enabled
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:135:13-35
+	android:exported
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:136:13-36
+	android:permission
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:137:13-57
+	tools:targetApi
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:138:13-32
+	android:directBootAware
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:134:13-44
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:133:13-78
+intent-filter#action:name:androidx.work.diagnostics.REQUEST_DIAGNOSTICS
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:139:13-141:29
+action#androidx.work.diagnostics.REQUEST_DIAGNOSTICS
+ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:140:17-88
+	android:name
+		ADDED from [androidx.work:work-runtime:2.9.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\d9532bec7596c8383365eef912727e69\transformed\work-runtime-2.9.0\AndroidManifest.xml:140:25-85
+uses-library#androidx.window.extensions
+ADDED from [androidx.window:window:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d4b97dc46916357cdc34e74a3ad5e8d\transformed\jetified-window-1.2.0\AndroidManifest.xml:23:9-25:40
+	android:required
+		ADDED from [androidx.window:window:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d4b97dc46916357cdc34e74a3ad5e8d\transformed\jetified-window-1.2.0\AndroidManifest.xml:25:13-37
+	android:name
+		ADDED from [androidx.window:window:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d4b97dc46916357cdc34e74a3ad5e8d\transformed\jetified-window-1.2.0\AndroidManifest.xml:24:13-54
+uses-library#androidx.window.sidecar
+ADDED from [androidx.window:window:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d4b97dc46916357cdc34e74a3ad5e8d\transformed\jetified-window-1.2.0\AndroidManifest.xml:26:9-28:40
+	android:required
+		ADDED from [androidx.window:window:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d4b97dc46916357cdc34e74a3ad5e8d\transformed\jetified-window-1.2.0\AndroidManifest.xml:28:13-37
+	android:name
+		ADDED from [androidx.window:window:1.2.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\3d4b97dc46916357cdc34e74a3ad5e8d\transformed\jetified-window-1.2.0\AndroidManifest.xml:27:13-51
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1c28dc2cb03551257b6d6eff62fa91bd\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1c28dc2cb03551257b6d6eff62fa91bd\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1c28dc2cb03551257b6d6eff62fa91bd\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+permission#com.example.elite_tiers.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+uses-permission#com.example.elite_tiers.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\682db32368f7e6710efcc873cdb0b3f7\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b6f594cb9222328dc4747c839d8c7a\transformed\jetified-lifecycle-process-2.8.6\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b6f594cb9222328dc4747c839d8c7a\transformed\jetified-lifecycle-process-2.8.6\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.8.6] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\40b6f594cb9222328dc4747c839d8c7a\transformed\jetified-lifecycle-process-2.8.6\AndroidManifest.xml:30:17-78
+service#androidx.room.MultiInstanceInvalidationService
+ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8e8ba6e30032914062c4f80277bc4918\transformed\room-runtime-2.5.0\AndroidManifest.xml:24:9-28:63
+	android:exported
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8e8ba6e30032914062c4f80277bc4918\transformed\room-runtime-2.5.0\AndroidManifest.xml:27:13-37
+	tools:ignore
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8e8ba6e30032914062c4f80277bc4918\transformed\room-runtime-2.5.0\AndroidManifest.xml:28:13-60
+	android:directBootAware
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8e8ba6e30032914062c4f80277bc4918\transformed\room-runtime-2.5.0\AndroidManifest.xml:26:13-43
+	android:name
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\8e8ba6e30032914062c4f80277bc4918\transformed\room-runtime-2.5.0\AndroidManifest.xml:25:13-74
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Lahore Laptop\.gradle\caches\transforms-3\1b677a0f32f03ee18e46b06823c74de6\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:25-92

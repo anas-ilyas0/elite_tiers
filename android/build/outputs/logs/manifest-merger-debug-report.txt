@@ -1,0 +1,16 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\flutter projects\elite_tiers\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest7833371167256460795.xml:2:13-83
+INJECTED from C:\flutter projects\elite_tiers\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest7833371167256460795.xml:2:13-83
+	package
+		INJECTED from C:\flutter projects\elite_tiers\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest7833371167256460795.xml
+	xmlns:android
+		ADDED from C:\flutter projects\elite_tiers\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest7833371167256460795.xml:2:23-81
+uses-sdk
+INJECTED from C:\flutter projects\elite_tiers\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest7833371167256460795.xml reason: use-sdk injection requested
+INJECTED from C:\flutter projects\elite_tiers\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest7833371167256460795.xml
+INJECTED from C:\flutter projects\elite_tiers\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest7833371167256460795.xml
+	android:targetSdkVersion
+		INJECTED from C:\flutter projects\elite_tiers\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest7833371167256460795.xml
+	android:minSdkVersion
+		INJECTED from C:\flutter projects\elite_tiers\android\build\intermediates\tmp\ProcessLibraryManifest\debug\tempAndroidManifest7833371167256460795.xml
