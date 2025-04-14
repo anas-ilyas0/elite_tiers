@@ -247,208 +247,219 @@ class _ShowMoreHomeProductsState extends State<ShowMoreHomeProducts> {
                                                   .primary,
                                             ),
                                           ),
-                                          const SizedBox(height: 10),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  getTranslated(
-                                                      context, 'dimensions')!,
-                                                  style: TextStyle(
-                                                    fontSize: 17,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .primary,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 5),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    color: Theme.of(context)
-                                                                .brightness ==
-                                                            Brightness.dark
-                                                        ? Colors.black
-                                                            .withValues(
-                                                                alpha: 0.1)
-                                                        : Theme.of(context)
-                                                            .colorScheme
-                                                            .lightWhite,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            7),
-                                                    border: Border.all(
+                                          if (widget.categoryName != 'إطار' ||
+                                              widget.categoryName != 'الإطارات')
+                                            const SizedBox(height: 10),
+                                          if (widget.categoryName == 'إطار' ||
+                                              widget.categoryName == 'الإطارات')
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    getTranslated(
+                                                        context, 'dimensions')!,
+                                                    style: TextStyle(
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       color: Theme.of(context)
                                                           .colorScheme
                                                           .primary,
                                                     ),
                                                   ),
-                                                  child: Padding(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 4),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            Expanded(
-                                                              child:
-                                                                  DropdownButton<
-                                                                      String>(
-                                                                isExpanded:
-                                                                    true,
-                                                                hint: Text(
-                                                                  getTranslated(
-                                                                      context,
-                                                                      'diameter')!,
-                                                                  style: const TextStyle(
-                                                                      fontSize:
-                                                                          14),
-                                                                ),
-                                                                value:
-                                                                    tempSelectedDiameter,
-                                                                items: diameters.map<
-                                                                    DropdownMenuItem<
-                                                                        String>>((String
-                                                                    value) {
-                                                                  return DropdownMenuItem<
-                                                                      String>(
-                                                                    value:
+                                                  const SizedBox(height: 5),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      color: Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness.dark
+                                                          ? Colors.black
+                                                              .withValues(
+                                                                  alpha: 0.1)
+                                                          : Theme.of(context)
+                                                              .colorScheme
+                                                              .lightWhite,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              7),
+                                                      border: Border.all(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .primary,
+                                                      ),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 4),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Expanded(
+                                                                child:
+                                                                    DropdownButton<
+                                                                        String>(
+                                                                  isExpanded:
+                                                                      true,
+                                                                  hint: Text(
+                                                                    getTranslated(
+                                                                        context,
+                                                                        'diameter')!,
+                                                                    style: const TextStyle(
+                                                                        fontSize:
+                                                                            14),
+                                                                  ),
+                                                                  value:
+                                                                      tempSelectedDiameter,
+                                                                  items: diameters.map<
+                                                                      DropdownMenuItem<
+                                                                          String>>((String
+                                                                      value) {
+                                                                    return DropdownMenuItem<
+                                                                        String>(
+                                                                      value:
+                                                                          value,
+                                                                      child:
+                                                                          Text(
                                                                         value,
-                                                                    child: Text(
-                                                                      value,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Theme.of(context).brightness ==
-                                                                                Brightness.dark
-                                                                            ? Colors.white
-                                                                            : Colors.black,
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color: Theme.of(context).brightness == Brightness.dark
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                  );
-                                                                }).toList(),
-                                                                onChanged: (String?
-                                                                    newValue) {
-                                                                  setDialogState(
-                                                                      () {
-                                                                    tempSelectedDiameter =
-                                                                        newValue;
-                                                                  });
-                                                                },
-                                                              ),
-                                                            ),
-                                                            const SizedBox(
-                                                                width: 5),
-                                                            Expanded(
-                                                              child:
-                                                                  DropdownButton<
-                                                                      String>(
-                                                                isExpanded:
-                                                                    true,
-                                                                hint: Text(
-                                                                  getTranslated(
-                                                                      context,
-                                                                      'ratio')!,
-                                                                  style: const TextStyle(
-                                                                      fontSize:
-                                                                          14),
+                                                                    );
+                                                                  }).toList(),
+                                                                  onChanged:
+                                                                      (String?
+                                                                          newValue) {
+                                                                    setDialogState(
+                                                                        () {
+                                                                      tempSelectedDiameter =
+                                                                          newValue;
+                                                                    });
+                                                                  },
                                                                 ),
-                                                                value:
-                                                                    tempSelectedRatio,
-                                                                items: ratios.map<
-                                                                    DropdownMenuItem<
-                                                                        String>>((String
-                                                                    value) {
-                                                                  return DropdownMenuItem<
-                                                                      String>(
-                                                                    value:
-                                                                        value,
-                                                                    child: Text(
-                                                                      value,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Theme.of(context).brightness ==
-                                                                                Brightness.dark
-                                                                            ? Colors.white
-                                                                            : Colors.black,
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                }).toList(),
-                                                                onChanged: (String?
-                                                                    newValue) {
-                                                                  setDialogState(
-                                                                      () {
-                                                                    tempSelectedRatio =
-                                                                        newValue;
-                                                                  });
-                                                                },
                                                               ),
-                                                            ),
-                                                            const SizedBox(
-                                                                width: 5),
-                                                            Expanded(
-                                                              child:
-                                                                  DropdownButton<
-                                                                      String>(
-                                                                isExpanded:
-                                                                    true,
-                                                                hint: Text(
-                                                                  getTranslated(
-                                                                      context,
-                                                                      'width')!,
-                                                                  style: const TextStyle(
-                                                                      fontSize:
-                                                                          14),
+                                                              const SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child:
+                                                                    DropdownButton<
+                                                                        String>(
+                                                                  isExpanded:
+                                                                      true,
+                                                                  hint: Text(
+                                                                    getTranslated(
+                                                                        context,
+                                                                        'ratio')!,
+                                                                    style: const TextStyle(
+                                                                        fontSize:
+                                                                            14),
+                                                                  ),
+                                                                  value:
+                                                                      tempSelectedRatio,
+                                                                  items: ratios.map<
+                                                                      DropdownMenuItem<
+                                                                          String>>((String
+                                                                      value) {
+                                                                    return DropdownMenuItem<
+                                                                        String>(
+                                                                      value:
+                                                                          value,
+                                                                      child:
+                                                                          Text(
+                                                                        value,
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color: Theme.of(context).brightness == Brightness.dark
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  }).toList(),
+                                                                  onChanged:
+                                                                      (String?
+                                                                          newValue) {
+                                                                    setDialogState(
+                                                                        () {
+                                                                      tempSelectedRatio =
+                                                                          newValue;
+                                                                    });
+                                                                  },
                                                                 ),
-                                                                value:
-                                                                    tempSelectedWidth,
-                                                                items: widths.map<
-                                                                    DropdownMenuItem<
-                                                                        String>>((String
-                                                                    value) {
-                                                                  return DropdownMenuItem<
-                                                                      String>(
-                                                                    value:
-                                                                        value,
-                                                                    child: Text(
-                                                                      value,
-                                                                      style:
-                                                                          TextStyle(
-                                                                        color: Theme.of(context).brightness ==
-                                                                                Brightness.dark
-                                                                            ? Colors.white
-                                                                            : Colors.black,
-                                                                      ),
-                                                                    ),
-                                                                  );
-                                                                }).toList(),
-                                                                onChanged: (String?
-                                                                    newValue) {
-                                                                  setDialogState(
-                                                                      () {
-                                                                    tempSelectedWidth =
-                                                                        newValue;
-                                                                  });
-                                                                },
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
+                                                              const SizedBox(
+                                                                  width: 5),
+                                                              Expanded(
+                                                                child:
+                                                                    DropdownButton<
+                                                                        String>(
+                                                                  isExpanded:
+                                                                      true,
+                                                                  hint: Text(
+                                                                    getTranslated(
+                                                                        context,
+                                                                        'width')!,
+                                                                    style: const TextStyle(
+                                                                        fontSize:
+                                                                            14),
+                                                                  ),
+                                                                  value:
+                                                                      tempSelectedWidth,
+                                                                  items: widths.map<
+                                                                      DropdownMenuItem<
+                                                                          String>>((String
+                                                                      value) {
+                                                                    return DropdownMenuItem<
+                                                                        String>(
+                                                                      value:
+                                                                          value,
+                                                                      child:
+                                                                          Text(
+                                                                        value,
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color: Theme.of(context).brightness == Brightness.dark
+                                                                              ? Colors.white
+                                                                              : Colors.black,
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  }).toList(),
+                                                                  onChanged:
+                                                                      (String?
+                                                                          newValue) {
+                                                                    setDialogState(
+                                                                        () {
+                                                                      tempSelectedWidth =
+                                                                          newValue;
+                                                                    });
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 20),
+                                          if (widget.categoryName == 'إطار' ||
+                                              widget.categoryName == 'الإطارات')
+                                            const SizedBox(height: 20),
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 12),
@@ -871,7 +882,7 @@ class _ShowMoreHomeProductsState extends State<ShowMoreHomeProducts> {
                                       id: product.id,
                                       categoryName: widget.categoryName ==
                                               getTranslated(context, 'tires')!
-                                          ? 'Wheels'
+                                          ? 'الإطارات'
                                           : widget.categoryName,
                                       productImage: product.primaryImage,
                                       tag: product.tag,
