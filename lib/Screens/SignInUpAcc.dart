@@ -3,13 +3,19 @@ import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
 import 'package:elite_tiers/Screens/Dashboard.dart';
 import 'package:elite_tiers/UI/widgets/AppBtn.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:elite_tiers/utils/blured_router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../app/routes.dart';
 
 class SignInUpAcc extends StatefulWidget {
   const SignInUpAcc({super.key});
+  static route(RouteSettings settings) {
+    return BlurredRouter(
+      builder: (context) {
+        return const SignInUpAcc();
+      },
+    );
+  }
 
   @override
   _SignInUpAccState createState() => _SignInUpAccState();
@@ -48,18 +54,14 @@ class _SignInUpAccState extends State<SignInUpAcc>
   _subLogo() {
     return Padding(
         padding: const EdgeInsetsDirectional.only(top: 30.0),
-        child: SvgPicture.asset(
-          'assets/images/homelogo.svg',
-          colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.primarytheme, BlendMode.srcIn),
-        ));
+        child: Image.asset('assets/images/logo.png', height: 150));
   }
 
-  welcomeEshopTxt() {
+  welcomeTxt() {
     return Padding(
       padding: const EdgeInsetsDirectional.only(top: 30.0),
       child: Text(
-        getTranslated(context, 'WELCOME_ESHOP')!,
+        getTranslated(context, 'WELCOME_ELITE_TIRES')!,
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
             color: Theme.of(context).colorScheme.fontColor,
             fontWeight: FontWeight.bold,
@@ -106,34 +108,6 @@ class _SignInUpAccState extends State<SignInUpAcc>
             arguments: {"isPop": false});
       },
     );
-
-    // CupertinoButton(
-    //   child: Container(
-    //       width: deviceWidth! * 0.8,
-    //       height: 45,
-    //       alignment: FractionalOffset.center,
-    //       decoration: BoxDecoration(
-    //         color: Theme.of(context).colorScheme.primarytheme,
-    //         borderRadius: const BorderRadius.all(Radius.circular(100.0)),
-    //         boxShadow: [
-    //           BoxShadow(
-    //               blurRadius: 10,
-    //               offset: const Offset(0, 8),
-    //               color: Theme.of(context)
-    //                   .colorScheme
-    //                   .primarytheme
-    //                   .withValues(0.4))
-    //         ],
-    //       ),
-    //       child: Text(getTranslated(context, 'SIGNIN_LBL')!,
-    //           textAlign: TextAlign.center,
-    //           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-    //               color: colors.whiteTemp, fontWeight: FontWeight.normal))),
-    //   onPressed: () {
-    //     Navigator.pushNamed(context, Routers.loginScreen,
-    //         arguments: {"isPop": false});
-    //   },
-    // );
   }
 
   createAccBtn() {
@@ -147,24 +121,6 @@ class _SignInUpAccState extends State<SignInUpAcc>
             arguments: {"title": getTranslated(context, 'SEND_OTP_TITLE')});
       },
     );
-    // return CupertinoButton(
-    //   child: Container(
-    //       width: deviceWidth! * 0.8,
-    //       height: 45,
-    //       alignment: FractionalOffset.center,
-    //       decoration: BoxDecoration(
-    //         color: Theme.of(context).colorScheme.primarytheme,
-    //         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-    //       ),
-    //       child: Text(getTranslated(context, 'CREATE_ACC_LBL')!,
-    //           textAlign: TextAlign.center,
-    //           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-    //               color: colors.whiteTemp, fontWeight: FontWeight.normal))),
-    //   onPressed: () {
-    //     Navigator.pushNamed(context, Routers.sendOTPScreen,
-    //         arguments: {"title": getTranslated(context, 'SEND_OTP_TITLE')});
-    //   },
-    // );
   }
 
   skipSignInBtn() {
@@ -182,56 +138,7 @@ class _SignInUpAccState extends State<SignInUpAcc>
         );
       },
     );
-    // return CupertinoButton(
-    //   child: Container(
-    //       width: deviceWidth! * 0.8,
-    //       height: 45,
-    //       alignment: FractionalOffset.center,
-    //       decoration: BoxDecoration(
-    //         color: Theme.of(context).colorScheme.primarytheme,
-    //         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-    //       ),
-    //       child: Text(getTranslated(context, 'SKIP_SIGNIN_LBL')!,
-    //           textAlign: TextAlign.center,
-    //           style: Theme.of(context).textTheme.titleMedium!.copyWith(
-    //               color: colors.whiteTemp, fontWeight: FontWeight.normal))),
-    //   onPressed: () {
-    //     Dashboard.dashboardScreenKey = GlobalKey<HomePageState>();
-
-    //     Navigator.pushReplacementNamed(
-    //       context,
-    //       Routers.dashboardScreen,
-    //     );
-    //   },
-    // );
   }
-
-  // backBtn() {
-  //   return Container(
-  //     padding: const EdgeInsetsDirectional.only(top: 34.0, start: 5.0),
-  //     alignment: Alignment.topLeft,
-  //     width: 60,
-  //     child: Material(
-  //         color: Colors.transparent,
-  //         child: Container(
-  //           margin: const EdgeInsets.all(10),
-  //           decoration: shadow(),
-  //           child: Card(
-  //             elevation: 0,
-  //             child: InkWell(
-  //               borderRadius: BorderRadius.circular(4),
-  //               onTap: () => Navigator.of(context).pop(),
-  //               child: const Center(
-  //                 child: Icon(
-  //                   Icons.keyboard_arrow_left,
-  //                   color: Theme.of(context).colorScheme.primarytheme,
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //         )),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +154,7 @@ class _SignInUpAccState extends State<SignInUpAcc>
               mainAxisSize: MainAxisSize.min,
               children: [
                 _subLogo(),
-                welcomeEshopTxt(),
+                welcomeTxt(),
                 eCommerceforBusinessTxt(),
                 signInyourAccTxt(),
                 signInBtn(),

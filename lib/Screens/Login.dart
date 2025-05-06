@@ -662,7 +662,7 @@ class _LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
         width: 150,
         height: 150,
         child: SvgPicture.asset(
-          "assets/images/homelogo.svg",
+          "assets/images/logo.png",
           colorFilter: ColorFilter.mode(
               Theme.of(context).colorScheme.primarytheme, BlendMode.srcIn),
         ),

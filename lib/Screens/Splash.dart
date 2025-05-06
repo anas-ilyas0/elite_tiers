@@ -157,7 +157,7 @@ class _SplashScreen extends State<Splash> {
           CupertinoPageRoute(
             builder: (context) => const IntroSlider(),
           ));
-      Navigator.pushReplacementNamed(context, Routers.introSliderScreen);
+      Navigator.pushReplacementNamed(context, Routers.signInUpAcc);
 
       //
     }

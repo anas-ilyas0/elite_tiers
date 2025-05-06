@@ -3,6 +3,7 @@ import 'package:elite_tiers/Screens/Dashboard.dart';
 import 'package:elite_tiers/Screens/Intro_Slider.dart';
 import 'package:elite_tiers/Screens/Login.dart';
 import 'package:elite_tiers/Screens/SendOtp.dart';
+import 'package:elite_tiers/Screens/SignInUpAcc.dart';
 import 'package:elite_tiers/Screens/SignUp.dart';
 import 'package:elite_tiers/Screens/Splash.dart';
 import 'package:elite_tiers/utils/blured_router.dart';
@@ -12,6 +13,7 @@ class Routers {
   Routers._(); //priv cons
 
   static const String splash = "/";
+  static const String signInUpAcc = '/signInUpAcc';
   static const String dashboardScreen = "/dashboard";
   static const String introSliderScreen = "/introSliderScreen";
   static const String notificationListScreen = "/notificationListScreen";
@@ -96,6 +98,8 @@ class Routers {
       // case verifyOTPScreen:
       //   return VerifyOtp.route(routeSettings);
 
+      case signInUpAcc:
+        return SignInUpAcc.route(routeSettings);
       case introSliderScreen:
         return IntroSlider.route(routeSettings);
 

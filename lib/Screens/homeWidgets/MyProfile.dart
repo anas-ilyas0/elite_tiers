@@ -470,7 +470,7 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
         // _getDivider(),
         // _getDrawerItem(getTranslated(context, 'CHANGE_LANGUAGE_LBL')!,
         //     'assets/images/pro_language.svg'),
-        //  CUR_USERID == "" || CUR_USERID == null ? SizedBox.shrink() : _getDivider(),
+        //CUR_USERID == "" || CUR_USERID == null ? SizedBox.shrink() : _getDivider(),
         context.read<UserProvider>().userId == "" ||
                 context.read<UserProvider>().loginType != PHONE_TYPE
             ? const SizedBox.shrink()
@@ -629,16 +629,18 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
             _launchUrl('https://elitetiers.3chats.com/privacy/policy');
           } else if (title == getTranslated(context, 'RATE_US')) {
             //_openStoreListing();
-          } else if (title == getTranslated(context, 'SHARE_APP')) {
-            var str =
-                "$appName\n\n${getTranslated(context, 'APPFIND')}$androidLink$packageName\n\n ${getTranslated(context, 'IOSLBL')}\n$iosLink";
-            Share.share(str,
-                sharePositionOrigin: Rect.fromLTWH(
-                    0,
-                    0,
-                    MediaQuery.of(context).size.width,
-                    MediaQuery.of(context).size.height / 2));
-          } else if (title == getTranslated(context, 'ABOUT_LBL')) {
+          }
+          // else if (title == getTranslated(context, 'SHARE_APP')) {
+          //   var str =
+          //       "$appName\n\n${getTranslated(context, 'APPFIND')}$androidLink$packageName\n\n ${getTranslated(context, 'IOSLBL')}\n$iosLink";
+          //   Share.share(str,
+          //       sharePositionOrigin: Rect.fromLTWH(
+          //           0,
+          //           0,
+          //           MediaQuery.of(context).size.width,
+          //           MediaQuery.of(context).size.height / 2));
+          // }
+          else if (title == getTranslated(context, 'ABOUT_LBL')) {
             _launchUrl('https://elitetiers.3chats.com/about-us');
           } else if (title == getTranslated(context, 'SHIPPING_PO_LBL')) {
             _launchUrl('https://elitetiers.3chats.com/shipping/return');

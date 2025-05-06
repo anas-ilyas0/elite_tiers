@@ -249,7 +249,10 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
         controller: emailController,
         decoration: InputDecoration(
           hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
-              color: Theme.of(context).colorScheme.fontColor.withValues(alpha: 0.6),
+              color: Theme.of(context)
+                  .colorScheme
+                  .fontColor
+                  .withValues(alpha: 0.6),
               fontWeight: FontWeight.normal),
           hintText: getTranslated(context, 'EMAILHINT_LBL'),
           border: OutlineInputBorder(
@@ -591,9 +594,9 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
         width: 150,
         height: 150,
         child: SvgPicture.asset(
-          "assets/images/homelogo.svg",
-          colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.primarytheme, BlendMode.srcIn),
+          "assets/images/logo.png",
+          // colorFilter: ColorFilter.mode(
+          //     Theme.of(context).colorScheme.primarytheme, BlendMode.srcIn),
         ),
       ),
     );
