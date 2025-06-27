@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:elite_tiers/App/languages.dart';
 import 'package:elite_tiers/Models/language_model.dart';
-import 'package:elite_tiers/utils/Hive/hive_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,22 +34,6 @@ Future<bool> isNetworkAvailable() async {
   }
 }
 
-// Future<bool> isNetworkAvailable() async {
-//   try {
-//     var connectivityResult = await Connectivity().checkConnectivity();
-//     if (connectivityResult == ConnectivityResult.mobile ||
-//         connectivityResult == ConnectivityResult.wifi) {
-//       final result = await InternetAddress.lookup('google.com');
-//       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-//         return true;
-//       }
-//     }
-//     return false;
-//   } on SocketException catch (_) {
-//     return false;
-//   }
-// }
-
 Future<Locale> getLocale() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String languageCode =
@@ -74,7 +57,7 @@ String? getTranslated(BuildContext context, String key) {
   return AppLocalization.of(context)!.translate(key) ?? key;
 }
 
-String getToken() {
+getToken() {
   // final claimSet = JwtClaim(
   //     issuer: issuerName,
   //     // maxAge: const Duration(minutes: 1),
@@ -83,7 +66,7 @@ String getToken() {
   //
   // String token = issueJwtHS256(claimSet, Hive);
   // print("token is $token");
-  return HiveUtils.getJWT() ?? "";
+  //return HiveUtils.getJWT() ?? "";
 }
 
 Map<String, String> get headers => {

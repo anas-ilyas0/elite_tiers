@@ -90,8 +90,7 @@ errorAccWidget(double size) {
 
 String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
 
-cartTotalClear() {
-}
+cartTotalClear() {}
 
 getThemeColor(BuildContext context) {
   var systemBrightness =
@@ -142,6 +141,7 @@ Widget getHeading(String title, BuildContext context) {
 noIntImage() {
   return SvgPicture.asset(
     'assets/images/no_internet.svg',
+    colorFilter: ColorFilter.mode(Color(0xff22A4BE), BlendMode.srcIn),
     fit: BoxFit.contain,
     height: 400,
   );

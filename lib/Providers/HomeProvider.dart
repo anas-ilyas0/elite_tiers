@@ -55,6 +55,10 @@ class HomeProvider extends ChangeNotifier {
 
   List<ProductsCategories> _batteriesList = [];
   List<ProductsCategories> get batteriesList => _batteriesList;
+
+  List<ProductsCategories> _categories = [];
+  List<ProductsCategories> get categories => _categories;
+
 //deal
   bool _isDealLoading = true;
   bool get dealLoading => _isDealLoading;
@@ -81,6 +85,17 @@ class HomeProvider extends ChangeNotifier {
     fetchProducts();
     fetchDeal();
   }
+
+  Future<void> refreshAPIs() async {
+    await Future.wait([
+      fetchCategories(),
+      fetchBrands(),
+      fetchBlogs(),
+      fetchProducts(),
+      fetchDeal(),
+    ]);
+  }
+
 //categories
   Future<void> fetchCategories() async {
     _isCatLoading = true;
@@ -155,6 +170,7 @@ class HomeProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
       var productResponse = ProductsModel.fromJson(data);
+      _categories = productResponse.data;
       _categoriesList = productResponse.data.map((category) {
         return {
           'name': category.name,

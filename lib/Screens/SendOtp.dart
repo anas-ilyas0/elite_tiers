@@ -8,13 +8,11 @@ import 'package:elite_tiers/Screens/Verify_Otp.dart';
 import 'package:elite_tiers/Screens/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../ui/styles/DesignConfig.dart';
 import '../ui/styles/Validators.dart';
 import '../ui/widgets/AppBtn.dart';
 import '../ui/widgets/BehaviorWidget.dart';
-import '../utils/Hive/hive_utils.dart';
 import '../utils/blured_router.dart';
 
 class SendOtp extends StatefulWidget {
@@ -595,24 +593,10 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
         height: 150,
         child: SvgPicture.asset(
           "assets/images/logo.png",
-          // colorFilter: ColorFilter.mode(
-          //     Theme.of(context).colorScheme.primarytheme, BlendMode.srcIn),
         ),
       ),
     );
   }
-}
-
-String getToken() {
-  // final claimSet = JwtClaim(
-  //     issuer: issuerName,
-  //     // maxAge: const Duration(minutes: 1),
-  //     maxAge: const Duration(days: tokenExpireTime),
-  //     issuedAt: DateTime.now().toUtc());
-  //
-  // String token = issueJwtHS256(claimSet, Hive);
-  // print("token is $token");
-  return HiveUtils.getJWT() ?? "";
 }
 
 Map<String, String> get headers => {

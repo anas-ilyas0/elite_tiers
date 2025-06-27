@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'package:elite_tiers/App/languages.dart';
 import 'package:elite_tiers/Helpers/ApiBaseHelper.dart';
@@ -18,19 +17,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:http/http.dart' as http;
-import 'package:http_parser/http_parser.dart';
-import 'package:mime/mime.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../main.dart';
 import '../../../ui/styles/DesignConfig.dart';
 import '../../../ui/styles/Validators.dart';
 import '../../../ui/widgets/AppBtn.dart';
-
-//GlobalKey _scaffold = GlobalKey();
 
 class MyProfile extends StatefulWidget {
   const MyProfile({super.key});
@@ -53,11 +46,7 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
 
   final GlobalKey<FormState> _formkey1 = GlobalKey<FormState>();
   int? selectLan, curTheme;
-
-  // TextEditingController? curPassC, confPassC;
   String? curPass, newPass, confPass, pass, mob;
-
-  //String? name, email, mobile;
 
   final GlobalKey<FormState> _changePwdKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _changeUserDetailsKey = GlobalKey<FormState>();
@@ -79,8 +68,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
   AnimationController? buttonController;
   final ScrollController _scrollBottomBarController = ScrollController();
   bool isLoading = false;
-  // final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  // final GoogleSignIn _googleSignIn = GoogleSignIn();
   Animation? buttonSqueezeanimation1;
   AnimationController? buttonController1;
 
@@ -468,8 +455,8 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
         //       'assets/images/pro_theme.svg'),
         // },
         // _getDivider(),
-        // _getDrawerItem(getTranslated(context, 'CHANGE_LANGUAGE_LBL')!,
-        //     'assets/images/pro_language.svg'),
+        _getDrawerItem(getTranslated(context, 'CHANGE_LANGUAGE_LBL')!,
+            'assets/images/pro_language.svg'),
         //CUR_USERID == "" || CUR_USERID == null ? SizedBox.shrink() : _getDivider(),
         context.read<UserProvider>().userId == "" ||
                 context.read<UserProvider>().loginType != PHONE_TYPE
@@ -861,27 +848,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
                                           from = 1;
                                         });
                                       } else {
-                                        // User? currentUser =
-                                        //     FirebaseAuth.instance.currentUser;
-                                        // print("currentUser is:$currentUser");
-                                        // if (currentUser != null) {
-                                        //   currentUser
-                                        //       .delete()
-                                        //       .then((value) async {
-                                        //     Navigator.of(context,
-                                        //             rootNavigator: true)
-                                        //         .pop(true);
-                                        //     setDeleteSocialAcc();
-                                        //   });
-                                        // } else {
-                                        //   Navigator.of(context,
-                                        //           rootNavigator: true)
-                                        //       .pop(true);
-                                        //   setSnackbar(
-                                        //       getTranslated(
-                                        //           context, 'RELOGIN_REQ')!,
-                                        //       context);
-                                        // }
                                       }
                                     }
                                   : null,
@@ -970,10 +936,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
     _isNetworkAvail = await isNetworkAvailable();
     if (_isNetworkAvail) {
       try {
-        // var parameter = {
-        //   USER_ID: context.read<UserProvider>().userId,
-        // };
-
         apiBaseHelper.postAPICall(deleteSocialAccApi, {}).then((getdata) {
           bool error = getdata["error"];
           String? msg = getdata["message"];
@@ -982,17 +944,8 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
 
             SettingProvider settingProvider =
                 Provider.of<SettingProvider>(context, listen: false);
-
-            // context.read<FavoriteProvider>().setFavlist([]);
-            // context.read<CartProvider>().setCartlist([]);
             settingProvider.clearUserSession(context);
             Future.delayed(Duration.zero, () {
-              // Navigator.of(context).pushAndRemoveUntil(
-              //     MaterialPageRoute(
-              //         builder: (BuildContext context) => const LoginScreen(
-              //               isPop: false,
-              //             )),
-              //     (Route<dynamic> route) => false);
 
               Navigator.pushNamedAndRemoveUntil(
                   context,
@@ -1042,17 +995,8 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
 
             SettingProvider settingProvider =
                 Provider.of<SettingProvider>(context, listen: false);
-
-            // context.read<FavoriteProvider>().setFavlist([]);
-            // context.read<CartProvider>().setCartlist([]);
             settingProvider.clearUserSession(context);
             Future.delayed(Duration.zero, () {
-              // Navigator.of(context).pushAndRemoveUntil(
-              //     MaterialPageRoute(
-              //         builder: (BuildContext context) => const LoginScreen(
-              //               isPop: false,
-              //             )),
-              //     (Route<dynamic> route) => false);
 
               Navigator.pushNamedAndRemoveUntil(
                   context,
@@ -1201,10 +1145,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
     //ISDARK = isDark.toString();
   }
 
-  // Future<void> _openStoreListing() => _inAppReview.openStoreListing(
-  //       appStoreId: appStoreId,
-  //       microsoftStoreId: 'microsoftStoreId',
-  //     );
 
   logOutDailog(BuildContext context) async {
     await dialogAnimate(
@@ -1264,15 +1204,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
             )
           ],
         ));
-  }
-
-  Future<void> signOut(String type) async {
-    // _firebaseAuth.signOut();
-    // if (type == GOOGLE_TYPE) {
-    //   _googleSignIn.signOut();
-    // } else {
-    //   _firebaseAuth.signOut();
-    // }
   }
 
   @override
@@ -1385,17 +1316,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
                   return userProvider.profilePic != ''
                       ? networkImageCommon(userProvider.profilePic, 64, false,
                           height: 64, width: 64)
-                      /*CachedNetworkImage(
-                          fadeInDuration: const Duration(milliseconds: 150),
-                          imageUrl: userProvider.profilePic,
-                          height: 64.0,
-                          width: 64.0,
-                          fit: BoxFit.cover,
-                          errorWidget: (context, error, stackTrace) =>
-                              erroWidget(64),
-                          placeholder: (context, url) {
-                            return placeHolder(64);
-                          })*/
                       : imagePlaceHolder(62, context);
                 }),
               ),
@@ -1430,19 +1350,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
         });
   }
 
-/*  openChangeUserDetailsBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(40.0),
-                topRight: Radius.circular(40.0))),
-        isScrollControlled: true,
-        context: context,
-        builder: (context) {
-          return const EditProfileBottomSheet();
-        });
-  }*/
-
   openChangeUserDetailsBottomSheet(BuildContext context) {
     // showModalBottomSheet(
     //   shape: const RoundedRectangleBorder(
@@ -1458,183 +1365,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
 
   openEditBottomSheet(BuildContext context) {
     return openChangeUserDetailsBottomSheet(context);
-  }
-
-/*  void openChangeUserDetailsBottomSheet() {
-    showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(40.0),
-                topRight: Radius.circular(40.0))),
-        isScrollControlled: true,
-        context: context,
-        builder: (context) {
-          return LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-            return Consumer<UserProvider>(builder: (context, provider, _) {
-              return Wrap(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                        bottom: MediaQuery.of(context).viewInsets.bottom),
-                    child: Form(
-                        key: _changeUserDetailsKey,
-                        child:
-                            Column(mainAxisSize: MainAxisSize.max, children: [
-                          bottomSheetHandle(context),
-                          bottomsheetLabel("EDIT_PROFILE_LBL", context),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10.0),
-                            child: getUserImage(
-                                provider.profilePic, _imgFromGallery),
-                          ),
-                          Selector<UserProvider, String>(
-                              selector: (_, provider) => provider.curUserName,
-                              builder: (context, userName, child) {
-                                return setNameField();
-                              }),
-                          //setNameField(),
-                          Selector<UserProvider, String>(
-                              selector: (_, provider) => provider.email,
-                              builder: (context, userEmail, child) {
-                                return setEmailField();
-                              }),
-                          Selector<UserProvider, String>(
-                              selector: (_, provider) => provider.mob,
-                              builder: (context, userMob, child) {
-                                return setMobileField();
-                              }),
-                          //setMobileField(),
-                          saveButton(
-                              getTranslated(context, "SAVE_LBL")!,
-                              !provider.getProgress
-                                  ? () {
-                                      // FocusScope.of(context).unfocus();
-                                      validateAndSave(_changeUserDetailsKey);
-                                    }
-                                  : () {})
-                        ])),
-                  ),
-                ],
-              );
-            });
-          });
-        });
-  }*/
-
-  /* void _imgFromGallery() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(type: FileType.image);
-    if (result != null) {
-      File? image = File(result.files.single.path!);
-    //crop functionality\
-
-
-      await setProfilePic(image);
-    } else {
-      // User canceled the picker
-    }
-  }*/
-
-  // void _imgFromGallery() async {
-  //   try {
-  //     FilePickerResult? result =
-  //         await FilePicker.platform.pickFiles(type: FileType.image);
-  //     if (result != null) {
-  //       File? image = File(result.files.single.path!);
-
-  //       print('file image***$image');
-
-  //       // Create an instance of ImageCropper
-  //       ImageCropper imageCropper = ImageCropper();
-
-  //       // Crop the selected image
-  //       CroppedFile? croppedImage = await imageCropper
-  //           .cropImage(sourcePath: image.path, aspectRatioPresets: [
-  //         CropAspectRatioPreset.square,
-  //         CropAspectRatioPreset.ratio3x2,
-  //         CropAspectRatioPreset.original,
-  //         CropAspectRatioPreset.ratio4x3,
-  //         CropAspectRatioPreset.ratio16x9,
-  //       ], uiSettings: [
-  //         AndroidUiSettings(
-  //           toolbarTitle: 'Crop Image',
-  //           toolbarColor: Colors.deepOrange,
-  //           toolbarWidgetColor: Colors.white,
-  //           initAspectRatio: CropAspectRatioPreset.original,
-  //           lockAspectRatio: false,
-  //         ),
-  //         IOSUiSettings(
-  //           title: 'Crop Image',
-  //         ),
-  //       ]);
-
-  //       if (croppedImage != null) {
-  //         File croppedFile = File(croppedImage.path);
-  //         await setProfilePic(croppedFile);
-  //       } else {
-  //         // User canceled cropping
-  //       }
-  //     } else {
-  //       // User canceled the picker
-  //     }
-  //   } catch (e) {
-  //     setSnackbar(getTranslated(context, "PERMISSION_NOT_ALLOWED")!, context);
-  //   }
-  // }
-
-  Future<void> setProfilePic(File image) async {
-    _isNetworkAvail = await isNetworkAvailable();
-    if (_isNetworkAvail) {
-      try {
-        var request = http.MultipartRequest("POST", (getUpdateUserApi));
-        request.headers.addAll(headers);
-        request.fields[USER_ID] = context.read<UserProvider>().userId;
-        final mimeType = lookupMimeType(image.path);
-
-        var extension = mimeType!.split("/");
-
-        var pic = await http.MultipartFile.fromPath(
-          IMAGE,
-          image.path,
-          contentType: MediaType('image', extension[1]),
-        );
-
-        request.files.add(pic);
-
-        var response = await request.send();
-        var responseData = await response.stream.toBytes();
-        var responseString = String.fromCharCodes(responseData);
-
-        var getdata = json.decode(responseString);
-
-        bool error = getdata["error"];
-        String? msg = getdata['message'];
-
-        if (!error) {
-          var data = getdata["data"];
-          var image;
-          image = data[IMAGE];
-          var settingProvider =
-              Provider.of<SettingProvider>(context, listen: false);
-          settingProvider.setPrefrence(IMAGE, image!);
-
-          var userProvider = Provider.of<UserProvider>(context, listen: false);
-          userProvider.setProfilePic(image!);
-          setSnackbar(getTranslated(context, 'PROFILE_UPDATE_MSG')!, context);
-        } else {
-          setSnackbar(msg!, context);
-        }
-      } on TimeoutException catch (_) {
-        setSnackbar(getTranslated(context, 'somethingMSg')!, context);
-      }
-    } else {
-      if (mounted) {
-        setState(() {
-          _isNetworkAvail = false;
-        });
-      }
-    }
   }
 
   Widget setNameField() => Padding(
@@ -1684,7 +1414,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
             readOnly: (context.read<UserProvider>().loginType != GOOGLE_TYPE)
                 ? false
                 : true,
-            //initialValue: emailController.text,
             controller: emailController,
             decoration: InputDecoration(
                 label: Text(getTranslated(context, "EMAILHINT_LBL")!),
@@ -1699,48 +1428,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
       ),
     );
   }
-
-  /* Widget setMobileField() => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
-        child: Container(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.white,
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-            child: TextFormField(
-              readOnly: context.read<UserProvider>().loginType != PHONE_TYPE
-                  ? false
-                  : true,
-              controller: mobileController,
-              onChanged: (value) {
-                mobileController.text = value; // Update the controller's value
-              },
-              keyboardType: TextInputType.number,
-              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .copyWith(color: Theme.of(context).colorScheme.fontColor),
-              // initialValue: mobileController.text,
-
-              decoration: InputDecoration(
-                  label: Text(getTranslated(context, "MOBILEHINT_LBL")!),
-                  fillColor: Theme.of(context).colorScheme.white,
-                  border: InputBorder.none),
-              validator: (val) => validateMob(
-                  val!,
-                  getTranslated(context, 'MOB_REQUIRED'),
-                  getTranslated(context, 'VALID_MOB'),
-                  check: false),
-            ),
-          ),
-        ),
-      ); */
 
   Widget setMobileField() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 15.0),
@@ -1788,12 +1475,7 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
             btnAnim: buttonSqueezeanimation1,
             btnCntrl: buttonController1,
             onBtnSelected:
-                onBtnSelected) /*SimBtn(
-          onBtnSelected: onBtnSelected,
-          title: title,
-          height: 45.0,
-          width: deviceWidth,
-        )*/
+                onBtnSelected)
         );
   }
 
@@ -1978,11 +1660,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
         child: InkWell(
           child: Text(getTranslated(context, "FORGOT_PASSWORD_LBL")!),
           onTap: () {
-            // Navigator.of(context).push(CupertinoPageRoute(
-            //     builder: (context) => SendOtp(
-            //           title: ,
-            //         )));
-            //
             // Navigator.pushNamed(context, Routers.sendOTPScreen, arguments: {
             //   "title": getTranslated(context, 'FORGOT_PASS_TITLE')
             // });

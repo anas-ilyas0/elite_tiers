@@ -62,14 +62,10 @@ class _MyCartScreenState extends State<MyCartScreen> {
                             color: Theme.of(context).colorScheme.white,
                             fontWeight: FontWeight.normal))),
                 onPressed: () {
-                  // Future.delayed(Duration(milliseconds: 200), () {
-                  //   if (mounted) {
                   Navigator.of(context)
                       .popUntil((Route route) => route.isFirst);
                   Dashboard.dashboardScreenKey.currentState
                       ?.changeTabPosition(0);
-                  //   }
-                  // });
                 }),
           )
         ]),

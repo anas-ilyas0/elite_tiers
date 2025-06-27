@@ -10,43 +10,21 @@ import 'package:elite_tiers/Providers/Theme.dart';
 import 'package:elite_tiers/Providers/cart_provider.dart';
 import 'package:elite_tiers/Providers/user_provider.dart';
 import 'package:elite_tiers/UI/styles/themedata.dart';
-import 'package:elite_tiers/utils/Hive/hive_keys.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
-import 'package:hive/hive.dart';
+import 'package:myfatoorah_flutter/myfatoorah_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app/app_Localization.dart';
 import 'app/routes.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-///4.2.0
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize Hive
-  final appDocumentDirectory =
-      await path_provider.getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDirectory.path);
-
-  // Open a box (if needed here)
-  await Hive.openBox(HiveKeys.userDetailsBox);
-
-//mock info(test mode)
-  // await TamaraSdk.initSdk(
-  //   "test-auth-token", // Replace with your auth token
-  //   "https://api-sandbox.tamara.co", // Sandbox API URL
-  //   "https://example.com/notification", // Notification Webhook URL
-  //   "sandbox-publish-key", // Replace with publish key
-  //   "sandbox-notification-token", // Replace with notification token
-  //   true, // true for Sandbox, false for Production
-  // );
-
-  initializedDownload();
+  initMyFatoorahSDK();
   HttpOverrides.global = MyHttpOverrides();
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -99,8 +77,17 @@ void main() async {
   );
 }
 
-Future<void> initializedDownload() async {
-  await FlutterDownloader.initialize(debug: false);
+void initMyFatoorahSDK() {
+  MFSDK.init(
+      fatoorahToken,
+      MFCountry.SAUDIARABIA,
+      MFEnvironment.TEST); // "Live" in production
+  MFSDK.setUpActionBar(
+    toolBarTitle: "EliteTiers Payment",
+    toolBarTitleColor: "#FFFFFF",
+    toolBarBackgroundColor: "#22A4BE",
+    isShowToolBar: true,
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -165,7 +152,6 @@ class _MyAppState extends State<MyApp> {
           supportedLocales: [...Languages().codes()],
           onGenerateRoute: Routers.onGenerateRouted,
           initialRoute: Routers.splash,
-          //scaffoldMessengerKey: scaffoldMessageKey,
           localizationsDelegates: const [
             AppLocalization.delegate,
             GlobalMaterialLocalizations.delegate,

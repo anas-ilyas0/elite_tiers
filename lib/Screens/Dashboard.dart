@@ -12,7 +12,6 @@ import 'package:elite_tiers/Screens/cart/my_cart_screen.dart';
 import 'package:elite_tiers/Screens/homeWidgets/MyProfile.dart';
 import 'package:elite_tiers/Screens/home_screen.dart';
 import 'package:elite_tiers/utils/blured_router.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -60,8 +59,6 @@ class HomePageState extends State<Dashboard>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    initAppLinks();
-
     Future.delayed(Duration.zero, () async {
       SettingProvider settingsProvider =
           Provider.of<SettingProvider>(context, listen: false);
@@ -73,25 +70,6 @@ class HomePageState extends State<Dashboard>
           .read<HomeProvider>()
           .setAnimationController(navigationContainerAnimationController);
     });
-  }
-
-  Future<void> initAppLinks() async {}
-
-  Future<void> handleDeepLink(Uri uri) async {
-    if (uri.path.contains('/products/details/')) {
-      String slug = uri.pathSegments.last;
-      print("productslug--->${slug}");
-      if (slug.isNotEmpty) {
-        // final product = await getProductDetailsFromSlug(slug);
-        // if (product != null) {
-        //   //Routes.goToProductDetailsPage(context, product: product);
-        // }
-      }
-    } else {
-      if (kDebugMode) {
-        print('Received deep link: $uri');
-      }
-    }
   }
 
   changeTabPosition(int index) {
@@ -127,11 +105,7 @@ class HomePageState extends State<Dashboard>
                 controller: _pageController,
                 children: [
                   HomeScreen(),
-                  //AllCategory(),
                   const MyCartScreen(fromBottom: true),
-                  // Cart(
-                  //   fromBottom: true,
-                  // ),
                   const MyProfile()
                 ],
                 onPageChanged: (index) {
@@ -191,30 +165,7 @@ class HomePageState extends State<Dashboard>
                 Theme.of(context).colorScheme.blackInverseInDarkTheme,
                 BlendMode.srcIn),
           ),
-          onPressed: () {
-            final userProvider = context.read<UserProvider>();
-            if (userProvider.userId != "") {
-              Navigator.pushNamed(
-                context,
-                Routers.notificationListScreen,
-              ).then((value) {
-                if (value != null && value == true) {
-                  _pageController.jumpToPage(1);
-                }
-              });
-            } else {
-              Navigator.pushNamed(
-                context,
-                Routers.loginScreen,
-                arguments: {
-                  "isPop": true,
-                  "classType": Dashboard(
-                    key: Dashboard.dashboardScreenKey,
-                  )
-                },
-              );
-            }
-          },
+          onPressed: () {},
         ),
         IconButton(
           padding: const EdgeInsets.all(0),
@@ -225,10 +176,10 @@ class HomePageState extends State<Dashboard>
                 BlendMode.srcIn),
           ),
           onPressed: () {
-            Navigator.pushNamed(
-              context,
-              Routers.favoriteScreen,
-            );
+            // Navigator.pushNamed(
+            //   context,
+            //   Routers.favoriteScreen,
+            // );
           },
         ),
       ],

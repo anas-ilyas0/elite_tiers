@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:math';
 import 'package:elite_tiers/Helpers/ApiBaseHelper.dart';
 import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Constant.dart';
@@ -10,21 +8,16 @@ import 'package:elite_tiers/Models/cart_model.dart';
 import 'package:elite_tiers/Models/category_model.dart';
 import 'package:elite_tiers/Models/products_model.dart';
 import 'package:elite_tiers/Providers/HomeProvider.dart';
-import 'package:elite_tiers/Providers/SettingProvider.dart';
 import 'package:elite_tiers/Providers/cart_provider.dart';
-import 'package:elite_tiers/Providers/user_provider.dart';
-import 'package:elite_tiers/Screens/blog_details.dart';
 import 'package:elite_tiers/Screens/home_product_details.dart';
 import 'package:elite_tiers/Screens/show_more_home_products.dart';
 import 'package:elite_tiers/UI/widgets/AppBtn.dart';
-import 'package:elite_tiers/utils/Extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../ui/styles/DesignConfig.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,11 +34,8 @@ class PaymentOptions {
 }
 
 ApiBaseHelper apiBaseHelper = ApiBaseHelper();
-List<String> tagList = [];
-List<Widget> pages = [];
-int count = 1;
-String _selectedCategory = 'زيت';
-CategoryModel? categoryModel;
+
+String? _selectedCategoryName;
 String formatDate(DateTime date) {
   final DateFormat formatter = DateFormat('MMM dd, yyyy');
   return formatter.format(date);
@@ -139,7 +129,6 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     super.initState();
     _filteredProducts = productsList;
-    callApi();
     buttonController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
 
@@ -180,17 +169,15 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    Locale locale = Localizations.localeOf(context);
     var provider = Provider.of<HomeProvider>(context);
+    final dynamicCategories = provider.categories; // List<ProductsCategories>
     List<CategoryData> categories = provider.catList;
 
-    List<DropdownMenuItem<String>> dropdownItems = categories
-        .map((category) => DropdownMenuItem<String>(
-              value: category.enCategoryName,
+    List<DropdownMenuItem<String>> dropdownItems = dynamicCategories
+        .map((dCategory) => DropdownMenuItem<String>(
+              value: dCategory.name,
               child: Text(
-                locale.languageCode == 'ar'
-                    ? category.frCategoryName
-                    : category.enCategoryName,
+                dCategory.name,
                 style: TextStyle(
                     color: Theme.of(context).brightness == Brightness.dark
                         ? Colors.white
@@ -200,15 +187,15 @@ class _HomeScreenState extends State<HomeScreen>
             ))
         .toList();
 
-    bool isSelectedCategoryValid(
-        List<CategoryData> categories, String? selectedValue) {
-      if (selectedValue == null) return false;
-      return categories
-          .any((category) => category.enCategoryName == selectedValue);
-    }
-
     super.build(context);
     hideAppbarAndBottomBarOnScroll(_scrollBottomBarController, context);
+    if (_selectedCategoryName == null && categories.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        setState(() {
+          _selectedCategoryName = categories.first.frCategoryName;
+        });
+      });
+    }
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.lightWhite,
         body: _isNetworkAvail
@@ -581,12 +568,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   child: DropdownButton<String>(
                                     underline: Container(),
                                     isDense: true,
-                                    value: provider.catLoading ||
-                                            !isSelectedCategoryValid(
-                                                provider.catList,
-                                                _selectedCategory)
-                                        ? null
-                                        : _selectedCategory,
+                                    value: _selectedCategoryName,
                                     hint: Text(
                                       getTranslated(
                                           context,
@@ -598,7 +580,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     items: dropdownItems,
                                     onChanged: (String? newValue) {
                                       setState(() {
-                                        _selectedCategory = newValue!;
+                                        _selectedCategoryName = newValue;
                                       });
                                     },
                                   )),
@@ -835,17 +817,6 @@ class _HomeScreenState extends State<HomeScreen>
             : noInternet(context));
   }
 
-  Future<void> _refresh() {
-    // context.read<HomeProvider>().setCatLoading(true);
-    // context.read<HomeProvider>().setSecLoading(true);
-    // context.read<HomeProvider>().setOfferLoading(true);
-    // context.read<HomeProvider>().setMostLikeLoading(true);
-    // context.read<HomeProvider>().setSliderLoading(true);
-    // context.read<CategoryProvider>().setCurSelected(0);
-    // proIds.clear();
-    return callApi();
-  }
-
   _slider() {
     return Selector<HomeProvider, bool>(
       builder: (context, data, child) {
@@ -979,7 +950,6 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   _catList(context) {
-    // Locale locale = Localizations.localeOf(context);
     return Selector<HomeProvider, bool>(
       selector: (_, provider) => provider.isProductsLoading,
       builder: (context, isLoading, child) {
@@ -1109,28 +1079,24 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  List<AllProducts> getProductsList(BuildContext context) {
-    List<ProductsCategories> categories;
-    switch (_selectedCategory) {
-      case 'الإطارات':
-        categories =
-            Provider.of<HomeProvider>(context, listen: false).tiresList;
-        break;
-      case 'زيت':
-        categories = Provider.of<HomeProvider>(context, listen: false).oilList;
-        break;
-      case 'منظفات':
-        categories =
-            Provider.of<HomeProvider>(context, listen: false).cleanersList;
-        break;
-      case 'البطاريات':
-        categories =
-            Provider.of<HomeProvider>(context, listen: false).batteriesList;
-        break;
-      default:
-        categories = [];
-    }
-    return categories.expand((category) => category.products).toList();
+  List<AllProducts> getProductsList(
+      BuildContext context, String? selectedCategoryName) {
+    final categories =
+        Provider.of<HomeProvider>(context, listen: false).categories;
+    if (selectedCategoryName == null) return [];
+    final category = categories.firstWhere(
+      (cat) => cat.name == selectedCategoryName,
+      orElse: () => ProductsCategories(
+        id: 0,
+        name: '',
+        image: '',
+        description: '',
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        products: [],
+      ),
+    );
+    return category.products;
   }
 
   Widget _productCard(
@@ -1352,7 +1318,7 @@ class _HomeScreenState extends State<HomeScreen>
                       color: Colors.grey,
                     ),
                     const SizedBox(height: 5),
-                    if (_selectedCategory == 'الإطارات')
+                    if (_selectedCategoryName == 'الإطارات')
                       FittedBox(
                         child: Row(
                           children: [
@@ -1436,8 +1402,7 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _featuredBrands() {
-    var categoryName = _selectedCategory;
-    //Locale locale = Localizations.localeOf(context);
+    var categoryName = _selectedCategoryName;
 
     return Selector<HomeProvider, bool>(
       selector: (_, provider) => provider.productsLoading,
@@ -1452,7 +1417,8 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           );
         } else {
-          List<AllProducts> productsList = getProductsList(context);
+          List<AllProducts> productsList =
+              getProductsList(context, categoryName);
           if (productsList.isEmpty) {
             return Center(
                 child: Text(getTranslated(context, 'no_product_found')!));
@@ -1470,7 +1436,7 @@ class _HomeScreenState extends State<HomeScreen>
                       return _productCard(
                         context,
                         productsList[index],
-                        categoryName,
+                        categoryName ?? '',
                       );
                     },
                   ),
@@ -1866,171 +1832,171 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  _blogsList() {
-    Locale locale = Localizations.localeOf(context);
-    bool isRtl(context) {
-      return ['ar', 'he', 'fa', 'ur'].contains(locale.languageCode);
-    }
+  // _blogsList() {
+  //   Locale locale = Localizations.localeOf(context);
+  //   bool isRtl(context) {
+  //     return ['ar', 'he', 'fa', 'ur'].contains(locale.languageCode);
+  //   }
 
-    return Selector<HomeProvider, bool>(
-        selector: (_, provider) => provider.blogsLoading,
-        builder: (context, isLoading, child) {
-          if (isLoading) {
-            return SizedBox(
-              width: double.infinity,
-              child: Shimmer.fromColors(
-                  baseColor: Theme.of(context).colorScheme.simmerBase,
-                  highlightColor: Theme.of(context).colorScheme.simmerHigh,
-                  child: catLoading()),
-            );
-          } else {
-            final blogsList =
-                Provider.of<HomeProvider>(context, listen: false).blogsList;
-            return SizedBox(
-              width: double.infinity,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: IntrinsicHeight(
-                  child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: List.generate(
-                          blogsList.length > 3 ? 3 : blogsList.length, (index) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? null
-                                  : Colors.blueGrey.withValues(alpha: 0.2),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Stack(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (_) => BlogDetails(
-                                                    name: locale.languageCode ==
-                                                            'ar'
-                                                        ? blogsList[index]
-                                                            .frTitle
-                                                        : blogsList[index]
-                                                            .enTitle,
-                                                    tag: 'Hot Collection',
-                                                    image: blogsList[index]
-                                                        .smallImage,
-                                                    date: formatDate(
-                                                        blogsList[index]
-                                                            .createdAt),
-                                                    title: capitalize(
-                                                      locale.languageCode ==
-                                                              'ar'
-                                                          ? blogsList[index]
-                                                              .frTitle
-                                                          : blogsList[index]
-                                                              .enTitle,
-                                                    ),
-                                                    shortDesc: capitalize(
-                                                      locale.languageCode ==
-                                                              'ar'
-                                                          ? capitalize(blogsList[
-                                                                  index]
-                                                              .frDescriptionOne
-                                                              .toLowerCase())
-                                                          : blogsList[index]
-                                                              .enDescriptionOne
-                                                              .toLowerCase(),
-                                                    ),
-                                                    longDesc: capitalize(
-                                                      locale.languageCode ==
-                                                              'ar'
-                                                          ? capitalize(blogsList[
-                                                                  index]
-                                                              .frDescriptionTwo
-                                                              .toLowerCase())
-                                                          : blogsList[index]
-                                                              .enDescriptionTwo
-                                                              .toLowerCase(),
-                                                    ),
-                                                  )),
-                                        );
-                                      },
-                                      child: Container(
-                                        height: 200,
-                                        width: 340,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: NetworkImage(
-                                                  blogsList[index].smallImage)),
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(10),
-                                            topRight: Radius.circular(10),
-                                            bottomLeft: Radius.zero,
-                                            bottomRight: Radius.zero,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: 5,
-                                      right: isRtl(context) ? 5 : null,
-                                      left: isRtl(context) ? null : 5,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
-                                          borderRadius:
-                                              BorderRadius.circular(6),
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(4.0),
-                                          child: Center(
-                                            child: Text(
-                                              'Hot Collection',
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(7),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(formatDate(
-                                          blogsList[index].createdAt)),
-                                      const SizedBox(height: 5),
-                                      Text(capitalize(
-                                          locale.languageCode == 'ar'
-                                              ? blogsList[index].frTitle
-                                              : blogsList[index].enTitle)),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      })),
-                ),
-              ),
-            );
-          }
-        });
-  }
+  //   return Selector<HomeProvider, bool>(
+  //       selector: (_, provider) => provider.blogsLoading,
+  //       builder: (context, isLoading, child) {
+  //         if (isLoading) {
+  //           return SizedBox(
+  //             width: double.infinity,
+  //             child: Shimmer.fromColors(
+  //                 baseColor: Theme.of(context).colorScheme.simmerBase,
+  //                 highlightColor: Theme.of(context).colorScheme.simmerHigh,
+  //                 child: catLoading()),
+  //           );
+  //         } else {
+  //           final blogsList =
+  //               Provider.of<HomeProvider>(context, listen: false).blogsList;
+  //           return SizedBox(
+  //             width: double.infinity,
+  //             child: SingleChildScrollView(
+  //               scrollDirection: Axis.horizontal,
+  //               child: IntrinsicHeight(
+  //                 child: Row(
+  //                     mainAxisSize: MainAxisSize.min,
+  //                     children: List.generate(
+  //                         blogsList.length > 3 ? 3 : blogsList.length, (index) {
+  //                       return Padding(
+  //                         padding: const EdgeInsets.symmetric(horizontal: 12),
+  //                         child: Container(
+  //                           decoration: BoxDecoration(
+  //                             color: Theme.of(context).brightness ==
+  //                                     Brightness.dark
+  //                                 ? null
+  //                                 : Colors.blueGrey.withValues(alpha: 0.2),
+  //                             borderRadius: BorderRadius.circular(10),
+  //                           ),
+  //                           child: Column(
+  //                             crossAxisAlignment: CrossAxisAlignment.start,
+  //                             children: [
+  //                               Stack(
+  //                                 children: [
+  //                                   GestureDetector(
+  //                                     onTap: () {
+  //                                       Navigator.push(
+  //                                         context,
+  //                                         MaterialPageRoute(
+  //                                             builder: (_) => BlogDetails(
+  //                                                   name: locale.languageCode ==
+  //                                                           'ar'
+  //                                                       ? blogsList[index]
+  //                                                           .frTitle
+  //                                                       : blogsList[index]
+  //                                                           .enTitle,
+  //                                                   tag: 'Hot Collection',
+  //                                                   image: blogsList[index]
+  //                                                       .smallImage,
+  //                                                   date: formatDate(
+  //                                                       blogsList[index]
+  //                                                           .createdAt),
+  //                                                   title: capitalize(
+  //                                                     locale.languageCode ==
+  //                                                             'ar'
+  //                                                         ? blogsList[index]
+  //                                                             .frTitle
+  //                                                         : blogsList[index]
+  //                                                             .enTitle,
+  //                                                   ),
+  //                                                   shortDesc: capitalize(
+  //                                                     locale.languageCode ==
+  //                                                             'ar'
+  //                                                         ? capitalize(blogsList[
+  //                                                                 index]
+  //                                                             .frDescriptionOne
+  //                                                             .toLowerCase())
+  //                                                         : blogsList[index]
+  //                                                             .enDescriptionOne
+  //                                                             .toLowerCase(),
+  //                                                   ),
+  //                                                   longDesc: capitalize(
+  //                                                     locale.languageCode ==
+  //                                                             'ar'
+  //                                                         ? capitalize(blogsList[
+  //                                                                 index]
+  //                                                             .frDescriptionTwo
+  //                                                             .toLowerCase())
+  //                                                         : blogsList[index]
+  //                                                             .enDescriptionTwo
+  //                                                             .toLowerCase(),
+  //                                                   ),
+  //                                                 )),
+  //                                       );
+  //                                     },
+  //                                     child: Container(
+  //                                       height: 200,
+  //                                       width: 340,
+  //                                       decoration: BoxDecoration(
+  //                                         image: DecorationImage(
+  //                                             fit: BoxFit.fill,
+  //                                             image: NetworkImage(
+  //                                                 blogsList[index].smallImage)),
+  //                                         borderRadius: const BorderRadius.only(
+  //                                           topLeft: Radius.circular(10),
+  //                                           topRight: Radius.circular(10),
+  //                                           bottomLeft: Radius.zero,
+  //                                           bottomRight: Radius.zero,
+  //                                         ),
+  //                                       ),
+  //                                     ),
+  //                                   ),
+  //                                   Positioned(
+  //                                     top: 5,
+  //                                     right: isRtl(context) ? 5 : null,
+  //                                     left: isRtl(context) ? null : 5,
+  //                                     child: Container(
+  //                                       decoration: BoxDecoration(
+  //                                         color: Theme.of(context)
+  //                                             .colorScheme
+  //                                             .primary,
+  //                                         borderRadius:
+  //                                             BorderRadius.circular(6),
+  //                                       ),
+  //                                       child: const Padding(
+  //                                         padding: EdgeInsets.all(4.0),
+  //                                         child: Center(
+  //                                           child: Text(
+  //                                             'Hot Collection',
+  //                                             style: TextStyle(
+  //                                                 color: Colors.white),
+  //                                           ),
+  //                                         ),
+  //                                       ),
+  //                                     ),
+  //                                   ),
+  //                                 ],
+  //                               ),
+  //                               Padding(
+  //                                 padding: const EdgeInsets.all(7),
+  //                                 child: Column(
+  //                                   crossAxisAlignment:
+  //                                       CrossAxisAlignment.start,
+  //                                   children: [
+  //                                     Text(formatDate(
+  //                                         blogsList[index].createdAt)),
+  //                                     const SizedBox(height: 5),
+  //                                     Text(capitalize(
+  //                                         locale.languageCode == 'ar'
+  //                                             ? blogsList[index].frTitle
+  //                                             : blogsList[index].enTitle)),
+  //                                   ],
+  //                                 ),
+  //                               ),
+  //                             ],
+  //                           ),
+  //                         ),
+  //                       );
+  //                     })),
+  //               ),
+  //             ),
+  //           );
+  //         }
+  //       });
+  // }
 
   _tiresList() {
     Locale locale = Localizations.localeOf(context);
@@ -2200,14 +2166,6 @@ class _HomeScreenState extends State<HomeScreen>
                                             FittedBox(
                                               child: Row(
                                                 children: [
-                                                  // Text(
-                                                  //     'SAR ${product.discountPrice.toString()}',
-                                                  //     style: TextStyle(
-                                                  //       fontSize: 12,
-                                                  //       color: Theme.of(context)
-                                                  //           .colorScheme
-                                                  //           .primarytheme,
-                                                  //     )),
                                                   Text(
                                                       locale.languageCode ==
                                                               'ar'
@@ -2614,14 +2572,6 @@ class _HomeScreenState extends State<HomeScreen>
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                // Text(
-                                                //     'SAR ${product.discountPrice.toString()}',
-                                                //     style: TextStyle(
-                                                //       fontSize: 12,
-                                                //       color: Theme.of(context)
-                                                //           .colorScheme
-                                                //           .primarytheme,
-                                                //     )),
                                                 Text(
                                                     locale.languageCode == 'ar'
                                                         ? product.discountPrice
@@ -3001,14 +2951,6 @@ class _HomeScreenState extends State<HomeScreen>
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  // Text(
-                                                  //     'SAR ${product.discountPrice.toString()}',
-                                                  //     style: TextStyle(
-                                                  //       fontSize: 12,
-                                                  //       color: Theme.of(context)
-                                                  //           .colorScheme
-                                                  //           .primarytheme,
-                                                  //     )),
                                                   Text(
                                                       locale.languageCode ==
                                                               'ar'
@@ -3394,14 +3336,6 @@ class _HomeScreenState extends State<HomeScreen>
                                           FittedBox(
                                             child: Row(
                                               children: [
-                                                // Text(
-                                                //     'SAR ${product.discountPrice.toString()}',
-                                                //     style: TextStyle(
-                                                //       fontSize: 12,
-                                                //       color: Theme.of(context)
-                                                //           .colorScheme
-                                                //           .primarytheme,
-                                                //     )),
                                                 Text(
                                                     locale.languageCode == 'ar'
                                                         ? product.discountPrice
@@ -3620,151 +3554,10 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Future<void> callApi() async {
-    // WidgetsBinding.instance.addPostFrameCallback((_) async {
-    //   UserProvider user = Provider.of<UserProvider>(context, listen: false);
-    //   SettingProvider setting =
-    //       Provider.of<SettingProvider>(context, listen: false);
-
-    //   pincodeOrCityName = await setting.getPrefrence(pinCodeOrCityNameKey);
-    //   user.setUserId(setting.userId);
-    //   user.setMobile(setting.mobile);
-    //   user.setName(setting.userName);
-    //   user.setEmail(setting.email);
-    //   user.setProfilePic(setting.profileUrl);
-    //   user.setType(setting.loginType);
-    // });
-
-    // _isNetworkAvail = await isNetworkAvailable();
-    // if (_isNetworkAvail) {
-    //   getSetting();
-
-    //   //
-    //   var cityId = await context.read<SettingProvider>().getPrefrence("cityId");
-    //   context.read<FetchFeaturedSectionsCubit>().fetchSections(context,
-    //       userId: context.read<UserProvider>().userId,
-    //       pincodeOrCityName: isCityWiseDelivery! ? cityId : pincodeOrCityName,
-    //       isCityWiseDelivery: isCityWiseDelivery!);
-    //   context.read<BrandsListCubit>().getBrandsList();
-    // } else {
-    //   if (mounted) {
-    //     setState(() {
-    //       _isNetworkAvail = false;
-    //     });
-    //   }
-    // }
-
-    return;
-  }
-
-  void getFeaturedSection({String? pincode}) {
-    //return;
-    try {
-      Map parameter = {PRODUCT_LIMIT: "6", PRODUCT_OFFSET: "0"};
-
-      if (context.read<UserProvider>().userId != "") {
-        parameter[USER_ID] = context.read<UserProvider>().userId;
-      }
-      //String curPin = context.read<UserProvider>().curPincode;
-      if (pincode != null) parameter[ZIPCODE] = pincode;
-
-      apiBaseHelper.postAPICall(getSectionApi, parameter).then((getdata) {
-        bool error = getdata["error"];
-        String? msg = getdata["message"];
-        // featuredSectionList.clear();
-        if (!error) {
-          //var data = getdata["data"];
-
-          print('section pincode*******$pincode');
-          ////TODOOOOOO
-          if (pincode != null) {
-            context
-                .read<SettingProvider>()
-                .setPrefrence(pinCodeOrCityNameKey, pincode!);
-          }
-
-          // featuredSectionList = (data as List)
-          //     .map((data) => SectionModel.fromJson(data))
-          //     .toList();
-        } else {
-          if (pincode != null) {
-            setState(() {
-              pincode = null;
-            });
-          }
-          setSnackbar(msg!, context);
-        }
-
-        context.read<HomeProvider>().setSecLoading(false);
-      }, onError: (error) {
-        print("SECTION ERROR");
-        setSnackbar(error.toString(), context);
-        context.read<HomeProvider>().setSecLoading(false);
-      });
-    } on FormatException catch (e) {
-      setSnackbar(e.message, context);
-    }
-  }
-
-  final _chars =
-      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
-  final Random _rnd = Random();
-
-  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-      length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
-
-  updateDailog() async {
-    await dialogAnimate(context,
-        StatefulBuilder(builder: (BuildContext context, StateSetter setStater) {
-      return AlertDialog(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(5.0))),
-        title: Text(getTranslated(context, 'UPDATE_APP')!),
-        content: Text(
-          getTranslated(context, 'UPDATE_AVAIL')!,
-          style: Theme.of(this.context)
-              .textTheme
-              .titleMedium!
-              .copyWith(color: Theme.of(context).colorScheme.fontColor),
-        ),
-        actions: <Widget>[
-          TextButton(
-              child: Text(
-                getTranslated(context, 'NO')!,
-                style: Theme.of(this.context).textTheme.titleSmall!.copyWith(
-                    color: Theme.of(context).colorScheme.lightBlack,
-                    fontWeight: FontWeight.bold),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              }),
-          TextButton(
-              child: Text(
-                getTranslated(context, 'YES')!,
-                style: Theme.of(this.context).textTheme.titleSmall!.copyWith(
-                    color: Theme.of(context).colorScheme.fontColor,
-                    fontWeight: FontWeight.bold),
-              ),
-              onPressed: () async {
-                Navigator.of(context).pop(false);
-
-                String url = '';
-                if (Platform.isAndroid) {
-                  url = androidLink + packageName;
-                } else if (Platform.isIOS) {
-                  url = iosLink;
-                }
-
-                if (await canLaunchUrl(Uri.parse(url))) {
-                  await launchUrl(Uri.parse(url),
-                      mode: LaunchMode.externalApplication);
-                } else {
-                  throw 'Could not launch $url';
-                }
-              })
-        ],
-      );
-    }));
+  Future<void> _refresh() async {
+    await checkNetworkAndSetState();
+    if (!_isNetworkAvail) return;
+    await context.read<HomeProvider>().refreshAPIs();
   }
 
   Widget homeShimmer() {
@@ -3830,6 +3623,25 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
+  Future<bool> checkNetwork(BuildContext context) async {
+    bool isAvailable = await isNetworkAvailable();
+    if (context.mounted) {
+      setState(() {
+        _isNetworkAvail = isAvailable;
+      });
+    }
+    return isAvailable;
+  }
+
+  Future<void> checkNetworkAndSetState() async {
+    bool isAvailable = await isNetworkAvailable();
+    if (mounted) {
+      setState(() {
+        _isNetworkAvail = isAvailable;
+      });
+    }
+  }
+
   Widget noInternet(BuildContext context) {
     return SingleChildScrollView(
       child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -3842,8 +3654,6 @@ class _HomeScreenState extends State<HomeScreen>
           btnCntrl: buttonController,
           onBtnSelected: () async {
             context.read<HomeProvider>().setCatLoading(true);
-            context.read<HomeProvider>().setBrandsLoading(true);
-            context.read<HomeProvider>().setBlogsLoading(true);
             _playAnimation();
             Future.delayed(const Duration(seconds: 2)).then((_) async {
               _isNetworkAvail = await isNetworkAvailable();
@@ -3852,8 +3662,10 @@ class _HomeScreenState extends State<HomeScreen>
                   setState(() {
                     _isNetworkAvail = true;
                   });
+
+                  await context.read<HomeProvider>().refreshAPIs();
+                  await buttonController.reverse();
                 }
-                callApi();
               } else {
                 await buttonController.reverse();
                 if (mounted) setState(() {});
@@ -3933,57 +3745,6 @@ class _HomeScreenState extends State<HomeScreen>
     } on TickerCanceled {}
   }
 
-  void getSlider() {
-    try {
-      Map map = {};
-
-      apiBaseHelper.postAPICall(getSliderApi, map).then((getdata) {
-        bool error = getdata["error"];
-        String? msg = getdata["message"];
-        if (!error) {
-        } else {
-          setSnackbar(msg!, context);
-        }
-
-        context.read<HomeProvider>().setSliderLoading(false);
-      }, onError: (error) {
-        setSnackbar(error.toString(), context);
-        context.read<HomeProvider>().setSliderLoading(false);
-      });
-    } on FormatException catch (e) {
-      setSnackbar(e.message, context);
-    }
-  }
-
-  void getCat() {
-    try {
-      Map parameter = {
-        CAT_FILTER: "false",
-      };
-      apiBaseHelper.postAPICall(getCatApi, parameter).then((getdata) {
-        bool error = getdata["error"];
-        String? msg = getdata["message"];
-        if (!error) {
-          // var data = getdata["data"];
-
-          // catList =
-          //     (data as List).map((data) => Product.fromCat(data)).toList();
-
-          if (getdata.containsKey("popular_categories")) {}
-        } else {
-          setSnackbar(msg!, context);
-        }
-
-        context.read<HomeProvider>().setCatLoading(false);
-      }, onError: (error) {
-        setSnackbar(error.toString(), context);
-        context.read<HomeProvider>().setCatLoading(false);
-      });
-    } on FormatException catch (e) {
-      setSnackbar(e.message, context);
-    }
-  }
-
   sectionLoading() {
     return Column(
         children: [0, 1, 2, 3, 4]
@@ -4043,154 +3804,5 @@ class _HomeScreenState extends State<HomeScreen>
                   ],
                 ))
             .toList());
-  }
-
-  void appMaintenanceDialog() async {
-    await dialogAnimate(context,
-        StatefulBuilder(builder: (BuildContext context, StateSetter setStater) {
-      return PopScope(
-        canPop: false,
-        child: AlertDialog(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5.0))),
-          title: Text(
-            getTranslated(context, 'APP_MAINTENANCE')!,
-            softWrap: true,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Theme.of(context).colorScheme.fontColor,
-                fontWeight: FontWeight.normal,
-                fontSize: 16),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Container(
-              //   child: Lottie.asset('assets/animation/maintenance.json'),
-              // ),
-              const SizedBox(
-                height: 25,
-              ),
-              Text(
-                IS_APP_MAINTENANCE_MESSAGE != ''
-                    ? IS_APP_MAINTENANCE_MESSAGE!
-                    : getTranslated(context, 'MAINTENANCE_DEFAULT_MESSAGE')!,
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.fontColor,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 12),
-              )
-            ],
-          ),
-        ),
-      );
-    }));
-  }
-
-  void showPopUpOfferDialog() async {}
-}
-
-class LocationSelectorWidget extends StatefulWidget {
-  const LocationSelectorWidget({super.key});
-
-  @override
-  State<LocationSelectorWidget> createState() => _LocationSelectorWidgetState();
-}
-
-class _LocationSelectorWidgetState extends State<LocationSelectorWidget> {
-// ScrollController _controller=ScrollController();
-
-  final ScrollController _pageScrollController = ScrollController();
-  final TextEditingController _cityName = TextEditingController();
-  Timer? timer;
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    timer?.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      initialChildSize: 0.6,
-      expand: false,
-      minChildSize: 0.6,
-      maxChildSize: 0.91,
-      builder: (context, ScrollController scrollController) {
-        return ListView(controller: _pageScrollController, children: [
-          Padding(
-              padding: const EdgeInsets.only(
-                  left: 20.0, right: 20, bottom: 40, top: 30),
-              child: Padding(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: Form(
-                    child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Icon(Icons.close),
-                      ),
-                    ),
-                    TextFormField(
-                      controller: _cityName,
-                      // keyboardType: TextInputType.,
-                      // textCapitalization: TextCapitalization.words,
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: Theme.of(context).colorScheme.fontColor),
-                      decoration: InputDecoration(
-                        isDense: false,
-                        prefixIcon: const Icon(
-                          Icons.location_on,
-                        ),
-                        hintText: getTranslated(context, 'CITY_NAME'),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context, {"city": null, "id": null});
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            color: context.color.primarytheme,
-                            borderRadius: BorderRadius.circular(3)),
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("Clear ",
-                                style: TextStyle(color: colors.cardColor)),
-                            Text("X",
-                                style: TextStyle(color: colors.cardColor)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                )),
-              ))
-        ]);
-      },
-    );
   }
 }

@@ -5,19 +5,15 @@ import 'package:elite_tiers/App/routes.dart';
 import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
-import 'package:elite_tiers/Providers/SettingProvider.dart';
-import 'package:elite_tiers/Screens/Dashboard.dart';
 import 'package:elite_tiers/Screens/home_screen.dart';
 import 'package:elite_tiers/UI/widgets/cropped_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
 import '../ui/styles/DesignConfig.dart';
 import '../ui/styles/Validators.dart';
 import '../ui/widgets/AppBtn.dart';
 import '../ui/widgets/BehaviorWidget.dart';
-import '../utils/Hive/hive_utils.dart';
 import '../utils/blured_router.dart';
 
 class SignUp extends StatefulWidget {
@@ -78,15 +74,6 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
     }
   }
 
-  // getUserDetails() async {
-  //   SettingProvider settingsProvider =
-  //       Provider.of<SettingProvider>(context, listen: false);
-
-  //   mobile = await settingsProvider.getPrefrence(MOBILE);
-  //   countrycode = await settingsProvider.getPrefrence(COUNTRY_CODE);
-  //   if (mounted) setState(() {});
-  // }
-
   Future<void> _playAnimation() async {
     try {
       await buttonController!.forward();
@@ -96,7 +83,7 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
   Future<void> checkNetwork() async {
     bool avail = await isNetworkAvailable();
     if (avail) {
-      if (referCode != null) getRegisterUser();
+      // if (referCode != null)
     } else {
       Future.delayed(const Duration(seconds: 2)).then((_) async {
         if (mounted) {
@@ -160,59 +147,6 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
         )
       ]),
     );
-  }
-
-  Future<void> getRegisterUser() async {
-    try {
-      var data = {
-        MOBILE: mobile,
-        NAME: name,
-        EMAIL: email,
-        PASSWORD: password,
-        COUNTRY_CODE: countrycode,
-        REFERCODE: referCode,
-        FRNDCODE: friendCode
-      };
-      apiBaseHelper.postAPICall(getUserSignUpApi, data).then((getdata) async {
-        bool error = getdata["error"];
-        String? msg = getdata["message"];
-        await buttonController!.reverse();
-        if (!error) {
-          setSnackbar(getTranslated(context, 'REGISTER_SUCCESS_MSG')!, context);
-          var i = getdata["data"][0];
-          await HiveUtils.setJWT(getdata['token']);
-
-          id = i[ID];
-          name = i[USERNAME];
-          email = i[EMAIL];
-          mobile = i[MOBILE];
-          loginType = i[TYPE];
-
-          //CUR_USERID = id;
-
-          SettingProvider settingProvider = context.read<SettingProvider>();
-          settingProvider.setPrefrenceBool(ISFIRSTTIME, true);
-          settingProvider.saveUserDetail(id!, name, email, mobile, city, area,
-              address, pincode, latitude, longitude, "", loginType, context);
-
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (context) {
-            Dashboard.dashboardScreenKey = GlobalKey<HomePageState>();
-            return Dashboard(
-              key: Dashboard.dashboardScreenKey,
-            );
-          }), (route) => false);
-        } else {
-          setSnackbar(msg!, context);
-        }
-        if (mounted) setState(() {});
-      }, onError: (error) {
-        setSnackbar(error.toString(), context);
-      });
-    } on TimeoutException catch (_) {
-      setSnackbar(getTranslated(context, 'somethingMSg')!, context);
-      await buttonController!.reverse();
-    }
   }
 
   Widget registerTxt() {
