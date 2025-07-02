@@ -10,7 +10,7 @@ class AppSettings {
   static const String appStoreId = '123456789';
   //change this with your client secret and API urls
 
-  static const String baseUrl = 'https://elitetiers.3chats.com/api/';
+  static const String baseUrl = 'https://elitetiersco.com/api/';
   static const String chatBaseUrl = "PLACE_YOUR_CHAT_BASE_URL_HERE";
 
   static const String deepLinkUrlPrefix = 'https://eshopwrteamin.page.link';
