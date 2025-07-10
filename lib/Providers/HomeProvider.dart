@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:elite_tiers/Helpers/Constant.dart';
-import 'package:elite_tiers/Models/blogs_model.dart';
 import 'package:elite_tiers/Models/brands_model.dart';
 import 'package:elite_tiers/Models/category_model.dart';
 import 'package:elite_tiers/Models/deal_model.dart';
@@ -36,10 +35,10 @@ class HomeProvider extends ChangeNotifier {
   List<Brands> _brandsList = [];
   List<Brands> get brandsList => _brandsList;
 //blogs
-  bool _isBlogsLoading = true;
-  bool get blogsLoading => _isBlogsLoading;
-  List<Blogs> _blogsList = [];
-  List<Blogs> get blogsList => _blogsList;
+  // bool _isBlogsLoading = true;
+  // bool get blogsLoading => _isBlogsLoading;
+  // List<Blogs> _blogsList = [];
+  // List<Blogs> get blogsList => _blogsList;
 //products
   bool _isProductsLoading = true;
   bool get productsLoading => _isProductsLoading;
@@ -81,7 +80,7 @@ class HomeProvider extends ChangeNotifier {
   HomeProvider() {
     fetchCategories();
     fetchBrands();
-    fetchBlogs();
+    //fetchBlogs();
     fetchProducts();
     fetchDeal();
   }
@@ -90,7 +89,7 @@ class HomeProvider extends ChangeNotifier {
     await Future.wait([
       fetchCategories(),
       fetchBrands(),
-      fetchBlogs(),
+      //fetchBlogs(),
       fetchProducts(),
       fetchDeal(),
     ]);
@@ -139,25 +138,25 @@ class HomeProvider extends ChangeNotifier {
   }
 
 //blogs
-  Future<void> fetchBlogs() async {
-    _isBlogsLoading = true;
-    notifyListeners();
+  // Future<void> fetchBlogs() async {
+  //   _isBlogsLoading = true;
+  //   notifyListeners();
 
-    var url = Uri.parse('${baseUrl}all/blogs');
-    var response = await http.get(url);
+  //   var url = Uri.parse('${baseUrl}all/blogs');
+  //   var response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
-      var blogResponse = BlogsModel.fromJson(data);
-      _blogsList = blogResponse.data;
-      _isBlogsLoading = false;
-      notifyListeners();
-    } else {
-      _isBlogsLoading = false;
-      notifyListeners();
-      throw Exception('Failed to load blogs');
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     var data = json.decode(response.body);
+  //     var blogResponse = BlogsModel.fromJson(data);
+  //     _blogsList = blogResponse.data;
+  //     _isBlogsLoading = false;
+  //     notifyListeners();
+  //   } else {
+  //     _isBlogsLoading = false;
+  //     notifyListeners();
+  //     throw Exception('Failed to load blogs');
+  //   }
+  // }
 
 //products
   Future<void> fetchProducts() async {
@@ -207,7 +206,7 @@ class HomeProvider extends ChangeNotifier {
           .where((category) => category.name.toLowerCase() == "الإطارات")
           .toList();
       _oilList = productResponse.data
-          .where((category) => category.name.toLowerCase() == "زيت")
+          .where((category) => category.name.toLowerCase() == "زيوت")
           .toList();
       _cleanersList = productResponse.data
           .where((category) => category.name.toLowerCase() == "منظفات")
@@ -262,10 +261,10 @@ class HomeProvider extends ChangeNotifier {
   }
 
   // setter for blogs loading
-  setBlogsLoading(bool loading) {
-    _isBlogsLoading = loading;
-    notifyListeners();
-  }
+  // setBlogsLoading(bool loading) {
+  //   _isBlogsLoading = loading;
+  //   notifyListeners();
+  // }
 
   // setter for products loading
   setProductsLoading(bool loading) {

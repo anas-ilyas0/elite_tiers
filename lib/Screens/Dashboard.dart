@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:bottom_bar/bottom_bar.dart';
-import 'package:elite_tiers/App/routes.dart';
 import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
@@ -49,28 +48,49 @@ class HomePageState extends State<Dashboard>
   StreamSubscription<Uri>? _linkSubscription;
 
   @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    _linkSubscription!.cancel();
-    super.dispose();
+void dispose() {
+  WidgetsBinding.instance.removeObserver(this);
+  _linkSubscription?.cancel();
+  _pageController.dispose();
+  navigationContainerAnimationController.dispose();
+  super.dispose();
+}
+
+  void loadData() async {
+    final settingsProvider =
+        Provider.of<SettingProvider>(context, listen: false);
+    final userId = await settingsProvider.getPrefrence(ID) ?? '';
+
+    if (!mounted) return;
+
+    context.read<UserProvider>().setUserId(userId);
+    context
+        .read<HomeProvider>()
+        .setAnimationController(navigationContainerAnimationController);
   }
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    Future.delayed(Duration.zero, () async {
-      SettingProvider settingsProvider =
-          Provider.of<SettingProvider>(context, listen: false);
-      context
-          .read<UserProvider>()
-          .setUserId(await settingsProvider.getPrefrence(ID) ?? '');
-
-      context
-          .read<HomeProvider>()
-          .setAnimationController(navigationContainerAnimationController);
-    });
+    Future.delayed(Duration.zero, loadData);
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   WidgetsBinding.instance.addObserver(this);
+  //   Future.delayed(Duration.zero, () async {
+  //     if (!mounted) return;
+  //     final settingsProvider = context.read<SettingProvider>();
+  //     final userId = await settingsProvider.getPrefrence(ID) ?? '';
+  //     if (!mounted) return;
+  //     context.read<UserProvider>().setUserId(userId);
+  //     context
+  //         .read<HomeProvider>()
+  //         .setAnimationController(navigationContainerAnimationController);
+  //   });
+  // }
 
   changeTabPosition(int index) {
     Future.delayed(Duration.zero, () {
@@ -306,12 +326,14 @@ class HomePageState extends State<Dashboard>
                                               : 0),
                                       child: Row(
                                         children: [
-                                          Text(
-                                            cart.cartItems.length.toString(),
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primarytheme),
+                                          FittedBox(
+                                            child: Text(
+                                              cart.cartItems.length.toString(),
+                                              style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primarytheme),
+                                            ),
                                           ),
                                           SizedBox(width: 3),
                                           SvgPicture.asset(
@@ -329,12 +351,14 @@ class HomePageState extends State<Dashboard>
                                     )
                                   : Row(
                                       children: [
-                                        Text(
-                                          cart.cartItems.length.toString(),
-                                          style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primarytheme),
+                                        FittedBox(
+                                          child: Text(
+                                            cart.cartItems.length.toString(),
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primarytheme),
+                                          ),
                                         ),
                                         SizedBox(width: 3),
                                         SvgPicture.asset(

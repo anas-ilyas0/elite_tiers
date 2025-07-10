@@ -34,7 +34,7 @@ class MyProfile extends StatefulWidget {
 
 class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
   //final InAppReview _inAppReview = InAppReview.instance;
-  var isDarkTheme;
+  //var isDarkTheme;
   bool isDark = false;
   late ThemeNotifier themeNotifier;
   Languages languages = Languages();

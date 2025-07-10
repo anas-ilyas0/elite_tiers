@@ -31,10 +31,10 @@ class SendOtp extends StatefulWidget {
   const SendOtp({super.key, this.title});
 
   @override
-  _SendOtpState createState() => _SendOtpState();
+  SendOtpState createState() => SendOtpState();
 }
 
-class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
+class SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
   bool visible = false;
   final emailController = TextEditingController();
   final ccodeController = TextEditingController();

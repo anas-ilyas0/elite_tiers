@@ -10,16 +10,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-class MyCartScreen extends StatefulWidget {
+class MyCartScreen extends StatelessWidget {
   final bool fromBottom;
   const MyCartScreen({super.key, required this.fromBottom});
 
-  @override
-  State<MyCartScreen> createState() => _MyCartScreenState();
-}
+  final int num = 1;
 
-class _MyCartScreenState extends State<MyCartScreen> {
-  int num = 1;
   cartEmpty(BuildContext context) {
     return Center(
       child: SingleChildScrollView(

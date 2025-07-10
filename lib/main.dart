@@ -20,7 +20,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app/app_Localization.dart';
 import 'app/routes.dart';
 
-GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,9 +78,7 @@ void main() async {
 }
 
 void initMyFatoorahSDK() {
-  MFSDK.init(
-      fatoorahToken,
-      MFCountry.SAUDIARABIA,
+  MFSDK.init(fatoorahToken, MFCountry.SAUDIARABIA,
       MFEnvironment.TEST); // "Live" in production
   MFSDK.setUpActionBar(
     toolBarTitle: "EliteTiers Payment",
@@ -96,15 +94,15 @@ class MyApp extends StatefulWidget {
   final SharedPreferences sharedPreferences;
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 
   static void setLocale(BuildContext context, Locale newLocale) {
-    _MyAppState state = context.findAncestorStateOfType<_MyAppState>()!;
+    MyAppState state = context.findAncestorStateOfType<MyAppState>()!;
     state.setLocale(newLocale);
   }
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
   Locale? _locale;
 
   @override

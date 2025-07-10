@@ -103,6 +103,22 @@ class _MyCartPaymentScreenState extends State<MyCartPaymentScreen> {
     'Ras Tanura'
   ];
 
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    contactController.dispose();
+    streetController.dispose();
+    zipPostalController.dispose();
+    neighborhoodController.dispose();
+    copyNameController.dispose();
+    copyEmailController.dispose();
+    copyContactController.dispose();
+    copyStreetController.dispose();
+    copyZipPostalController.dispose();
+    super.dispose();
+  }
+
   _launchUrl(String url) async {
     final Uri aboutUrl = Uri.parse(isDemoApp
         ? setSnackbar(getTranslated(context, 'SIGNIN_DETAILS')!, context)
@@ -390,7 +406,6 @@ class _MyCartPaymentScreenState extends State<MyCartPaymentScreen> {
       );
     }
   }
-
 
   Future<void> startMyFatoorahPayment(BuildContext context, int amount) async {
     // Step 1: Initiate Payment

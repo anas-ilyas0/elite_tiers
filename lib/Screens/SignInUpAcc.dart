@@ -18,10 +18,10 @@ class SignInUpAcc extends StatefulWidget {
   }
 
   @override
-  _SignInUpAccState createState() => _SignInUpAccState();
+  SignInUpAccState createState() => SignInUpAccState();
 }
 
-class _SignInUpAccState extends State<SignInUpAcc>
+class SignInUpAccState extends State<SignInUpAcc>
     with TickerProviderStateMixin {
   Animation? buttonSqueezeanimation;
   AnimationController? buttonController;
@@ -62,6 +62,7 @@ class _SignInUpAccState extends State<SignInUpAcc>
       padding: const EdgeInsetsDirectional.only(top: 30.0),
       child: Text(
         getTranslated(context, 'WELCOME_ELITE_TIRES')!,
+        textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.titleMedium!.copyWith(
             color: Theme.of(context).colorScheme.fontColor,
             fontWeight: FontWeight.bold,

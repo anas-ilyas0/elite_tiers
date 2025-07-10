@@ -12,6 +12,7 @@ import 'package:elite_tiers/Providers/cart_provider.dart';
 import 'package:elite_tiers/Screens/home_product_details.dart';
 import 'package:elite_tiers/Screens/show_more_home_products.dart';
 import 'package:elite_tiers/UI/widgets/AppBtn.dart';
+import 'package:elite_tiers/UI/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,17 +24,10 @@ import '../ui/styles/DesignConfig.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class PaymentOptions {
-  static const Map<String, String> images = {
-    'tabby': 'assets/images/tabby.png',
-    'tamara': 'assets/images/tamara.png',
-  };
-}
-
-ApiBaseHelper apiBaseHelper = ApiBaseHelper();
+final apiBaseHelper = ApiBaseHelper();
 
 String? _selectedCategoryName;
 String formatDate(DateTime date) {
@@ -41,18 +35,19 @@ String formatDate(DateTime date) {
   return formatter.format(date);
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with AutomaticKeepAliveClientMixin<HomeScreen>, TickerProviderStateMixin {
+class HomeScreenState extends State<HomeScreen>
+    with
+        AutomaticKeepAliveClientMixin<HomeScreen>,
+        TickerProviderStateMixin<HomeScreen> {
   bool _isNetworkAvail = true;
   final _controller = PageController();
   late Animation buttonSqueezeanimation;
   late AnimationController buttonController;
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final _formkey = GlobalKey<FormState>();
   final productsSearchController = TextEditingController();
 
   final ScrollController _scrollBottomBarController = ScrollController();
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-      GlobalKey<RefreshIndicatorState>();
+  final _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
   double beginAnim = 0.0;
   double endAnim = 1.0;
   String? selectedFrontDiameter;
@@ -121,14 +116,14 @@ class _HomeScreenState extends State<HomeScreen>
   ];
   bool isChecked = false;
   List<AllProducts> productsList = [];
-  late List<AllProducts> _filteredProducts;
+  late List<AllProducts> filteredProducts;
   @override
   bool get wantKeepAlive => true;
 
   @override
   void initState() {
     super.initState();
-    _filteredProducts = productsList;
+    filteredProducts = productsList;
     buttonController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
 
@@ -148,13 +143,14 @@ class _HomeScreenState extends State<HomeScreen>
   void dispose() {
     _scrollBottomBarController.removeListener(() {});
     _controller.dispose();
+    productsSearchController.dispose();
     buttonController.dispose();
     super.dispose();
   }
 
-  void filteredProducts() {
+  void filteredProductsFunc() {
     setState(() {
-      _filteredProducts = productsList.where((product) {
+      filteredProducts = productsList.where((product) {
         final matchesName = productsSearchController.text.isEmpty ||
             product.enProductName
                 .toLowerCase()
@@ -589,7 +585,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       const SizedBox(height: 5),
-                      _featuredBrands(),
+                      _featuredProducts(),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 5),
@@ -1107,301 +1103,31 @@ class _HomeScreenState extends State<HomeScreen>
             ? product.discountPrice
             : product.price);
     double installment = (discountPriceValue ?? 0) / 4;
-    final discountPrice = product.discountPrice.toString();
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: 150,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Theme.of(context).colorScheme.primarytheme,
-          ),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          children: [
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => HomeProductDetails(
-                              id: product.id,
-                              categoryName: categoryName,
-                              productImage: product.primaryImage,
-                              tag: product.tag,
-                              productName: locale.languageCode == 'ar'
-                                  ? product.frProductName
-                                  : product.enProductName,
-                              actualPrice:
-                                  double.tryParse(product.price)?.toInt() ?? 0,
-                              discountedPrice: product.discountPrice.isNotEmpty
-                                  ? double.tryParse(product.discountPrice)
-                                          ?.toInt() ??
-                                      0
-                                  : 0,
-                              origin: product.origin,
-                              yearOfProduction: product.year,
-                              pattern: product.pattern,
-                              width: product.width,
-                              rimSize: product.rimSize,
-                              ratio: product.ratio,
-                              diameter: product.diameter,
-                              description: locale.languageCode == 'ar'
-                                  ? product.frDescription
-                                  : product.enDescription,
-                            )));
-              },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
-                child: Column(
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                          height: 100,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: product.primaryImage.isNotEmpty
-                                  ? NetworkImage(product.primaryImage)
-                                  : AssetImage('assets/images/noimage.png'),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 35,
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                          child: FittedBox(
-                            child: Center(
-                              child: Text(
-                                product.tag,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Container(
-                      height: 0.5,
-                      color: Colors.grey,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Text(
-                            locale.languageCode == 'ar'
-                                ? product.frProductName
-                                : product.enProductName,
-                            style: const TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        FittedBox(
-                          child: Row(
-                            children: [
-                              Text(
-                                  locale.languageCode == 'ar'
-                                      ? discountPrice
-                                      : 'SAR $discountPrice',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primarytheme,
-                                  )),
-                              if (locale.languageCode == 'ar')
-                                SizedBox(width: 3),
-                              if (locale.languageCode == 'ar')
-                                Text('ر.س',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primarytheme,
-                                    )),
-                              SizedBox(
-                                  width:
-                                      product.discountPrice.isNotEmpty ? 5 : 0),
-                              Text(product.price.toString(),
-                                  style: TextStyle(
-                                      decoration:
-                                          product.discountPrice.isNotEmpty
-                                              ? TextDecoration.lineThrough
-                                              : TextDecoration.none,
-                                      fontSize: 12,
-                                      color: product.discountPrice.isNotEmpty
-                                          ? Colors.red
-                                          : Theme.of(context)
-                                              .colorScheme
-                                              .primarytheme)),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(getTranslated(context, 'tax_included')!,
-                        style: TextStyle(
-                            color: Theme.of(context).colorScheme.primarytheme)),
-                    const SizedBox(height: 5),
-                    Container(
-                      height: 0.5,
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(height: 5),
-                    Column(
-                      children: [
-                        FittedBox(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                getTranslated(context, 'monthly')!,
-                              ),
-                              Text(
-                                installment.toStringAsFixed(1),
-                                style: const TextStyle(fontSize: 12),
-                              ),
-                              SizedBox(width: 3),
-                              Text(
-                                locale.languageCode == 'ar' ? 'ر.س' : 'SAR',
-                                style: const TextStyle(fontSize: 12),
-                              )
-                            ],
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              getTranslated(context, 'in')!,
-                              style: const TextStyle(fontSize: 12),
-                            ),
-                            const SizedBox(width: 3),
-                            const Text(
-                              '4',
-                              style: TextStyle(fontSize: 12),
-                            ),
-                            const SizedBox(width: 3),
-                            Text(
-                              getTranslated(context, 'installments')!,
-                              style: const TextStyle(fontSize: 12),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: PaymentOptions.images.entries
-                          .map((entry) => Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Image.asset(
-                                    entry.value,
-                                    height: 30,
-                                  ),
-                                ),
-                              ))
-                          .toList(),
-                    ),
-                    Container(
-                      height: 0.5,
-                      color: Colors.grey,
-                    ),
-                    const SizedBox(height: 5),
-                    if (_selectedCategoryName == 'الإطارات')
-                      FittedBox(
-                        child: Row(
-                          children: [
-                            Image(
-                              height: 20,
-                              width: 30,
-                              color: Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? Colors.white
-                                  : Colors.black,
-                              image: const AssetImage(
-                                  'assets/images/smallcar.png'),
-                            ),
-                            SizedBox(width: 20),
-                            Text('${product.origin} | ${product.year}')
-                          ],
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primarytheme,
-                ),
-                onPressed: () {
-                  if (isDemoApp) {
-                    setSnackbar(
-                      getTranslated(context, 'SIGNIN_DETAILS')!,
-                      context,
-                    );
-                  } else {
-                    bool productAdded =
-                        Provider.of<MyCartProvider>(context, listen: false)
-                            .addItem(CartItem(
-                      id: product.id,
-                      image: product.primaryImage,
-                      tag: product.tag,
-                      title: locale.languageCode == 'ar'
-                          ? product.frProductName
-                          : product.enProductName,
-                      actualPrice: double.tryParse(product.price)?.toInt() ?? 0,
-                      discountedPrice: product.discountPrice.isNotEmpty
-                          ? double.tryParse(product.discountPrice)?.toInt() ?? 0
-                          : 0,
-                    ));
-                    if (productAdded) {
-                      setSnackbar(
-                          getTranslated(context, 'product_added_to_cart')!,
-                          context);
-                    } else {
-                      setSnackbar(
-                          getTranslated(context, 'product_already_in_cart')!,
-                          context);
-                    }
-                  }
-                },
-                child: FittedBox(
-                  child: Row(
-                    children: [
-                      const Icon(Icons.add_circle, size: 18),
-                      SizedBox(width: 10),
-                      Text(
-                        getTranslated(context, 'ADD_CART2')!,
-                        style: const TextStyle(
-                          fontSize: 14,
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+    return ProductItem(
+      productImage: product.primaryImage,
+      productTag: product.tag,
+      productName: locale.languageCode == 'ar'
+          ? product.frProductName
+          : product.enProductName,
+      productDiscountPrice: product.discountPrice,
+      productPrice: product.price,
+      productOrigin: product.origin,
+      productYear: product.year,
+      productId: product.id,
+      productInstallment: installment,
+      productCategoryName: categoryName,
+      productPattern: product.pattern,
+      productWidth: product.width,
+      productRimSize: product.rimSize,
+      productRatio: product.ratio,
+      productDiameter: product.diameter,
+      productDescription: locale.languageCode == 'ar'
+          ? product.frDescription
+          : product.enDescription,
     );
   }
 
-  Widget _featuredBrands() {
+  Widget _featuredProducts() {
     var categoryName = _selectedCategoryName;
 
     return Selector<HomeProvider, bool>(
@@ -1529,7 +1255,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   const SizedBox(height: 10),
                                   Row(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Stack(
                                         children: [
@@ -1586,7 +1312,7 @@ class _HomeScreenState extends State<HomeScreen>
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            const SizedBox(height: 7),
+                                            const SizedBox(height: 14),
                                             RatingBar.builder(
                                               glow: true,
                                               initialRating: 3,
@@ -1604,8 +1330,7 @@ class _HomeScreenState extends State<HomeScreen>
                                               ),
                                               onRatingUpdate: (rating) {},
                                             ),
-                                            SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
+                                            FittedBox(
                                               child: Text(
                                                 locale.languageCode == 'ar'
                                                     ? dealList[index]
@@ -1614,8 +1339,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                         .enProductName,
                                                 style: const TextStyle(
                                                     fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                                    fontWeight: FontWeight.bold),
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
@@ -2049,361 +1773,27 @@ class _HomeScreenState extends State<HomeScreen>
                                 ? product.discountPrice
                                 : product.price);
                         double installment = (discountPriceValue ?? 0) / 4;
-                        return Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 6, 8, 2),
-                          child: Container(
-                            width: 150,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color:
-                                    Theme.of(context).colorScheme.primarytheme,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Column(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) => HomeProductDetails(
-                                                  id: product.id,
-                                                  categoryName:
-                                                      categoryName.toString(),
-                                                  productImage:
-                                                      product.primaryImage,
-                                                  tag: product.tag,
-                                                  productName: locale
-                                                              .languageCode ==
-                                                          'ar'
-                                                      ? product.frProductName
-                                                      : product.enProductName,
-                                                  actualPrice: double.tryParse(
-                                                              product.price)
-                                                          ?.toInt() ??
-                                                      0,
-                                                  discountedPrice: product
-                                                          .discountPrice
-                                                          .isNotEmpty
-                                                      ? double.tryParse(product
-                                                                  .discountPrice)
-                                                              ?.toInt() ??
-                                                          0
-                                                      : 0,
-                                                  origin: product.origin,
-                                                  yearOfProduction:
-                                                      product.year,
-                                                  pattern: product.pattern,
-                                                  width: product.width,
-                                                  rimSize: product.rimSize,
-                                                  ratio: product.ratio,
-                                                  diameter: product.diameter,
-                                                  description: locale
-                                                              .languageCode ==
-                                                          'ar'
-                                                      ? product.frDescription
-                                                      : product.enDescription,
-                                                )));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Stack(
-                                          children: [
-                                            Container(
-                                              height: 100,
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                      product.primaryImage),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 35,
-                                              decoration: BoxDecoration(
-                                                color: Colors.red,
-                                                borderRadius:
-                                                    BorderRadius.circular(2),
-                                              ),
-                                              child: FittedBox(
-                                                child: Center(
-                                                  child: Text(
-                                                    product.tag,
-                                                    style: const TextStyle(
-                                                        color: Colors.white),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 10),
-                                        Container(
-                                          height: 0.5,
-                                          color: Colors.grey,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            SingleChildScrollView(
-                                              scrollDirection: Axis.horizontal,
-                                              child: Text(
-                                                locale.languageCode == 'ar'
-                                                    ? product.frProductName
-                                                    : product.enProductName,
-                                                style: const TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                            FittedBox(
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                      locale.languageCode ==
-                                                              'ar'
-                                                          ? product
-                                                              .discountPrice
-                                                              .toString()
-                                                          : 'SAR ${product.discountPrice.toString()}',
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .primarytheme,
-                                                      )),
-                                                  if (locale.languageCode ==
-                                                      'ar')
-                                                    SizedBox(width: 3),
-                                                  if (locale.languageCode ==
-                                                      'ar')
-                                                    Text('ر.س',
-                                                        style: TextStyle(
-                                                          fontSize: 12,
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .colorScheme
-                                                                  .primarytheme,
-                                                        )),
-                                                  SizedBox(
-                                                      width: product
-                                                              .discountPrice
-                                                              .isNotEmpty
-                                                          ? 5
-                                                          : 0),
-                                                  Text(product.price.toString(),
-                                                      style: TextStyle(
-                                                          decoration: product
-                                                                  .discountPrice
-                                                                  .isNotEmpty
-                                                              ? TextDecoration
-                                                                  .lineThrough
-                                                              : TextDecoration
-                                                                  .none,
-                                                          fontSize: 12,
-                                                          color: product
-                                                                  .discountPrice
-                                                                  .isNotEmpty
-                                                              ? Colors.red
-                                                              : Theme.of(
-                                                                      context)
-                                                                  .colorScheme
-                                                                  .primarytheme)),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                            getTranslated(
-                                                context, 'tax_included')!,
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primarytheme)),
-                                        const SizedBox(height: 5),
-                                        Container(
-                                          height: 0.5,
-                                          color: Colors.grey,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        FittedBox(
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    getTranslated(
-                                                        context, 'monthly')!,
-                                                  ),
-                                                  Text(
-                                                    installment
-                                                        .toStringAsFixed(1),
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                  ),
-                                                  SizedBox(width: 3),
-                                                  Text(locale.languageCode ==
-                                                          'ar'
-                                                      ? 'ر.س'
-                                                      : 'SAR')
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    getTranslated(
-                                                        context, 'in')!,
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                  ),
-                                                  const SizedBox(width: 3),
-                                                  const Text(
-                                                    '4',
-                                                    style:
-                                                        TextStyle(fontSize: 12),
-                                                  ),
-                                                  const SizedBox(width: 3),
-                                                  Text(
-                                                    getTranslated(context,
-                                                        'installments')!,
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Row(
-                                          children: PaymentOptions
-                                              .images.entries
-                                              .map((entry) => Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              4.0),
-                                                      child: Image.asset(
-                                                        entry.value,
-                                                        height: 30,
-                                                      ),
-                                                    ),
-                                                  ))
-                                              .toList(),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Container(
-                                          height: 0.5,
-                                          color: Colors.grey,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        FittedBox(
-                                          child: Row(
-                                            children: [
-                                              Image(
-                                                height: 20,
-                                                width: 30,
-                                                color: Theme.of(context)
-                                                            .brightness ==
-                                                        Brightness.dark
-                                                    ? Colors.white
-                                                    : Colors.black,
-                                                image: const AssetImage(
-                                                    'assets/images/smallcar.png'),
-                                              ),
-                                              SizedBox(width: 10),
-                                              Text(
-                                                  '${product.origin} | ${product.year}')
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Theme.of(context)
-                                          .colorScheme
-                                          .primarytheme,
-                                    ),
-                                    onPressed: () {
-                                      if (isDemoApp) {
-                                        setSnackbar(
-                                          getTranslated(
-                                              context, 'SIGNIN_DETAILS')!,
-                                          context,
-                                        );
-                                      } else {
-                                        bool productAdded =
-                                            Provider.of<MyCartProvider>(context,
-                                                    listen: false)
-                                                .addItem(CartItem(
-                                          id: product.id,
-                                          image: product.primaryImage,
-                                          tag: product.tag,
-                                          title: locale.languageCode == 'ar'
-                                              ? product.frProductName
-                                              : product.enProductName,
-                                          actualPrice:
-                                              double.tryParse(product.price)
-                                                      ?.toInt() ??
-                                                  0,
-                                          discountedPrice: product
-                                                  .discountPrice.isNotEmpty
-                                              ? double.tryParse(
-                                                          product.discountPrice)
-                                                      ?.toInt() ??
-                                                  0
-                                              : 0,
-                                        ));
-                                        if (productAdded) {
-                                          setSnackbar(
-                                              getTranslated(context,
-                                                  'product_added_to_cart')!,
-                                              context);
-                                        } else {
-                                          setSnackbar(
-                                              getTranslated(context,
-                                                  'product_already_in_cart')!,
-                                              context);
-                                        }
-                                      }
-                                    },
-                                    child: FittedBox(
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Icon(Icons.add_circle,
-                                              size: 18),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            getTranslated(
-                                                context, 'ADD_CART2')!,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        return ProductItem(
+                          productImage: product.primaryImage,
+                          productTag: product.tag,
+                          productName: locale.languageCode == 'ar'
+                              ? product.frProductName
+                              : product.enProductName,
+                          productDiscountPrice: product.discountPrice,
+                          productPrice: product.price,
+                          productOrigin: product.origin,
+                          productYear: product.year,
+                          productId: product.id,
+                          productInstallment: installment,
+                          productCategoryName: categoryName,
+                          productPattern: product.pattern,
+                          productWidth: product.width,
+                          productRimSize: product.rimSize,
+                          productRatio: product.ratio,
+                          productDiameter: product.diameter,
+                          productDescription: locale.languageCode == 'ar'
+                              ? product.frDescription
+                              : product.enDescription,
                         );
                       },
                     ),
@@ -2461,325 +1851,27 @@ class _HomeScreenState extends State<HomeScreen>
                               ? product.discountPrice
                               : product.price);
                       double installment = (discountPriceValue ?? 0) / 4;
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: 150,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Theme.of(context).colorScheme.primarytheme,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => HomeProductDetails(
-                                                id: product.id,
-                                                categoryName:
-                                                    categoryName.toString(),
-                                                productImage:
-                                                    product.primaryImage,
-                                                tag: product.tag,
-                                                productName:
-                                                    locale.languageCode == 'ar'
-                                                        ? product.frProductName
-                                                        : product.enProductName,
-                                                actualPrice: double.tryParse(
-                                                            product.price)
-                                                        ?.toInt() ??
-                                                    0,
-                                                discountedPrice: product
-                                                        .discountPrice
-                                                        .isNotEmpty
-                                                    ? double.tryParse(product
-                                                                .discountPrice)
-                                                            ?.toInt() ??
-                                                        0
-                                                    : 0,
-                                                origin: product.origin,
-                                                yearOfProduction: product.year,
-                                                pattern: product.pattern,
-                                                width: product.width,
-                                                rimSize: product.rimSize,
-                                                ratio: product.ratio,
-                                                diameter: product.diameter,
-                                                description:
-                                                    locale.languageCode == 'ar'
-                                                        ? product.frDescription
-                                                        : product.enDescription,
-                                              )));
-                                },
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(8, 6, 8, 2),
-                                  child: Column(
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          Container(
-                                            height: 100,
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                    product.primaryImage),
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: 35,
-                                            decoration: BoxDecoration(
-                                              color: Colors.red,
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
-                                            ),
-                                            child: FittedBox(
-                                              child: Center(
-                                                child: Text(
-                                                  product.tag,
-                                                  style: const TextStyle(
-                                                      color: Colors.white),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Container(
-                                        height: 0.5,
-                                        color: Colors.grey,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            locale.languageCode == 'ar'
-                                                ? product.frProductName
-                                                : product.enProductName,
-                                            style: const TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          FittedBox(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                    locale.languageCode == 'ar'
-                                                        ? product.discountPrice
-                                                            .toString()
-                                                        : 'SAR ${product.discountPrice.toString()}',
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .primarytheme,
-                                                    )),
-                                                if (locale.languageCode == 'ar')
-                                                  SizedBox(width: 3),
-                                                if (locale.languageCode == 'ar')
-                                                  Text('ر.س',
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .primarytheme,
-                                                      )),
-                                                SizedBox(
-                                                    width: product.discountPrice
-                                                            .isNotEmpty
-                                                        ? 5
-                                                        : 0),
-                                                Text(product.price.toString(),
-                                                    style: TextStyle(
-                                                        decoration: product
-                                                                .discountPrice
-                                                                .isNotEmpty
-                                                            ? TextDecoration
-                                                                .lineThrough
-                                                            : TextDecoration
-                                                                .none,
-                                                        fontSize: 12,
-                                                        color: product
-                                                                .discountPrice
-                                                                .isNotEmpty
-                                                            ? Colors.red
-                                                            : Theme.of(context)
-                                                                .colorScheme
-                                                                .primarytheme)),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                          getTranslated(
-                                              context, 'tax_included')!,
-                                          style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primarytheme)),
-                                      const SizedBox(height: 5),
-                                      Container(
-                                        height: 0.5,
-                                        color: Colors.grey,
-                                      ),
-                                      const SizedBox(height: 5),
-                                      FittedBox(
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  getTranslated(
-                                                      context, 'monthly')!,
-                                                ),
-                                                Text(
-                                                  installment
-                                                      .toStringAsFixed(1),
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
-                                                ),
-                                                SizedBox(width: 3),
-                                                Text(locale.languageCode == 'ar'
-                                                    ? 'ر.س'
-                                                    : 'SAR')
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  getTranslated(context, 'in')!,
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
-                                                ),
-                                                const SizedBox(width: 3),
-                                                const Text(
-                                                  '4',
-                                                  style:
-                                                      TextStyle(fontSize: 12),
-                                                ),
-                                                const SizedBox(width: 3),
-                                                Text(
-                                                  getTranslated(
-                                                      context, 'installments')!,
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Row(
-                                        children: PaymentOptions.images.entries
-                                            .map((entry) => Expanded(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            4.0),
-                                                    child: Image.asset(
-                                                      entry.value,
-                                                      height: 30,
-                                                    ),
-                                                  ),
-                                                ))
-                                            .toList(),
-                                      ),
-                                      Container(
-                                        height: 0.5,
-                                        color: Colors.grey,
-                                      ),
-                                      const SizedBox(height: 5),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Theme.of(context)
-                                        .colorScheme
-                                        .primarytheme,
-                                  ),
-                                  onPressed: () {
-                                    if (isDemoApp) {
-                                      setSnackbar(
-                                        getTranslated(
-                                            context, 'SIGNIN_DETAILS')!,
-                                        context,
-                                      );
-                                    } else {
-                                      bool productAdded =
-                                          Provider.of<MyCartProvider>(context,
-                                                  listen: false)
-                                              .addItem(CartItem(
-                                        id: product.id,
-                                        image: product.primaryImage,
-                                        tag: product.tag,
-                                        title: locale.languageCode == 'ar'
-                                            ? product.frProductName
-                                            : product.enProductName,
-                                        actualPrice:
-                                            double.tryParse(product.price)
-                                                    ?.toInt() ??
-                                                0,
-                                        discountedPrice: product
-                                                .discountPrice.isNotEmpty
-                                            ? double.tryParse(
-                                                        product.discountPrice)
-                                                    ?.toInt() ??
-                                                0
-                                            : 0,
-                                      ));
-                                      if (productAdded) {
-                                        setSnackbar(
-                                            getTranslated(context,
-                                                'product_added_to_cart')!,
-                                            context);
-                                      } else {
-                                        setSnackbar(
-                                            getTranslated(context,
-                                                'product_already_in_cart')!,
-                                            context);
-                                      }
-                                    }
-                                  },
-                                  child: FittedBox(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        const Icon(Icons.add_circle, size: 18),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          getTranslated(context, 'ADD_CART2')!,
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      return ProductItem(
+                        productImage: product.primaryImage,
+                        productTag: product.tag,
+                        productName: locale.languageCode == 'ar'
+                            ? product.frProductName
+                            : product.enProductName,
+                        productDiscountPrice: product.discountPrice,
+                        productPrice: product.price,
+                        productOrigin: product.origin,
+                        productYear: product.year,
+                        productId: product.id,
+                        productInstallment: installment,
+                        productCategoryName: categoryName,
+                        productPattern: product.pattern,
+                        productWidth: product.width,
+                        productRimSize: product.rimSize,
+                        productRatio: product.ratio,
+                        productDiameter: product.diameter,
+                        productDescription: locale.languageCode == 'ar'
+                            ? product.frDescription
+                            : product.enDescription,
                       );
                     },
                   ),
@@ -2836,339 +1928,27 @@ class _HomeScreenState extends State<HomeScreen>
                                 ? product.discountPrice
                                 : product.price);
                         double installment = (discountPriceValue ?? 0) / 4;
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 150,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color:
-                                    Theme.of(context).colorScheme.primarytheme,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Column(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (_) => HomeProductDetails(
-                                                  id: product.id,
-                                                  categoryName:
-                                                      categoryName.toString(),
-                                                  productImage:
-                                                      product.primaryImage,
-                                                  tag: product.tag,
-                                                  productName: locale
-                                                              .languageCode ==
-                                                          'ar'
-                                                      ? product.frProductName
-                                                      : product.enProductName,
-                                                  actualPrice: double.tryParse(
-                                                              product.price)
-                                                          ?.toInt() ??
-                                                      0,
-                                                  discountedPrice: product
-                                                          .discountPrice
-                                                          .isNotEmpty
-                                                      ? double.tryParse(product
-                                                                  .discountPrice)
-                                                              ?.toInt() ??
-                                                          0
-                                                      : 0,
-                                                  origin: product.origin,
-                                                  yearOfProduction:
-                                                      product.year,
-                                                  pattern: product.pattern,
-                                                  width: product.width,
-                                                  rimSize: product.rimSize,
-                                                  ratio: product.ratio,
-                                                  diameter: product.diameter,
-                                                  description: locale
-                                                              .languageCode ==
-                                                          'ar'
-                                                      ? product.frDescription
-                                                      : product.enDescription,
-                                                )));
-                                  },
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 6, 8, 2),
-                                    child: Column(
-                                      children: [
-                                        Stack(
-                                          children: [
-                                            Container(
-                                              height: 100,
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                      product.primaryImage),
-                                                ),
-                                              ),
-                                            ),
-                                            Container(
-                                              width: 35,
-                                              decoration: BoxDecoration(
-                                                color: Colors.red,
-                                                borderRadius:
-                                                    BorderRadius.circular(2),
-                                              ),
-                                              child: FittedBox(
-                                                child: Center(
-                                                  child: Text(
-                                                    product.tag,
-                                                    style: const TextStyle(
-                                                        color: Colors.white),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 10),
-                                        Container(
-                                          height: 0.5,
-                                          color: Colors.grey,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              locale.languageCode == 'ar'
-                                                  ? product.frProductName
-                                                  : product.enProductName,
-                                              style: const TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            FittedBox(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                      locale.languageCode ==
-                                                              'ar'
-                                                          ? product
-                                                              .discountPrice
-                                                              .toString()
-                                                          : 'SAR ${product.discountPrice.toString()}',
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .primarytheme,
-                                                      )),
-                                                  if (locale.languageCode ==
-                                                      'ar')
-                                                    SizedBox(width: 3),
-                                                  if (locale.languageCode ==
-                                                      'ar')
-                                                    Text('ر.س',
-                                                        style: TextStyle(
-                                                          fontSize: 12,
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .colorScheme
-                                                                  .primarytheme,
-                                                        )),
-                                                  SizedBox(
-                                                      width: product
-                                                              .discountPrice
-                                                              .isNotEmpty
-                                                          ? 5
-                                                          : 0),
-                                                  Text(product.price.toString(),
-                                                      style: TextStyle(
-                                                          decoration: product
-                                                                  .discountPrice
-                                                                  .isNotEmpty
-                                                              ? TextDecoration
-                                                                  .lineThrough
-                                                              : TextDecoration
-                                                                  .none,
-                                                          fontSize: 12,
-                                                          color: product
-                                                                  .discountPrice
-                                                                  .isNotEmpty
-                                                              ? Colors.red
-                                                              : Theme.of(
-                                                                      context)
-                                                                  .colorScheme
-                                                                  .primarytheme)),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                            getTranslated(
-                                                context, 'tax_included')!,
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primarytheme)),
-                                        const SizedBox(height: 5),
-                                        Container(
-                                          height: 0.5,
-                                          color: Colors.grey,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        FittedBox(
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    getTranslated(
-                                                        context, 'monthly')!,
-                                                  ),
-                                                  Text(
-                                                    installment
-                                                        .toStringAsFixed(1),
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                  ),
-                                                  SizedBox(width: 3),
-                                                  Text(locale.languageCode ==
-                                                          'ar'
-                                                      ? 'ر.س'
-                                                      : 'SAR')
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                    getTranslated(
-                                                        context, 'in')!,
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                  ),
-                                                  const SizedBox(width: 3),
-                                                  const Text(
-                                                    '4',
-                                                    style:
-                                                        TextStyle(fontSize: 12),
-                                                  ),
-                                                  const SizedBox(width: 3),
-                                                  Text(
-                                                    getTranslated(context,
-                                                        'installments')!,
-                                                    style: const TextStyle(
-                                                        fontSize: 12),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Row(
-                                          children: PaymentOptions
-                                              .images.entries
-                                              .map((entry) => Expanded(
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              4.0),
-                                                      child: Image.asset(
-                                                        entry.value,
-                                                        height: 30,
-                                                      ),
-                                                    ),
-                                                  ))
-                                              .toList(),
-                                        ),
-                                        Container(
-                                          height: 0.5,
-                                          color: Colors.grey,
-                                        ),
-                                        const SizedBox(height: 5),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Theme.of(context)
-                                          .colorScheme
-                                          .primarytheme,
-                                    ),
-                                    onPressed: () {
-                                      if (isDemoApp) {
-                                        setSnackbar(
-                                          getTranslated(
-                                              context, 'SIGNIN_DETAILS')!,
-                                          context,
-                                        );
-                                      } else {
-                                        bool productAdded =
-                                            Provider.of<MyCartProvider>(context,
-                                                    listen: false)
-                                                .addItem(CartItem(
-                                          id: product.id,
-                                          image: product.primaryImage,
-                                          tag: product.tag,
-                                          title: locale.languageCode == 'ar'
-                                              ? product.frProductName
-                                              : product.enProductName,
-                                          actualPrice:
-                                              double.tryParse(product.price)
-                                                      ?.toInt() ??
-                                                  0,
-                                          discountedPrice: product
-                                                  .discountPrice.isNotEmpty
-                                              ? double.tryParse(
-                                                          product.discountPrice)
-                                                      ?.toInt() ??
-                                                  0
-                                              : 0,
-                                        ));
-                                        if (productAdded) {
-                                          setSnackbar(
-                                              getTranslated(context,
-                                                  'product_added_to_cart')!,
-                                              context);
-                                        } else {
-                                          setSnackbar(
-                                              getTranslated(context,
-                                                  'product_already_in_cart')!,
-                                              context);
-                                        }
-                                      }
-                                    },
-                                    child: FittedBox(
-                                      child: Row(
-                                        children: [
-                                          const Icon(Icons.add_circle,
-                                              size: 18),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            getTranslated(
-                                                context, 'ADD_CART2')!,
-                                            style: const TextStyle(
-                                              fontSize: 14,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                        return ProductItem(
+                          productImage: product.primaryImage,
+                          productTag: product.tag,
+                          productName: locale.languageCode == 'ar'
+                              ? product.frProductName
+                              : product.enProductName,
+                          productDiscountPrice: product.discountPrice,
+                          productPrice: product.price,
+                          productOrigin: product.origin,
+                          productYear: product.year,
+                          productId: product.id,
+                          productInstallment: installment,
+                          productCategoryName: categoryName,
+                          productPattern: product.pattern,
+                          productWidth: product.width,
+                          productRimSize: product.rimSize,
+                          productRatio: product.ratio,
+                          productDiameter: product.diameter,
+                          productDescription: locale.languageCode == 'ar'
+                              ? product.frDescription
+                              : product.enDescription,
                         );
                       },
                     ),
@@ -3227,321 +2007,27 @@ class _HomeScreenState extends State<HomeScreen>
                               ? product.discountPrice
                               : product.price);
                       double installment = (discountPriceValue ?? 0) / 4;
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: 150,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Theme.of(context).colorScheme.primarytheme,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => HomeProductDetails(
-                                                id: product.id,
-                                                categoryName:
-                                                    categoryName.toString(),
-                                                productImage:
-                                                    product.primaryImage,
-                                                tag: product.tag,
-                                                productName:
-                                                    locale.languageCode == 'ar'
-                                                        ? product.frProductName
-                                                        : product.enProductName,
-                                                actualPrice: double.tryParse(
-                                                            product.price)
-                                                        ?.toInt() ??
-                                                    0,
-                                                discountedPrice: product
-                                                        .discountPrice
-                                                        .isNotEmpty
-                                                    ? double.tryParse(product
-                                                                .discountPrice)
-                                                            ?.toInt() ??
-                                                        0
-                                                    : 0,
-                                                origin: product.origin,
-                                                yearOfProduction: product.year,
-                                                pattern: product.pattern,
-                                                width: product.width,
-                                                rimSize: product.rimSize,
-                                                ratio: product.ratio,
-                                                diameter: product.diameter,
-                                                description:
-                                                    locale.languageCode == 'ar'
-                                                        ? product.frDescription
-                                                        : product.enDescription,
-                                              )));
-                                },
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(8, 6, 8, 2),
-                                  child: Column(
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          Container(
-                                            height: 100,
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                    product.primaryImage),
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: 35,
-                                            decoration: BoxDecoration(
-                                              color: Colors.red,
-                                              borderRadius:
-                                                  BorderRadius.circular(2),
-                                            ),
-                                            child: FittedBox(
-                                              child: Center(
-                                                child: Text(
-                                                  product.tag,
-                                                  style: const TextStyle(
-                                                      color: Colors.white),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Container(
-                                        height: 0.5,
-                                        color: Colors.grey,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            locale.languageCode == 'ar'
-                                                ? product.frProductName
-                                                : product.enProductName,
-                                            style: const TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          FittedBox(
-                                            child: Row(
-                                              children: [
-                                                Text(
-                                                    locale.languageCode == 'ar'
-                                                        ? product.discountPrice
-                                                            .toString()
-                                                        : 'SAR ${product.discountPrice.toString()}',
-                                                    style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .primarytheme,
-                                                    )),
-                                                if (locale.languageCode == 'ar')
-                                                  SizedBox(width: 3),
-                                                if (locale.languageCode == 'ar')
-                                                  Text('ر.س',
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .primarytheme,
-                                                      )),
-                                                SizedBox(
-                                                    width: product.discountPrice
-                                                            .isNotEmpty
-                                                        ? 5
-                                                        : 0),
-                                                Text(product.price.toString(),
-                                                    style: TextStyle(
-                                                        decoration: product
-                                                                .discountPrice
-                                                                .isNotEmpty
-                                                            ? TextDecoration
-                                                                .lineThrough
-                                                            : TextDecoration
-                                                                .none,
-                                                        fontSize: 12,
-                                                        color: product
-                                                                .discountPrice
-                                                                .isNotEmpty
-                                                            ? Colors.red
-                                                            : Theme.of(context)
-                                                                .colorScheme
-                                                                .primarytheme)),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                          getTranslated(
-                                              context, 'tax_included')!,
-                                          style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primarytheme)),
-                                      const SizedBox(height: 5),
-                                      Container(
-                                        height: 0.5,
-                                        color: Colors.grey,
-                                      ),
-                                      const SizedBox(height: 5),
-                                      FittedBox(
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  getTranslated(
-                                                      context, 'monthly')!,
-                                                ),
-                                                Text(
-                                                  installment
-                                                      .toStringAsFixed(1),
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
-                                                ),
-                                                SizedBox(width: 3),
-                                                Text(locale.languageCode == 'ar'
-                                                    ? 'ر.س'
-                                                    : 'SAR')
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  getTranslated(context, 'in')!,
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
-                                                ),
-                                                const SizedBox(width: 3),
-                                                const Text(
-                                                  '4',
-                                                  style:
-                                                      TextStyle(fontSize: 12),
-                                                ),
-                                                const SizedBox(width: 3),
-                                                Text(
-                                                  getTranslated(
-                                                      context, 'installments')!,
-                                                  style: const TextStyle(
-                                                      fontSize: 12),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Row(
-                                        children: PaymentOptions.images.entries
-                                            .map((entry) => Expanded(
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            4.0),
-                                                    child: Image.asset(
-                                                      entry.value,
-                                                      height: 30,
-                                                    ),
-                                                  ),
-                                                ))
-                                            .toList(),
-                                      ),
-                                      Container(
-                                        height: 0.5,
-                                        color: Colors.grey,
-                                      ),
-                                      const SizedBox(height: 5),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Theme.of(context)
-                                        .colorScheme
-                                        .primarytheme,
-                                  ),
-                                  onPressed: () {
-                                    if (isDemoApp) {
-                                      setSnackbar(
-                                        getTranslated(
-                                            context, 'SIGNIN_DETAILS')!,
-                                        context,
-                                      );
-                                    } else {
-                                      bool productAdded =
-                                          Provider.of<MyCartProvider>(context,
-                                                  listen: false)
-                                              .addItem(CartItem(
-                                        id: product.id,
-                                        image: product.primaryImage,
-                                        tag: product.tag,
-                                        title: locale.languageCode == 'ar'
-                                            ? product.frProductName
-                                            : product.enProductName,
-                                        actualPrice:
-                                            double.tryParse(product.price)
-                                                    ?.toInt() ??
-                                                0,
-                                        discountedPrice: product
-                                                .discountPrice.isNotEmpty
-                                            ? double.tryParse(
-                                                        product.discountPrice)
-                                                    ?.toInt() ??
-                                                0
-                                            : 0,
-                                      ));
-                                      if (productAdded) {
-                                        setSnackbar(
-                                            getTranslated(context,
-                                                'product_added_to_cart')!,
-                                            context);
-                                      } else {
-                                        setSnackbar(
-                                            getTranslated(context,
-                                                'product_already_in_cart')!,
-                                            context);
-                                      }
-                                    }
-                                  },
-                                  child: FittedBox(
-                                    child: Row(
-                                      children: [
-                                        const Icon(Icons.add_circle, size: 18),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          getTranslated(context, 'ADD_CART2')!,
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      return ProductItem(
+                        productImage: product.primaryImage,
+                        productTag: product.tag,
+                        productName: locale.languageCode == 'ar'
+                            ? product.frProductName
+                            : product.enProductName,
+                        productDiscountPrice: product.discountPrice,
+                        productPrice: product.price,
+                        productOrigin: product.origin,
+                        productYear: product.year,
+                        productId: product.id,
+                        productInstallment: installment,
+                        productCategoryName: categoryName,
+                        productPattern: product.pattern,
+                        productWidth: product.width,
+                        productRimSize: product.rimSize,
+                        productRatio: product.ratio,
+                        productDiameter: product.diameter,
+                        productDescription: locale.languageCode == 'ar'
+                            ? product.frDescription
+                            : product.enDescription,
                       );
                     },
                   ),
@@ -3556,6 +2042,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   Future<void> _refresh() async {
     await checkNetworkAndSetState();
+    if (!mounted) return;
     if (!_isNetworkAvail) return;
     await context.read<HomeProvider>().refreshAPIs();
   }
@@ -3662,7 +2149,6 @@ class _HomeScreenState extends State<HomeScreen>
                   setState(() {
                     _isNetworkAvail = true;
                   });
-
                   await context.read<HomeProvider>().refreshAPIs();
                   await buttonController.reverse();
                 }
@@ -3800,7 +2286,6 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ),
                     sliderLoading()
-                    //offerImages.length > index ? _getOfferImage(index) : SizedBox.shrink(),
                   ],
                 ))
             .toList());

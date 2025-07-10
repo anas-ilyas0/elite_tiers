@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:elite_tiers/settings.dart';
-import 'package:external_path/external_path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -112,28 +111,28 @@ Future<bool> hasStoragePermissionGiven() async {
   }
 }
 
-Future<String> getExternalStoragePath() async {
-  return Platform.isAndroid
-      ? (await ExternalPath.getExternalStoragePublicDirectory(
-          ExternalPath.DIRECTORY_DOWNLOADS))
-      : (await getApplicationDocumentsDirectory()).path;
-}
+// Future<String> getExternalStoragePath() async {
+//   return Platform.isAndroid
+//       ? (await ExternalPath.getExternalStoragePublicDirectory(
+//           ExternalPath.DIRECTORY_DOWNLOADS))
+//       : (await getApplicationDocumentsDirectory()).path;
+// }
 
 Future<String> getTempStoragePath() async {
   return (await getTemporaryDirectory()).path;
 }
 
-Future<String> checkIfFileAlreadyDownloaded(
-    {required String fileName,
-    required String fileExtension,
-    required bool downloadedInExternalStorage}) async {
-  final filePath = downloadedInExternalStorage
-      ? await getExternalStoragePath()
-      : await getTempStoragePath();
-  final File file = File('$filePath/$fileName.$fileExtension');
+// Future<String> checkIfFileAlreadyDownloaded(
+//     {required String fileName,
+//     required String fileExtension,
+//     required bool downloadedInExternalStorage}) async {
+//   final filePath = downloadedInExternalStorage
+//       ? await getExternalStoragePath()
+//       : await getTempStoragePath();
+//   final File file = File('$filePath/$fileName.$fileExtension');
 
-  return (await file.exists()) ? file.path : '';
-}
+//   return (await file.exists()) ? file.path : '';
+// }
 
 Future<String?> getDownloadPath({Function(dynamic err)? onError}) async {
   Directory? directory;

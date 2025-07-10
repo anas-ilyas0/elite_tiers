@@ -68,6 +68,7 @@ class SettingProvider {
     // CUR_USERID = null;
     String? theme = await getPrefrence(APP_THEME);
     String getlng = await getPrefrence(LAGUAGE_CODE) ?? '';
+
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
 

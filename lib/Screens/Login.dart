@@ -9,7 +9,6 @@ import 'package:elite_tiers/Screens/Dashboard.dart';
 import 'package:elite_tiers/Screens/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../ui/styles/DesignConfig.dart';
 import '../ui/styles/Validators.dart';
@@ -42,10 +41,10 @@ class LoginScreen extends StatefulWidget {
   });
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  LoginPageState createState() => LoginPageState();
 }
 
-class _LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
+class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   String? countryName;
@@ -72,10 +71,7 @@ class _LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
 
   AnimationController? buttonController;
   AnimationController? _animationController;
-  //var db = DatabaseHelper();
   bool acceptTnC = true;
-  // final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  // final GoogleSignIn _googleSignIn = GoogleSignIn();
   bool socialLoginLoading = false;
   bool? googleLogin, appleLogin;
   bool isShowPass = true;
@@ -83,9 +79,6 @@ class _LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    // getSetting();
-    // _animationController = AnimationController(
-    //     vsync: this, duration: const Duration(milliseconds: 2500));
     buttonController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
 
@@ -103,8 +96,10 @@ class _LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    _animationController?.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     buttonController?.dispose();
+    _animationController?.dispose();
     super.dispose();
   }
 
@@ -169,6 +164,7 @@ class _LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
 
             Future.delayed(const Duration(seconds: 2)).then((_) async {
               _isNetworkAvail = await isNetworkAvailable();
+
               if (_isNetworkAvail) {
                 Navigator.pushReplacement(
                     context,
@@ -196,6 +192,7 @@ class _LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
     Map<String, dynamic> data = getData();
     apiBaseHelper.postAPICall(getUserLoginApi, data).then((data) async {
       await buttonController!.reverse();
+      if (!mounted) return;
       isDemoApp = false;
       setSnackbar(getTranslated(context, 'logged_in_success')!, context);
       print('success login');
@@ -206,6 +203,7 @@ class _LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
     }).catchError((error) async {
       print('no login $error');
       await buttonController!.reverse();
+      if (!mounted) return;
       setSnackbar('Error $error', context);
     });
   }
@@ -366,7 +364,6 @@ class _LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
           children: <Widget>[
             InkWell(
               onTap: () {
-                //Navigator.push(context, MaterialPageRoute(builder: (_) => SendOtp()));
                 Navigator.pushNamed(
                   context,
                   Routers.sendOTPScreen,
@@ -397,9 +394,10 @@ class _LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
                     fontWeight: FontWeight.bold)),
             InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, Routers.sendOTPScreen, arguments: {
-                    "title": getTranslated(context, 'SEND_OTP_TITLE')
-                  });
+                  Navigator.pushNamed(context, Routers.sendOTPScreen,
+                      arguments: {
+                        "title": getTranslated(context, 'SEND_OTP_TITLE')
+                      });
                 },
                 child: Text(
                   getTranslated(context, 'SIGN_UP_LBL')!,
@@ -488,12 +486,8 @@ class _LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
       top: MediaQuery.of(context).size.height * 0.15,
       textDirection: Directionality.of(context),
       child: Container(
-        // alignment: Alignment.center,
         padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom * 0),
-        // height: MediaQuery.of(context).size.height * 0.65,
-        // width: MediaQuery.of(context).size.width * 0.95,
-        // color: Theme.of(context).colorScheme.white,
         child: Form(
           key: _formkey,
           child: ScrollConfiguration(
