@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:elite_tiers/App/routes.dart';
 import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/String.dart';
-import 'package:elite_tiers/Providers/SettingProvider.dart';
+import 'package:elite_tiers/Providers/settings_provider.dart';
 import 'package:elite_tiers/Screens/Dashboard.dart';
 import 'package:elite_tiers/Screens/Intro_Slider.dart';
 import 'package:elite_tiers/utils/blured_router.dart';
@@ -129,8 +129,8 @@ class _SplashScreen extends State<Splash> {
   }
 
   Future<void> navigationPage() async {
-    SettingProvider settingsProvider =
-        Provider.of<SettingProvider>(context, listen: false);
+    SettingsProvider settingsProvider =
+        Provider.of<SettingsProvider>(context, listen: false);
 
     bool isFirstTime = await settingsProvider.getPrefrenceBool(ISFIRSTTIME);
 

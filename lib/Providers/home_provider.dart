@@ -4,6 +4,7 @@ import 'package:elite_tiers/Models/brands_model.dart';
 import 'package:elite_tiers/Models/category_model.dart';
 import 'package:elite_tiers/Models/deal_model.dart';
 import 'package:elite_tiers/Models/products_model.dart';
+import 'package:elite_tiers/Screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -58,6 +59,10 @@ class HomeProvider extends ChangeNotifier {
   List<ProductsCategories> _categories = [];
   List<ProductsCategories> get categories => _categories;
 
+  List<AllProducts> get allProducts {
+    return _categories.expand((cat) => cat.products).toList();
+  }
+
 //deal
   bool _isDealLoading = true;
   bool get dealLoading => _isDealLoading;
@@ -65,6 +70,9 @@ class HomeProvider extends ChangeNotifier {
   List<Deal> get dealList => _dealList;
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
+  List<AllProducts> filteredProducts = [];
+
+  List<AllProducts> get getFilteredProducts => filteredProducts;
 
   void setIndex(int index) {
     _selectedIndex = index;
@@ -81,6 +89,7 @@ class HomeProvider extends ChangeNotifier {
     fetchCategories();
     fetchBrands();
     //fetchBlogs();
+    fetchFilteredProducts();
     fetchProducts();
     fetchDeal();
   }
@@ -90,9 +99,39 @@ class HomeProvider extends ChangeNotifier {
       fetchCategories(),
       fetchBrands(),
       //fetchBlogs(),
+      fetchFilteredProducts(),
       fetchProducts(),
       fetchDeal(),
     ]);
+  }
+
+  Future<List<AllProducts>> fetchFilteredProducts({
+    String? diameter,
+    String? width,
+    String? ratio,
+  }) async {
+    Map<String, dynamic> body = {};
+    if (diameter != null && diameter.isNotEmpty) body["diameter"] = diameter;
+    if (width != null && width.isNotEmpty) body["width"] = width;
+    if (ratio != null && ratio.isNotEmpty) body["ratio"] = ratio;
+
+    var response = await apiBaseHelper.postAPICall(
+      Uri.parse('${baseUrl}product/search-products'),
+      body,
+    );
+
+    List<AllProducts> result = [];
+    if (response != null && response['data'] != null) {
+      for (var item in response['data']) {
+        try {
+          result.add(AllProducts.fromJson(item));
+        } catch (e) {
+          print("Error parsing product: $e");
+        }
+      }
+    }
+
+    return result;
   }
 
 //categories
@@ -212,9 +251,12 @@ class HomeProvider extends ChangeNotifier {
           .where((category) => category.name.toLowerCase() == "منظفات")
           .toList();
       _batteriesList = productResponse.data
-          .where((category) => category.name.toLowerCase() == "البطاريات")
+          .where((category) =>
+              category.name.toLowerCase() == "البطاريات" ||
+              category.name.toLowerCase() == "بطارية" ||
+              category.name.toLowerCase() == "batteries" ||
+              category.name.toLowerCase() == "battery")
           .toList();
-
       _isProductsLoading = false;
       notifyListeners();
     } else {

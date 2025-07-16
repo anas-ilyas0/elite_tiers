@@ -4,8 +4,8 @@ import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Constant.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
-import 'package:elite_tiers/Providers/HomeProvider.dart';
-import 'package:elite_tiers/Providers/SettingProvider.dart';
+import 'package:elite_tiers/Providers/home_provider.dart';
+import 'package:elite_tiers/Providers/settings_provider.dart';
 import 'package:elite_tiers/Providers/Theme.dart';
 import 'package:elite_tiers/Providers/cart_provider.dart';
 import 'package:elite_tiers/Providers/user_provider.dart';
@@ -62,8 +62,8 @@ void main() async {
             }
           },
         ),
-        Provider<SettingProvider>(
-          create: (context) => SettingProvider(prefs),
+        Provider<SettingsProvider>(
+          create: (context) => SettingsProvider(prefs),
         ),
         ChangeNotifierProvider<MyCartProvider>(
             create: (context) => MyCartProvider()),

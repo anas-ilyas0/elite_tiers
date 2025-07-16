@@ -12,6 +12,7 @@ ThemeData lightTheme = ThemeData(
   fontFamily: 'OpenSans',
   colorScheme: ColorScheme.fromSwatch(primarySwatch: colors.primary_app)
       .copyWith(secondary: colors.primary, brightness: Brightness.light),
+  appBarTheme: AppBarTheme(scrolledUnderElevation: 0),
   textTheme: TextTheme(
           titleLarge: TextStyle(
             color: ThemeData().colorScheme.fontColor,

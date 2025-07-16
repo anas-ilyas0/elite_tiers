@@ -3,9 +3,9 @@ import 'package:bottom_bar/bottom_bar.dart';
 import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
-import 'package:elite_tiers/Providers/HomeProvider.dart';
-import 'package:elite_tiers/Providers/SettingProvider.dart';
 import 'package:elite_tiers/Providers/cart_provider.dart';
+import 'package:elite_tiers/Providers/home_provider.dart';
+import 'package:elite_tiers/Providers/settings_provider.dart';
 import 'package:elite_tiers/Providers/user_provider.dart';
 import 'package:elite_tiers/Screens/cart/my_cart_screen.dart';
 import 'package:elite_tiers/Screens/homeWidgets/MyProfile.dart';
@@ -58,7 +58,7 @@ void dispose() {
 
   void loadData() async {
     final settingsProvider =
-        Provider.of<SettingProvider>(context, listen: false);
+        Provider.of<SettingsProvider>(context, listen: false);
     final userId = await settingsProvider.getPrefrence(ID) ?? '';
 
     if (!mounted) return;
@@ -75,22 +75,6 @@ void dispose() {
     WidgetsBinding.instance.addObserver(this);
     Future.delayed(Duration.zero, loadData);
   }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addObserver(this);
-  //   Future.delayed(Duration.zero, () async {
-  //     if (!mounted) return;
-  //     final settingsProvider = context.read<SettingProvider>();
-  //     final userId = await settingsProvider.getPrefrence(ID) ?? '';
-  //     if (!mounted) return;
-  //     context.read<UserProvider>().setUserId(userId);
-  //     context
-  //         .read<HomeProvider>()
-  //         .setAnimationController(navigationContainerAnimationController);
-  //   });
-  // }
 
   changeTabPosition(int index) {
     Future.delayed(Duration.zero, () {

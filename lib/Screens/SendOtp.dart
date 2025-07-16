@@ -4,7 +4,6 @@ import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
 import 'package:elite_tiers/Helpers/forgot_password.dart';
-import 'package:elite_tiers/Screens/Verify_Otp.dart';
 import 'package:elite_tiers/Screens/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,19 +15,19 @@ import '../ui/widgets/BehaviorWidget.dart';
 import '../utils/blured_router.dart';
 
 class SendOtp extends StatefulWidget {
-  final String? title;
+  final String? email;
   static route(RouteSettings settings) {
     Map? arguments = settings.arguments as Map?;
     return BlurredRouter(
       builder: (context) {
         return SendOtp(
-          title: arguments?['title'],
+          email: arguments?['email'],
         );
       },
     );
   }
 
-  const SendOtp({super.key, this.title});
+  const SendOtp({super.key, this.email});
 
   @override
   SendOtpState createState() => SendOtpState();
@@ -47,7 +46,7 @@ class SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
 
   validateAndSubmit() async {
     if (validateAndSave()) {
-      if (widget.title != getTranslated(context, 'SEND_OTP_TITLE')) {
+      if (widget.email != getTranslated(context, 'SEND_OTP_TITLE')) {
         _playAnimation();
         checkNetwork();
       } else {
@@ -138,7 +137,7 @@ class SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
       var data = {
         MOBILE: mobile,
         "is_forgot_password":
-            (widget.title == getTranslated(context, 'FORGOT_PASS_TITLE')
+            (widget.email == getTranslated(context, 'FORGOT_PASS_TITLE')
                     ? 1
                     : 0)
                 .toString()
@@ -152,35 +151,36 @@ class SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
         // SettingProvider settingsProvider =
         //     Provider.of<SettingProvider>(context, listen: false);
 
-        if (widget.title == getTranslated(context, 'SEND_OTP_TITLE')) {
+        if (widget.email == getTranslated(context, 'SEND_OTP_TITLE')) {
           if (!error!) {
             setSnackbar(msg!, context);
 
             Future.delayed(const Duration(seconds: 1)).then((_) {
-              Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                      builder: (context) => VerifyOtp(
-                            mobileNumber: mobile!,
-                            countryCode: countrycode,
-                            title: getTranslated(context, 'SEND_OTP_TITLE'),
-                          )));
+              // Navigator.push(
+              //     context,
+              //     CupertinoPageRoute(
+              //         builder: (context) => VerifyOtp(
+              //               mobileNumber: mobile!,
+              //               countryCode: countrycode,
+              //               title: getTranslated(context, 'SEND_OTP_TITLE'),
+              //             ))
+              //             );
             });
           } else {
             setSnackbar(msg!, context);
           }
         }
-        if (widget.title == getTranslated(context, 'FORGOT_PASS_TITLE')) {
+        if (widget.email == getTranslated(context, 'FORGOT_PASS_TITLE')) {
           if (!error!) {
             Future.delayed(const Duration(seconds: 1)).then((_) {
-              Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                      builder: (context) => VerifyOtp(
-                            mobileNumber: mobile!,
-                            countryCode: countrycode,
-                            title: getTranslated(context, 'FORGOT_PASS_TITLE'),
-                          )));
+              // Navigator.push(
+              //     context,
+              //     CupertinoPageRoute(
+              //         builder: (context) => VerifyOtp(
+              //               mobileNumber: mobile!,
+              //               countryCode: countrycode,
+              //               title: getTranslated(context, 'FORGOT_PASS_TITLE'),
+              //             )));
             });
           } else {
             setSnackbar(getTranslated(context, 'FIRSTSIGNUP_MSG')!, context);
@@ -205,7 +205,7 @@ class SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
         child: Align(
           alignment: Alignment.center,
           child: Text(
-            widget.title == getTranslated(context, 'SEND_OTP_TITLE')
+            widget.email == getTranslated(context, 'SEND_OTP_TITLE')
                 ? getTranslated(context, 'CREATE_ACC_LBL')!
                 : getTranslated(context, 'FORGOT_PASSWORDTITILE')!,
             style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -279,7 +279,7 @@ class SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
 
   Widget verifyBtn() {
     return AppBtn(
-      title: widget.title == getTranslated(context, 'SEND_OTP_TITLE')
+      title: widget.email == getTranslated(context, 'SEND_OTP_TITLE')
           ? getTranslated(context, 'SEND_OTP')!.toUpperCase()
           : getTranslated(context, 'CONTINUE')!.toUpperCase(),
       btnAnim: buttonSqueezeanimation,
@@ -347,7 +347,7 @@ class SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
   }
 
   Widget termAndPolicyTxt() {
-    return widget.title == getTranslated(context, 'SEND_OTP_TITLE')
+    return widget.email == getTranslated(context, 'SEND_OTP_TITLE')
         ? Padding(
             padding: const EdgeInsets.only(
               top: 250,
@@ -556,7 +556,7 @@ class SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        widget.title == getTranslated(context, 'SEND_OTP_TITLE')
+                        widget.email == getTranslated(context, 'SEND_OTP_TITLE')
                             ? getTranslated(context, 'SIGN_UP_LBL')!
                             : getTranslated(context, 'FORGOT_PASSWORDTITILE')!,
                         style: TextStyle(

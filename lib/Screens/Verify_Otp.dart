@@ -1,287 +1,156 @@
 import 'dart:async';
+import 'package:elite_tiers/Helpers/Constant.dart';
+import 'package:elite_tiers/Screens/home_screen.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
+import 'package:elite_tiers/Screens/Dashboard.dart';
 import 'package:elite_tiers/UI/widgets/BehaviorWidget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../ui/styles/DesignConfig.dart';
 import '../ui/widgets/AppBtn.dart';
-import '../utils/blured_router.dart';
 
 class VerifyOtp extends StatefulWidget {
-  final String? mobileNumber, countryCode, title;
-  static route(RouteSettings settings) {
-    Map? arguments = settings.arguments as Map?;
-    return BlurredRouter(
-      builder: (context) {
-        return VerifyOtp(
-          mobileNumber: arguments?['mobileNumber'],
-          title: arguments?['title'],
-          countryCode: arguments?['countryCode'],
-        );
-      },
-    );
-  }
-
-  const VerifyOtp(
-      {Key? key,
-      required String this.mobileNumber,
-      this.countryCode,
-      this.title})
-      : super(key: key);
+  final String? email, userId;
+  const VerifyOtp({super.key, required this.email, required this.userId});
 
   @override
   _MobileOTPState createState() => _MobileOTPState();
 }
 
 class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
-  final dataKey = GlobalKey();
-  String? password;
-  String? otp;
-  bool isCodeSent = false;
-  String signature = "";
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final otpController = TextEditingController();
+  late AnimationController buttonController;
+  late Animation buttonSqueezeanimation;
+  bool _isNetworkAvail = true;
   bool _isClickable = false;
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
-  Animation? buttonSqueezeanimation;
-  AnimationController? buttonController;
+  bool isCodeSent = false;
 
   @override
   void initState() {
     super.initState();
-    getUserDetails();
-    getSingature();
-    _onVerifyCode();
-    Future.delayed(const Duration(seconds: 60)).then((_) {
-      _isClickable = true;
-    });
-    buttonController = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
+    initAnimations();
+    triggerOtpSent();
+    startClickableTimer();
+  }
 
+  void initAnimations() {
+    buttonController = AnimationController(
+      duration: const Duration(milliseconds: 2000),
+      vsync: this,
+    );
     buttonSqueezeanimation = Tween(
       begin: deviceWidth! * 0.9,
       end: 50.0,
     ).animate(CurvedAnimation(
-      parent: buttonController!,
-      curve: const Interval(
-        0.0,
-        0.150,
-      ),
+      parent: buttonController,
+      curve: const Interval(0.0, 0.150),
     ));
   }
 
-  Future<void> getSingature() async {
-    // signature = await SmsAutoFill().getAppSignature;
-    // SmsAutoFill().listenForCode;
+  void triggerOtpSent() {
+    setState(() {
+      isCodeSent = true;
+    });
   }
 
-  getUserDetails() async {
-    // SettingProvider settingsProvider =
-    //     Provider.of<SettingProvider>(context, listen: false);
-
-    if (mounted) setState(() {});
+  void startClickableTimer() {
+    Future.delayed(const Duration(seconds: 60), () {
+      _isClickable = true;
+    });
   }
 
-  Future<void> checkNetworkOtp() async {
-    bool avail = await isNetworkAvailable();
-    if (avail) {
-      if (_isClickable) {
-        _onVerifyCode();
-      } else {
-        setSnackbar(getTranslated(context, 'OTPWR')!, context);
-      }
-    } else {
-      if (mounted) setState(() {});
-
-      Future.delayed(const Duration(seconds: 60)).then((_) async {
-        bool avail = await isNetworkAvailable();
-        if (avail) {
-          if (_isClickable) {
-            _onVerifyCode();
-          } else {
-            setSnackbar(getTranslated(context, 'OTPWR')!, context);
-          }
-        } else {
-          await buttonController!.reverse();
-          setSnackbar(getTranslated(context, 'somethingMSg')!, context);
-        }
-      });
-    }
+  @override
+  void dispose() {
+    buttonController.dispose();
+    otpController.dispose();
+    super.dispose();
   }
 
   Widget verifyBtn() {
-    // String code = otp!.trim();
     return AppBtn(
       title: getTranslated(context, 'VERIFY_AND_PROCEED')!.toUpperCase(),
       btnAnim: buttonSqueezeanimation,
       btnCntrl: buttonController,
       onBtnSelected: () async {
-        FocusScope.of(context).requestFocus(FocusNode());
+        FocusScope.of(context).unfocus();
         _onFormSubmitted();
       },
-      // color: code.length == 6
-      //     ? Theme.of(context).colorScheme.primarytheme
-      //     : Theme.of(context).colorScheme.lightBlack2.withValues(0.5),
-      // fontColor: Theme.of(context).colorScheme.secondaryFontColor,
     );
-  }
-
-  void _onVerifyCode() async {
-    if (mounted) {
-      setState(() {
-        isCodeSent = true;
-      });
-    }
-
   }
 
   void _onFormSubmitted() async {
-
+    if (_formKey.currentState!.validate()) {
+      await _playAnimation();
+      await checkNetwork();
+    }
   }
 
-
-  @override
-  void dispose() {
-    buttonController!.dispose();
-    super.dispose();
+  Future<void> checkNetwork() async {
+    _isNetworkAvail = await isNetworkAvailable();
+    if (_isNetworkAvail) {
+      await otpProcess();
+    } else {
+      await buttonController.reverse();
+      setState(() {
+        _isNetworkAvail = false;
+      });
+    }
   }
 
-  monoVarifyText() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: Text(getTranslated(context, 'MOBILE_NUMBER_VARIFICATION')!,
-            style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: Theme.of(context).colorScheme.fontColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 18)),
-      ),
-    );
+  Future<void> otpProcess() async {
+    Map<String, String> data = {
+      "email": widget.email ?? '',
+      "otp": otpController.text,
+      "user_id": widget.userId ?? '',
+    };
+    print(data);
+    try {
+      await apiBaseHelper.postAPICall(verifyOtpFromEmailApi, data);
+      await buttonController.reverse();
+      if (!mounted) return;
+      isDemoApp = false;
+      setSnackbar(
+          '${getTranslated(context, 'OTPMSG')} & ${getTranslated(context, 'logged_in_success')}',
+          context);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => const Dashboard()));
+    } catch (error) {
+      await buttonController.reverse();
+      if (!mounted) return;
+      setSnackbar('Error $error', context);
+    }
   }
 
-  otpText() {
-    return Padding(
-        padding:
-            const EdgeInsetsDirectional.only(top: 15.0, bottom: 5.0, start: 12),
-        child: Align(
-          alignment: Alignment.topLeft,
-          child: Text(
-            getTranslated(context, 'SENT_VERIFY_CODE_TO_NO_LBL')!,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: Theme.of(context).colorScheme.fontColor,
-                fontWeight: FontWeight.normal),
-            overflow: TextOverflow.ellipsis,
-            softWrap: true,
-            maxLines: 1,
-          ),
-        ));
-  }
-
-  mobText() {
-    return Padding(
-      padding:
-          const EdgeInsetsDirectional.only(bottom: 20.0, end: 12.0, start: 12),
-      child: Align(
-        alignment: Alignment.topLeft,
-        child: Text("+${widget.countryCode}-${widget.mobileNumber}",
-            style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                color: Theme.of(context).colorScheme.fontColor,
-                fontWeight: FontWeight.normal)),
-      ),
-    );
-  }
-
-  Widget otpLayout() {
-    return Padding(
-        padding: const EdgeInsetsDirectional.only(
-            bottom: 20.0, end: 12.0, start: 12),
-        child: Text('')
-        );
-  }
-
-  Widget resendText() {
-    return Padding(
-      padding: const EdgeInsetsDirectional.only(
-          bottom: 30.0, start: 25.0, end: 25.0, top: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            getTranslated(context, 'DIDNT_GET_THE_CODE')!,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                color: Theme.of(context).colorScheme.fontColor,
-                fontWeight: FontWeight.bold),
-          ),
-          InkWell(
-              onTap: () async {
-              },
-              child: Text(
-                getTranslated(context, 'RESEND_OTP')!,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.primarytheme,
-                    decoration: TextDecoration.underline,
-                    fontWeight: FontWeight.bold),
-              ))
-        ],
-      ),
-    );
-  }
-
-  expandedBottomView() {
-    return Expanded(
-      flex: 6,
-      child: Container(
-        alignment: Alignment.bottomCenter,
-        child: ScrollConfiguration(
-            behavior: MyBehavior(),
-            child: SingleChildScrollView(
-              child: Card(
-                elevation: 0.5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                margin:
-                    const EdgeInsetsDirectional.only(start: 20.0, end: 20.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    monoVarifyText(),
-                    otpText(),
-                    mobText(),
-                    otpLayout(),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    verifyBtn(),
-                    resendText(),
-                  ],
-                ),
-              ),
-            )),
-      ),
-    );
+  Future<void> _playAnimation() async {
+    try {
+      await buttonController.forward();
+    } on TickerCanceled {}
   }
 
   @override
   Widget build(BuildContext context) {
     deviceHeight = MediaQuery.of(context).size.height;
     deviceWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Stack(
-          children: [
-            backBtn(),
-            getLoginContainer(),
-          ],
-        ));
+      resizeToAvoidBottomInset: false,
+      body: _isNetworkAvail
+          ? Stack(
+              children: [
+                backBtn(),
+                getLoginContainer(),
+              ],
+            )
+          : noInternet(context),
+    );
   }
 
-  backBtn() {
-    return Positioned(
-      top: 34.0,
-      // left: 5.0,
-      child: Material(
+  Widget backBtn() => Positioned(
+        top: 34.0,
+        child: Material(
           color: Colors.transparent,
           child: Container(
             margin: const EdgeInsets.all(10),
@@ -297,34 +166,53 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
                 ),
               ),
             ),
-          )),
-    );
-  }
+          ),
+        ),
+      );
 
-  getLoginContainer() {
-    return Positioned.directional(
-      start: MediaQuery.of(context).size.width * 0.025,
-      end: MediaQuery.of(context).size.width * 0.025,
-      top: MediaQuery.of(context).size.height * 0.15,
-      textDirection: Directionality.of(context),
-      child: Container(
-        padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom * 0),
+  Widget getLoginContainer() => Positioned.directional(
+        start: MediaQuery.of(context).size.width * 0.025,
+        end: MediaQuery.of(context).size.width * 0.025,
+        top: MediaQuery.of(context).size.height * 0.15,
+        textDirection: Directionality.of(context),
         child: Form(
-          key: _formkey,
+          key: _formKey,
           child: ScrollConfiguration(
             behavior: MyBehavior(),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  monoVarifyText(),
-                  otpText(),
-                  mobText(),
-                  otpLayout(),
-                  const SizedBox(
-                    height: 10,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        getTranslated(context, 'MOBILE_NUMBER_VARIFICATION')!,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(
+                              color: Theme.of(context).colorScheme.fontColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                      ),
+                    ),
                   ),
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                        top: 15.0, bottom: 5.0, start: 12),
+                    child: Text(
+                      '${getTranslated(context, 'SENT_VERIFY_CODE_TO_NO_LBL')!}: ${widget.email}',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            color: Theme.of(context).colorScheme.fontColor,
+                            fontWeight: FontWeight.normal,
+                          ),
+                    ),
+                  ),
+                  otpInputField(),
+                  const SizedBox(height: 10),
                   verifyBtn(),
                   resendText(),
                 ],
@@ -332,19 +220,112 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
             ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
-  Widget getLogo() {
-    return Positioned(
-      left: (MediaQuery.of(context).size.width / 2) - 50,
-      top: (MediaQuery.of(context).size.height * 0.2) - 50,
-      child: SizedBox(
-        width: 100,
-        height: 100,
-        child: SvgPicture.asset(getThemeColor(context)),
-      ),
-    );
-  }
+  Widget otpInputField() => Container(
+        width: MediaQuery.of(context).size.width * 0.85,
+        padding: const EdgeInsets.only(top: 15.0),
+        child: TextFormField(
+          controller: otpController,
+          keyboardType: TextInputType.number,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.fontColor,
+            fontWeight: FontWeight.normal,
+          ),
+          validator: (val) {
+            if (val == null || val.isEmpty) {
+              return getTranslated(context, 'ENTEROTP');
+            } else if (val.length != 6) {
+              return getTranslated(context, 'OTPERROR');
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            prefixIcon: Icon(Icons.lock,
+                color: Theme.of(context).colorScheme.fontColor, size: 20),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 13, vertical: 5),
+            hintText: getTranslated(context, "ENTEROTP"),
+            hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: Theme.of(context).colorScheme.fontColor,
+                ),
+            filled: true,
+            fillColor: Theme.of(context).colorScheme.lightBlack2.withAlpha(30),
+            border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
+      );
+
+  Widget resendText() => Padding(
+        padding: const EdgeInsetsDirectional.only(
+            top: 10, bottom: 30, start: 25.0, end: 25.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              getTranslated(context, 'DIDNT_GET_THE_CODE')!,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.fontColor,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            InkWell(
+              onTap: () async {
+                if (_isClickable) {
+                  triggerOtpSent();
+                  setSnackbar("OTP resent.", context);
+                  _isClickable = false;
+                  startClickableTimer();
+                } else {
+                  setSnackbar("Please wait before resending OTP.", context);
+                }
+              },
+              child: Text(
+                getTranslated(context, 'RESEND_OTP')!,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primarytheme,
+                      decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ),
+          ],
+        ),
+      );
+
+  Widget noInternet(BuildContext context) => SingleChildScrollView(
+        padding: const EdgeInsetsDirectional.only(top: kToolbarHeight),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            noIntImage(),
+            noIntText(context),
+            noIntDec(context),
+            AppBtn(
+              title: getTranslated(context, 'TRY_AGAIN_INT_LBL'),
+              btnAnim: buttonSqueezeanimation,
+              btnCntrl: buttonController,
+              onBtnSelected: () async {
+                await _playAnimation();
+                await Future.delayed(const Duration(seconds: 2));
+                _isNetworkAvail = await isNetworkAvailable();
+                if (_isNetworkAvail) {
+                  if (context.mounted) {
+                    Navigator.pushReplacement(
+                      context,
+                      CupertinoPageRoute(builder: (_) => widget),
+                    );
+                  }
+                } else {
+                  await buttonController.reverse();
+                  setState(() {});
+                }
+              },
+            ),
+          ],
+        ),
+      );
 }

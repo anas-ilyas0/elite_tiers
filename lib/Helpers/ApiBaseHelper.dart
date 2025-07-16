@@ -54,12 +54,60 @@ class ApiBaseHelper {
     return responseJson;
   }
 
+  Future<dynamic> postDioCall(String url, Map<String, dynamic> param) async {
+    print("API Request to $url with param: $param");
+
+    try {
+      final response = await dio.post(
+        url,
+        data: param,
+        options: dio_.Options(
+          followRedirects: false,
+          validateStatus: (status) => status != null && status < 500,
+          headers: headers, // Optional: add headers if any
+        ),
+      );
+
+      print("Response Code: ${response.statusCode}");
+      print("Response Body: ${response.data}");
+
+      if (response.statusCode == 200) {
+        return response.data;
+      } else if (response.statusCode == 302) {
+        final redirectUrl = response.headers.value('location');
+        throw FetchDataException('302 Redirected to $redirectUrl');
+      } else if (response.statusCode == 400) {
+        throw BadRequestException(response.data.toString());
+      } else if (response.statusCode == 401 || response.statusCode == 403) {
+        throw UnauthorisedException(response.data.toString());
+      } else {
+        throw FetchDataException(
+            'Unexpected status: ${response.statusCode} - ${response.statusMessage}');
+      }
+    } on dio_.DioException catch (e) {
+      if (e.type == dio_.DioExceptionType.connectionError) {
+        throw FetchDataException('No Internet connection');
+      } else if (e.type == dio_.DioExceptionType.connectionTimeout ||
+          e.type == dio_.DioExceptionType.receiveTimeout) {
+        throw FetchDataException('Connection timed out');
+      } else {
+        throw FetchDataException('Something went wrong: ${e.message}');
+      }
+    } catch (e) {
+      throw FetchDataException('Unexpected error: $e');
+    }
+  }
+
   dynamic _response(Response response) {
     switch (response.statusCode) {
       case 200:
         print("Reponse is ${getToken()}");
         var responseJson = json.decode(response.body.toString());
         return responseJson;
+      case 302:
+        var location = response.headers['location'];
+        print("Redirect Location: $location");
+        throw FetchDataException('302 Redirect received. Location: $location');
       case 400:
         throw BadRequestException(response.body.toString());
       case 401:

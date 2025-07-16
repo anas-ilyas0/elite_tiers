@@ -6,7 +6,7 @@ import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Constant.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
-import 'package:elite_tiers/Providers/SettingProvider.dart';
+import 'package:elite_tiers/Providers/settings_provider.dart';
 import 'package:elite_tiers/Providers/Theme.dart';
 import 'package:elite_tiers/Providers/cart_provider.dart';
 import 'package:elite_tiers/Providers/user_provider.dart';
@@ -121,8 +121,8 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
   }
 
   _getSaved() async {
-    SettingProvider settingsProvider =
-        Provider.of<SettingProvider>(context, listen: false);
+    SettingsProvider settingsProvider =
+        Provider.of<SettingsProvider>(context, listen: false);
 
     mob = await settingsProvider.getPrefrence(MOBILE) ?? '';
     context
@@ -390,7 +390,7 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
     Navigator.of(context).pop();
     if (!error) {
       var settingProvider =
-          Provider.of<SettingProvider>(context, listen: false);
+          Provider.of<SettingsProvider>(context, listen: false);
       var userProvider = Provider.of<UserProvider>(context, listen: false);
 
       if (username != "") {
@@ -942,8 +942,8 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
           if (!error) {
             setSnackbar(msg!, context);
 
-            SettingProvider settingProvider =
-                Provider.of<SettingProvider>(context, listen: false);
+            SettingsProvider settingProvider =
+                Provider.of<SettingsProvider>(context, listen: false);
             settingProvider.clearUserSession(context);
             Future.delayed(Duration.zero, () {
 
@@ -993,8 +993,8 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
 
             passController.clear();
 
-            SettingProvider settingProvider =
-                Provider.of<SettingProvider>(context, listen: false);
+            SettingsProvider settingProvider =
+                Provider.of<SettingsProvider>(context, listen: false);
             settingProvider.clearUserSession(context);
             Future.delayed(Duration.zero, () {
 

@@ -3,7 +3,7 @@ import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Constant.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
-import 'package:elite_tiers/Providers/HomeProvider.dart';
+import 'package:elite_tiers/Providers/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';

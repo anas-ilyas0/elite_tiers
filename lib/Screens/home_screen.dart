@@ -1,25 +1,25 @@
-import 'dart:async';
 import 'package:elite_tiers/Helpers/ApiBaseHelper.dart';
 import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Constant.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
 import 'package:elite_tiers/Models/cart_model.dart';
-import 'package:elite_tiers/Models/category_model.dart';
 import 'package:elite_tiers/Models/products_model.dart';
-import 'package:elite_tiers/Providers/HomeProvider.dart';
 import 'package:elite_tiers/Providers/cart_provider.dart';
+import 'package:elite_tiers/Providers/home_provider.dart';
+import 'package:elite_tiers/Screens/filtered_products_screens.dart';
 import 'package:elite_tiers/Screens/home_product_details.dart';
+import 'package:elite_tiers/Screens/search_products_screen.dart';
 import 'package:elite_tiers/Screens/show_more_home_products.dart';
-import 'package:elite_tiers/UI/widgets/AppBtn.dart';
 import 'package:elite_tiers/UI/widgets/product_item.dart';
+import 'package:elite_tiers/ui/styles/DesignConfig.dart';
+import 'package:elite_tiers/ui/widgets/AppBtn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-import '../ui/styles/DesignConfig.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -56,64 +56,6 @@ class HomeScreenState extends State<HomeScreen>
   String? selectedRearDiameter;
   String? selectedRearRatio;
   String? selectedRearWidth;
-  List<String> diameters = [
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
-    '22',
-    '23',
-    '24'
-  ];
-  List<String> ratios = [
-    '20',
-    '25',
-    '30',
-    '35',
-    '40',
-    '45',
-    '50',
-    '55',
-    '60',
-    '65',
-    '70',
-    '75',
-    '80',
-    '85',
-    '90'
-  ];
-  List<String> widths = [
-    '125',
-    '135',
-    '145',
-    '155',
-    '165',
-    '175',
-    '185',
-    '195',
-    '205',
-    '215',
-    '225',
-    '235',
-    '245',
-    '255',
-    '265',
-    '275',
-    '285',
-    '295',
-    '305',
-    '315',
-    '325',
-    '335',
-    '345',
-    '355',
-    '365'
-  ];
   bool isChecked = false;
   List<AllProducts> productsList = [];
   late List<AllProducts> filteredProducts;
@@ -167,7 +109,6 @@ class HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     var provider = Provider.of<HomeProvider>(context);
     final dynamicCategories = provider.categories; // List<ProductsCategories>
-    List<CategoryData> categories = provider.catList;
 
     List<DropdownMenuItem<String>> dropdownItems = dynamicCategories
         .map((dCategory) => DropdownMenuItem<String>(
@@ -185,13 +126,32 @@ class HomeScreenState extends State<HomeScreen>
 
     super.build(context);
     hideAppbarAndBottomBarOnScroll(_scrollBottomBarController, context);
-    if (_selectedCategoryName == null && categories.isNotEmpty) {
+    if (_selectedCategoryName == null && dynamicCategories.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         setState(() {
-          _selectedCategoryName = categories.first.frCategoryName;
+          _selectedCategoryName = dynamicCategories.first.name;
         });
       });
     }
+    final allProducts = provider.allProducts;
+    List<String> diameters = allProducts
+        .map((product) => product.diameter)
+        .where((d) => d.isNotEmpty)
+        .toSet()
+        .toList();
+
+    List<String> ratios = allProducts
+        .map((product) => product.ratio)
+        .where((r) => r.isNotEmpty)
+        .toSet()
+        .toList();
+
+    List<String> widths = allProducts
+        .map((product) => product.width)
+        .where((w) => w.isNotEmpty)
+        .toSet()
+        .toList();
+
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.lightWhite,
         body: _isNetworkAvail
@@ -222,28 +182,35 @@ class HomeScreenState extends State<HomeScreen>
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                getTranslated(context, 'size_difference')!,
+                        child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              isChecked = !isChecked;
+                            });
+                          },
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  getTranslated(context, 'size_difference')!,
+                                ),
                               ),
-                            ),
-                            Checkbox(
-                              value: isChecked,
-                              onChanged: (bool? newValue) {
-                                setState(() {
-                                  isChecked = newValue!;
-                                });
-                              },
-                              activeColor: const Color(0xff22A4BE),
-                              checkColor: Colors.white,
-                              tristate: false,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(3),
+                              Checkbox(
+                                value: isChecked,
+                                onChanged: (bool? newValue) {
+                                  setState(() {
+                                    isChecked = newValue!;
+                                  });
+                                },
+                                activeColor: const Color(0xff22A4BE),
+                                checkColor: Colors.white,
+                                tristate: false,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       Padding(
@@ -289,7 +256,7 @@ class HomeScreenState extends State<HomeScreen>
                                       child: DropdownButton<String>(
                                         isExpanded: true,
                                         hint: Text(
-                                          getTranslated(context, 'diameter')!,
+                                          getTranslated(context, 'rim_size')!,
                                           style: const TextStyle(fontSize: 14),
                                         ),
                                         value: selectedFrontDiameter,
@@ -322,7 +289,7 @@ class HomeScreenState extends State<HomeScreen>
                                       child: DropdownButton<String>(
                                         isExpanded: true,
                                         hint: Text(
-                                          getTranslated(context, 'ratio')!,
+                                          getTranslated(context, 'height')!,
                                           style: const TextStyle(fontSize: 14),
                                         ),
                                         value: selectedFrontRatio,
@@ -353,7 +320,7 @@ class HomeScreenState extends State<HomeScreen>
                                       child: DropdownButton<String>(
                                         isExpanded: true,
                                         hint: Text(
-                                          getTranslated(context, 'width')!,
+                                          getTranslated(context, 'offer')!,
                                           style: const TextStyle(fontSize: 14),
                                         ),
                                         value: selectedFrontWidth,
@@ -410,7 +377,7 @@ class HomeScreenState extends State<HomeScreen>
                                         child: DropdownButton<String>(
                                           isExpanded: true,
                                           hint: Text(
-                                            getTranslated(context, 'diameter')!,
+                                            getTranslated(context, 'rim_size')!,
                                             style:
                                                 const TextStyle(fontSize: 14),
                                           ),
@@ -444,7 +411,7 @@ class HomeScreenState extends State<HomeScreen>
                                         child: DropdownButton<String>(
                                           isExpanded: true,
                                           hint: Text(
-                                            getTranslated(context, 'ratio')!,
+                                            getTranslated(context, 'height')!,
                                             style:
                                                 const TextStyle(fontSize: 14),
                                           ),
@@ -476,7 +443,7 @@ class HomeScreenState extends State<HomeScreen>
                                         child: DropdownButton<String>(
                                           isExpanded: true,
                                           hint: Text(
-                                            getTranslated(context, 'width')!,
+                                            getTranslated(context, 'offer')!,
                                             style:
                                                 const TextStyle(fontSize: 14),
                                           ),
@@ -513,7 +480,57 @@ class HomeScreenState extends State<HomeScreen>
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () async {
+                              if ((selectedFrontDiameter == null ||
+                                      selectedFrontDiameter!.isEmpty) &&
+                                  (selectedFrontWidth == null ||
+                                      selectedFrontWidth!.isEmpty) &&
+                                  (selectedFrontRatio == null ||
+                                      selectedFrontRatio!.isEmpty)) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        'Please select at least one filter'),
+                                  ),
+                                );
+                                return;
+                              }
+                              // Show loading dialog
+                              showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (_) => const Center(
+                                    child: CircularProgressIndicator()),
+                              );
+                              try {
+                                final products =
+                                    await provider.fetchFilteredProducts(
+                                  diameter: selectedFrontDiameter,
+                                  width: selectedFrontWidth,
+                                  ratio: selectedFrontRatio,
+                                );
+                                if (context.mounted) {
+                                  Navigator.pop(context);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => FilteredProductsScreen(
+                                          allCategories: dynamicCategories,
+                                          filteredProducts: products),
+                                    ),
+                                  );
+                                }
+                              } catch (e) {
+                                if (context.mounted) {
+                                  Navigator.pop(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content:
+                                            Text('Failed to load products')),
+                                  );
+                                }
+                              }
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -564,7 +581,10 @@ class HomeScreenState extends State<HomeScreen>
                                   child: DropdownButton<String>(
                                     underline: Container(),
                                     isDense: true,
-                                    value: _selectedCategoryName,
+                                    value: dropdownItems.any((item) =>
+                                            item.value == _selectedCategoryName)
+                                        ? _selectedCategoryName
+                                        : null,
                                     hint: Text(
                                       getTranslated(
                                           context,
@@ -1339,7 +1359,8 @@ class HomeScreenState extends State<HomeScreen>
                                                         .enProductName,
                                                 style: const TextStyle(
                                                     fontSize: 12,
-                                                    fontWeight: FontWeight.bold),
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
@@ -2044,6 +2065,13 @@ class HomeScreenState extends State<HomeScreen>
     await checkNetworkAndSetState();
     if (!mounted) return;
     if (!_isNetworkAvail) return;
+    isChecked = false;
+    selectedFrontRatio = null;
+    selectedFrontWidth = null;
+    selectedFrontDiameter = null;
+    selectedRearRatio = null;
+    selectedRearWidth = null;
+    selectedRearDiameter = null;
     await context.read<HomeProvider>().refreshAPIs();
   }
 
@@ -2130,6 +2158,7 @@ class HomeScreenState extends State<HomeScreen>
   }
 
   Widget noInternet(BuildContext context) {
+    final homeProvider = context.read<HomeProvider>();
     return SingleChildScrollView(
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         noIntImage(),
@@ -2145,13 +2174,11 @@ class HomeScreenState extends State<HomeScreen>
             Future.delayed(const Duration(seconds: 2)).then((_) async {
               _isNetworkAvail = await isNetworkAvailable();
               if (_isNetworkAvail) {
-                if (mounted) {
-                  setState(() {
-                    _isNetworkAvail = true;
-                  });
-                  await context.read<HomeProvider>().refreshAPIs();
-                  await buttonController.reverse();
-                }
+                setState(() {
+                  _isNetworkAvail = true;
+                });
+                await homeProvider.refreshAPIs();
+                await buttonController.reverse();
               } else {
                 await buttonController.reverse();
                 if (mounted) setState(() {});
@@ -2166,50 +2193,64 @@ class HomeScreenState extends State<HomeScreen>
   _getSearchBar() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Container(
-        height: 44,
-        decoration:
-            BoxDecoration(border: Border.all(color: Colors.transparent)),
-        child: TextField(
-          controller: productsSearchController,
-          //textAlign: TextAlign.left,
-          onChanged: (value) {
-            // Notify the provider or update the state when search query changes
-            Provider.of<HomeProvider>(context, listen: false)
-                .updateSearchQuery(value);
-          },
-          decoration: InputDecoration(
-              contentPadding: const EdgeInsets.fromLTRB(15.0, 5.0, 8.0, 5.0),
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(50.0),
-                ),
-                borderSide: BorderSide(
-                  width: 1,
-                  style: BorderStyle.solid,
-                ),
-              ),
-              isDense: true,
-              hintText: getTranslated(context, 'searchHint')!,
-              hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: Theme.of(context).colorScheme.fontColor,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => const SearchProductsScreen(
+                      allCategories: [],
+                    )),
+          );
+        },
+        child: AbsorbPointer(
+          child: Container(
+            height: 44,
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.transparent)),
+            child: TextField(
+              controller: productsSearchController,
+              //textAlign: TextAlign.left,
+              onChanged: (value) {
+                // Notify the provider or update the state when search query changes
+                Provider.of<HomeProvider>(context, listen: false)
+                    .updateSearchQuery(value);
+              },
+              decoration: InputDecoration(
+                  contentPadding:
+                      const EdgeInsets.fromLTRB(15.0, 5.0, 8.0, 5.0),
+                  border: const OutlineInputBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(50.0),
+                    ),
+                    borderSide: BorderSide(
+                      width: 1,
+                      style: BorderStyle.solid,
+                    ),
                   ),
-              suffixIcon: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SvgPicture.asset(
-                  'assets/images/search.svg',
-                  colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.primarytheme,
-                      BlendMode.srcIn),
-                ),
-              ),
-              fillColor: Theme.of(context).colorScheme.lightWhite,
-              filled: true),
-          style: TextStyle(
-              fontSize: 14,
-              color: Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white
-                  : Colors.black),
+                  isDense: true,
+                  hintText: getTranslated(context, 'searchHint')!,
+                  hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.fontColor,
+                      ),
+                  suffixIcon: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: SvgPicture.asset(
+                      'assets/images/search.svg',
+                      colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.primarytheme,
+                          BlendMode.srcIn),
+                    ),
+                  ),
+                  fillColor: Theme.of(context).colorScheme.lightWhite,
+                  filled: true),
+              style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black),
+            ),
+          ),
         ),
       ),
     );

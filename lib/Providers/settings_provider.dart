@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SettingProvider {
+class SettingsProvider {
   late SharedPreferences _sharedPreferences;
 
-  SettingProvider(SharedPreferences sharedPreferences) {
+  SettingsProvider(SharedPreferences sharedPreferences) {
     _sharedPreferences = sharedPreferences;
   }
 

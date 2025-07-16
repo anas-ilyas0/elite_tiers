@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:elite_tiers/App/routes.dart';
 import 'package:elite_tiers/Helpers/Color.dart';
-import 'package:elite_tiers/Helpers/Constant.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
-import 'package:elite_tiers/Screens/Dashboard.dart';
+import 'package:elite_tiers/Screens/Verify_Otp.dart';
 import 'package:elite_tiers/Screens/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +45,6 @@ class LoginScreen extends StatefulWidget {
 class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  String? countryName;
   FocusNode? emailFocus, passFocus = FocusNode();
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
@@ -59,6 +56,7 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
       id,
       mobileno,
       city,
+      countryName,
       area,
       pincode,
       address,
@@ -68,7 +66,6 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
       loginType;
   bool _isNetworkAvail = true;
   Animation? buttonSqueezeanimation;
-
   AnimationController? buttonController;
   AnimationController? _animationController;
   bool acceptTnC = true;
@@ -166,10 +163,12 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
               _isNetworkAvail = await isNetworkAvailable();
 
               if (_isNetworkAvail) {
-                Navigator.pushReplacement(
-                    context,
-                    CupertinoPageRoute(
-                        builder: (BuildContext context) => super.widget));
+                if (context.mounted) {
+                  Navigator.pushReplacement(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (BuildContext context) => super.widget));
+                }
               } else {
                 await buttonController!.reverse();
                 if (mounted) setState(() {});
@@ -184,28 +183,40 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
   Map<String, String> getData() {
     return {
       "email": emailController.text,
-      "password": passwordController.text,
     };
   }
 
   Future<void> signInProcess() async {
     Map<String, dynamic> data = getData();
-    apiBaseHelper.postAPICall(getUserLoginApi, data).then((data) async {
+    try {
+      var res =
+          await apiBaseHelper.postDioCall(sendOtpToEmailApi.toString(), data);
+      //var res = await apiBaseHelper.postAPICall(sendOtpToEmailApi, data);
       await buttonController!.reverse();
+
       if (!mounted) return;
-      isDemoApp = false;
-      setSnackbar(getTranslated(context, 'logged_in_success')!, context);
-      print('success login');
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const Dashboard()),
-      );
-    }).catchError((error) async {
-      print('no login $error');
+
+      if (res['status'] == 'success') {
+        String userId = res['user_id'].toString();
+        setSnackbar(getTranslated(context, 'otp_sent_success')!, context);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VerifyOtp(
+              email: emailController.text,
+              userId: userId,
+            ),
+          ),
+        );
+      } else {
+        setSnackbar('OTP Send Failed', context);
+      }
+    } catch (error) {
+      print('no otp $error');
       await buttonController!.reverse();
       if (!mounted) return;
       setSnackbar('Error $error', context);
-    });
+    }
   }
 
   signInTxt() {
@@ -303,6 +314,7 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
             getTranslated(context, 'PWD_REQUIRED'),
             getTranslated(context, 'PASSWORD_VALIDATION'),
             from: 1),
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         onSaved: (String? value) {
           password = value;
         },
@@ -364,13 +376,13 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
           children: <Widget>[
             InkWell(
               onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  Routers.sendOTPScreen,
-                  arguments: {
-                    "title": getTranslated(context, 'FORGOT_PASS_TITLE')
-                  },
-                );
+                // Navigator.pushNamed(
+                //   context,
+                //   Routers.sendOTPScreen,
+                //   arguments: {
+                //     "title": getTranslated(context, 'FORGOT_PASS_TITLE')
+                //   },
+                // );
               },
               child: Text(getTranslated(context, 'FORGOT_PASSWORD_LBL')!,
                   style: Theme.of(context).textTheme.bodySmall!.copyWith(
@@ -394,10 +406,10 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
                     fontWeight: FontWeight.bold)),
             InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, Routers.sendOTPScreen,
-                      arguments: {
-                        "title": getTranslated(context, 'SEND_OTP_TITLE')
-                      });
+                  // Navigator.pushNamed(context, Routers.sendOTPScreen,
+                  //     arguments: {
+                  //       "email": emailController.text,
+                  //     });
                 },
                 child: Text(
                   getTranslated(context, 'SIGN_UP_LBL')!,
@@ -414,7 +426,7 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
 
   loginBtn() {
     return AppBtn(
-      title: getTranslated(context, 'SIGNIN_LBL')!.toUpperCase(),
+      title: getTranslated(context, 'SEND_OTP')!.toUpperCase(),
       btnAnim: buttonSqueezeanimation,
       btnCntrl: buttonController,
       onBtnSelected: () async {
@@ -499,8 +511,8 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
                   setSignInLabel(),
                   setSignInDetail(),
                   setEmail(),
-                  setPass(),
-                  forgetPass(),
+                  //setPass(),
+                  //forgetPass(),
                   loginBtn(),
                   loginWith(),
                   const SizedBox(

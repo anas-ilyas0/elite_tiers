@@ -1,7 +1,7 @@
 import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
-import 'package:elite_tiers/Providers/SettingProvider.dart';
+import 'package:elite_tiers/Providers/settings_provider.dart';
 import 'package:elite_tiers/Screens/SignInUpAcc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -167,8 +167,8 @@ class _GettingStartedScreenState extends State<IntroSlider>
               btnCntrl: buttonController,
               onBtnSelected: () {
                 if (_currentPage == 2) {
-                  SettingProvider settingProvider =
-                      Provider.of<SettingProvider>(context, listen: false);
+                  SettingsProvider settingProvider =
+                      Provider.of<SettingsProvider>(context, listen: false);
                   settingProvider.setPrefrenceBool(ISFIRSTTIME, true);
                   Navigator.pushReplacement(
                     context,
@@ -215,8 +215,8 @@ class _GettingStartedScreenState extends State<IntroSlider>
               children: <Widget>[
                 InkWell(
                   onTap: () {
-                    SettingProvider settingProvider =
-                        Provider.of<SettingProvider>(context, listen: false);
+                    SettingsProvider settingProvider =
+                        Provider.of<SettingsProvider>(context, listen: false);
                     settingProvider.setPrefrenceBool(ISFIRSTTIME, true);
                     Navigator.pushReplacement(
                       context,
