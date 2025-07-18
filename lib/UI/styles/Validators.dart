@@ -23,11 +23,7 @@ String? validateMob(String value, String? msg1, String? msg2, {bool? check}) {
     if (value.isEmpty) {
       return msg1;
     }
-    if (value.length < 6 || value.length > 15) {
-      return msg2;
-    }
-  } else {
-    if (value.isNotEmpty && value.length < 6 || value.length > 15) {
+    if (value.length < 9 || value.length > 9) {
       return msg2;
     }
   }
@@ -55,7 +51,6 @@ String? validatePass(String value, String? msg1, String? msg2, {int? from}) {
     return null;
   }
 }
-
 
 String? validateAltMob(String value, String? msg) {
   if (value.isNotEmpty && value.length < 6 || value.length > 15) {

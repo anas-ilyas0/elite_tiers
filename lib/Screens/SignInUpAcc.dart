@@ -2,6 +2,7 @@ import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
 import 'package:elite_tiers/Screens/Dashboard.dart';
+import 'package:elite_tiers/Screens/SignUp.dart';
 import 'package:elite_tiers/UI/widgets/AppBtn.dart';
 import 'package:elite_tiers/utils/blured_router.dart';
 import 'package:flutter/material.dart';
@@ -118,8 +119,7 @@ class SignInUpAccState extends State<SignInUpAcc>
       btnAnim: buttonSqueezeanimation,
       btnCntrl: buttonController,
       onBtnSelected: () async {
-        Navigator.pushNamed(context, Routers.sendOTPScreen,
-            arguments: {"title": getTranslated(context, 'SEND_OTP_TITLE')});
+        Navigator.push(context, MaterialPageRoute(builder: (_) => SignUp()));
       },
     );
   }

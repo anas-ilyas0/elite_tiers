@@ -58,8 +58,8 @@ class _SearchProductsScreenState extends State<SearchProductsScreen> {
           onChanged: onSearchChanged,
           cursorColor: Colors.white,
           style: const TextStyle(color: Colors.white),
-          decoration: const InputDecoration(
-            hintText: 'Search products...',
+          decoration: InputDecoration(
+            hintText: getTranslated(context, 'searchHint')!,
             hintStyle: TextStyle(color: Colors.white),
             border: InputBorder.none,
           ),

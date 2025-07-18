@@ -12,8 +12,9 @@ import '../ui/styles/DesignConfig.dart';
 import '../ui/widgets/AppBtn.dart';
 
 class VerifyOtp extends StatefulWidget {
-  final String? email, userId;
-  const VerifyOtp({super.key, required this.email, required this.userId});
+  final String? userId, email, mobile;
+  const VerifyOtp(
+      {super.key, required this.userId, required this.email, this.mobile});
 
   @override
   _MobileOTPState createState() => _MobileOTPState();
@@ -102,19 +103,29 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
 
   Future<void> otpProcess() async {
     Map<String, String> data = {
-      "email": widget.email ?? '',
       "otp": otpController.text,
       "user_id": widget.userId ?? '',
     };
-    print(data);
+
+    if (widget.email != null && widget.email!.isNotEmpty) {
+      data["email"] = widget.email!;
+    } else if (widget.mobile != null && widget.mobile!.isNotEmpty) {
+      data["mobile"] = widget.mobile!;
+    }
+
+    final api =
+        widget.email != null ? verifyOtpFromEmailApi : verifyOtpFromPhoneApi;
+
     try {
-      await apiBaseHelper.postAPICall(verifyOtpFromEmailApi, data);
+      await apiBaseHelper.postAPICall(api, data);
       await buttonController.reverse();
       if (!mounted) return;
-      isDemoApp = false;
+
       setSnackbar(
-          '${getTranslated(context, 'OTPMSG')} & ${getTranslated(context, 'logged_in_success')}',
-          context);
+        '${getTranslated(context, 'OTPMSG')} & ${getTranslated(context, 'logged_in_success')}',
+        context,
+      );
+
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => const Dashboard()));
     } catch (error) {
@@ -123,6 +134,30 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
       setSnackbar('Error $error', context);
     }
   }
+
+  // Future<void> otpProcess() async {
+  //   Map<String, String> data = {
+  //     "email": widget.email ?? '',
+  //     "otp": otpController.text,
+  //     "user_id": widget.userId ?? '',
+  //   };
+  //   print(data);
+  //   try {
+  //     await apiBaseHelper.postAPICall(verifyOtpFromEmailApi, data);
+  //     await buttonController.reverse();
+  //     if (!mounted) return;
+  //     isDemoApp = false;
+  //     setSnackbar(
+  //         '${getTranslated(context, 'OTPMSG')} & ${getTranslated(context, 'logged_in_success')}',
+  //         context);
+  //     Navigator.pushReplacement(
+  //         context, MaterialPageRoute(builder: (_) => const Dashboard()));
+  //   } catch (error) {
+  //     await buttonController.reverse();
+  //     if (!mounted) return;
+  //     setSnackbar('Error $error', context);
+  //   }
+  // }
 
   Future<void> _playAnimation() async {
     try {

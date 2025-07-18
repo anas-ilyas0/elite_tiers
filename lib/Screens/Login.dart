@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
+import 'package:elite_tiers/Screens/SignUp.dart';
 import 'package:elite_tiers/Screens/Verify_Otp.dart';
 import 'package:elite_tiers/Screens/home_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -72,6 +73,7 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
   bool socialLoginLoading = false;
   bool? googleLogin, appleLogin;
   bool isShowPass = true;
+  bool isPhoneLogin = false;
 
   @override
   void initState() {
@@ -180,18 +182,64 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
     );
   }
 
+  Widget loginToggle() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () => setState(() => isPhoneLogin = false),
+            child: Text(
+              getTranslated(context, 'email')!,
+              style: TextStyle(
+                color: isPhoneLogin
+                    ? Theme.of(context).colorScheme.primarytheme
+                    : Theme.of(context).colorScheme.fontColor,
+                fontWeight: FontWeight.bold,
+                decoration: isPhoneLogin
+                    ? TextDecoration.underline
+                    : TextDecoration.none,
+              ),
+            ),
+          ),
+          const SizedBox(width: 20),
+          GestureDetector(
+            onTap: () => setState(() => isPhoneLogin = true),
+            child: Text(
+              getTranslated(context, 'phone')!,
+              style: TextStyle(
+                color: !isPhoneLogin
+                    ? Theme.of(context).colorScheme.primarytheme
+                    : Theme.of(context).colorScheme.fontColor,
+                fontWeight: FontWeight.bold,
+                decoration: !isPhoneLogin
+                    ? TextDecoration.underline
+                    : TextDecoration.none,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Map<String, String> getData() {
-    return {
-      "email": emailController.text,
-    };
+    return isPhoneLogin
+        ? {
+            "mobile_no": emailController.text.trim(),
+          }
+        : {"email": emailController.text.trim()};
   }
 
   Future<void> signInProcess() async {
     Map<String, dynamic> data = getData();
     try {
-      var res =
-          await apiBaseHelper.postDioCall(sendOtpToEmailApi.toString(), data);
-      //var res = await apiBaseHelper.postAPICall(sendOtpToEmailApi, data);
+      var res = await apiBaseHelper.postDioCall(
+          isPhoneLogin
+              ? sendOtpToPhoneApi.toString()
+              : sendOtpToEmailApi.toString(),
+          data);
       await buttonController!.reverse();
 
       if (!mounted) return;
@@ -203,19 +251,20 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
           context,
           MaterialPageRoute(
             builder: (context) => VerifyOtp(
-              email: emailController.text,
               userId: userId,
+              email: isPhoneLogin ? emailController.text : null,
+              mobile: !isPhoneLogin ? emailController.text : null,
             ),
           ),
         );
       } else {
-        setSnackbar('OTP Send Failed', context);
+        setSnackbar(getTranslated(context, 'user_does`nt_exist')!, context);
       }
     } catch (error) {
       print('no otp $error');
       await buttonController!.reverse();
       if (!mounted) return;
-      setSnackbar('Error $error', context);
+      setSnackbar('${getTranslated(context, 'error')!}: $error', context);
     }
   }
 
@@ -275,6 +324,47 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
             vertical: 5,
           ),
           hintText: getTranslated(context, "EMAILHINT_LBL")!,
+          hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: Theme.of(context).colorScheme.fontColor,
+              fontWeight: FontWeight.normal),
+          filled: true,
+          fillColor:
+              Theme.of(context).colorScheme.lightBlack2.withValues(alpha: 0.3),
+          border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      ),
+    );
+  }
+
+  setPhone() {
+    return Container(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.0)),
+      width: MediaQuery.of(context).size.width * 0.85,
+      padding: const EdgeInsets.only(top: 15.0),
+      child: TextFormField(
+        keyboardType: TextInputType.phone,
+        controller: emailController,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.fontColor,
+          fontWeight: FontWeight.normal,
+        ),
+        enabled: true,
+        textInputAction: TextInputAction.next,
+        validator: (val) => validateMob(
+          val!,
+          getTranslated(context, 'MOB_REQUIRED'),
+          getTranslated(context, 'VALID_MOB'),
+        ),
+        onSaved: (String? value) {
+          mobile = value;
+        },
+        decoration: InputDecoration(
+          prefixIcon:
+              Icon(Icons.phone, color: Theme.of(context).colorScheme.fontColor),
+          hintText: getTranslated(context, "MOBILEHINT_LBL")!,
           hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: Theme.of(context).colorScheme.fontColor,
               fontWeight: FontWeight.normal),
@@ -406,10 +496,8 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
                     fontWeight: FontWeight.bold)),
             InkWell(
                 onTap: () {
-                  // Navigator.pushNamed(context, Routers.sendOTPScreen,
-                  //     arguments: {
-                  //       "email": emailController.text,
-                  //     });
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => SignUp()));
                 },
                 child: Text(
                   getTranslated(context, 'SIGN_UP_LBL')!,
@@ -510,7 +598,9 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
                 children: [
                   setSignInLabel(),
                   setSignInDetail(),
-                  setEmail(),
+                  loginToggle(),
+                  isPhoneLogin ? setPhone() : setEmail(),
+                  //setEmail(),
                   //setPass(),
                   //forgetPass(),
                   loginBtn(),

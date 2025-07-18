@@ -17,7 +17,7 @@ import '../ui/widgets/BehaviorWidget.dart';
 import '../utils/blured_router.dart';
 
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+  const SignUp({super.key});
   static route(RouteSettings settings) {
     //Map? arguments = settings.arguments as Map?;
     return BlurredRouter(
@@ -34,6 +34,7 @@ class SignUp extends StatefulWidget {
 class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
   bool? _showPassword = false;
   bool visible = false;
+  bool isPhoneSignup = false;
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -83,7 +84,7 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
   Future<void> checkNetwork() async {
     bool avail = await isNetworkAvailable();
     if (avail) {
-      // if (referCode != null)
+      signUpProcess();
     } else {
       Future.delayed(const Duration(seconds: 2)).then((_) async {
         if (mounted) {
@@ -178,10 +179,8 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
         style: TextStyle(
             color: Theme.of(context).colorScheme.fontColor,
             fontWeight: FontWeight.normal),
-        validator: (val) => validateUserName(
-            val!,
-            getTranslated(context, 'USER_REQUIRED'),
-            getTranslated(context, 'USER_LENGTH')),
+        validator: (val) =>
+            validateField(val!, getTranslated(context, 'name_required')),
         onSaved: (String? value) {
           name = value;
         },
@@ -213,6 +212,33 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget setMobile() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: TextFormField(
+        keyboardType: TextInputType.phone,
+        controller: mobileController,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.phone_android,
+              size: 17, color: Theme.of(context).colorScheme.fontColor),
+          hintText: getTranslated(context, 'MOBILEHINT_LBL')!,
+          hintStyle: Theme.of(context).textTheme.titleSmall,
+          focusedBorder: UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: Theme.of(context).colorScheme.primarytheme),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: Theme.of(context).colorScheme.fontColor),
+          ),
+        ),
+        validator: (val) =>
+            validateField(val!, getTranslated(context, 'MOBILEHINT_LBL')),
+        onSaved: (value) => mobile = value,
       ),
     );
   }
@@ -269,6 +295,45 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  Map<String, String> getData() {
+    return isPhoneSignup
+        ? {
+            "name": nameController.text,
+            "phone": mobileController.text,
+          }
+        : {
+            "name": nameController.text,
+            "email": emailController.text,
+          };
+  }
+
+  Future<void> signUpProcess() async {
+    Map<String, dynamic> data = getData();
+    try {
+      var res = await apiBaseHelper.postDioCall(
+          isPhoneSignup
+              ? userCreateToPhoneApi.toString()
+              : userCreateByEmailApi.toString(),
+          data);
+      await buttonController!.reverse();
+
+      if (!mounted) return;
+
+      if (res['status'] == 'success') {
+        String userId = res['user_id'].toString();
+        setSnackbar(getTranslated(context, 'REGISTER_SUCCESS_MSG')!, context);
+        Navigator.pop(context);
+      } else {
+        setSnackbar(getTranslated(context, 'USER_REGISTER_FAIL')!, context);
+      }
+    } catch (error) {
+      print('error signup $error');
+      await buttonController!.reverse();
+      if (!mounted) return;
+      setSnackbar('${getTranslated(context, 'error')!}: $error', context);
+    }
   }
 
   setRefer() {
@@ -421,25 +486,22 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(getTranslated(context, 'ALREADY_A_CUSTOMER')!,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+          SizedBox(height: 20),
+          Text(getTranslated(context, 'ALREADY_HAVE_AN_ACC')!,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: Theme.of(context).colorScheme.fontColor,
-                  fontWeight: FontWeight.normal)),
+                  fontWeight: FontWeight.bold)),
           InkWell(
               onTap: () {
-                // Navigator.of(context).push(CupertinoPageRoute(
-                //   builder: (BuildContext context) =>
-                //       const LoginScreen(isPop: false),
-                // ));
                 Navigator.pushNamed(context, Routers.loginScreen,
                     arguments: {"isPop": false});
               },
               child: Text(
                 getTranslated(context, 'LOG_IN_LBL')!,
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    color: Theme.of(context).colorScheme.fontColor,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: Theme.of(context).colorScheme.primarytheme,
                     decoration: TextDecoration.underline,
-                    fontWeight: FontWeight.normal),
+                    fontWeight: FontWeight.bold),
               ))
         ],
       ),
@@ -474,41 +536,6 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
         : const SizedBox.shrink();
   }
 
-  expandedBottomView() {
-    return Expanded(
-        flex: 8,
-        child: Container(
-          alignment: Alignment.bottomCenter,
-          child: ScrollConfiguration(
-            behavior: MyBehavior(),
-            child: SingleChildScrollView(
-                child: Form(
-              key: _formkey,
-              child: Card(
-                elevation: 0.5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                margin: const EdgeInsetsDirectional.only(
-                    start: 20.0, end: 20.0, top: 20.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    registerTxt(),
-                    setUserName(),
-                    setEmail(),
-                    setPass(),
-                    setRefer(),
-                    showPass(),
-                    verifyBtn(),
-                    loginTxt(),
-                  ],
-                ),
-              ),
-            )),
-          ),
-        ));
-  }
-
   @override
   void initState() {
     super.initState();
@@ -526,8 +553,6 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
         0.150,
       ),
     ));
-
-    generateReferral();
   }
 
   @override
@@ -613,10 +638,33 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
                         height: MediaQuery.of(context).size.height * 0.10,
                       ),
                       registerTxt(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(getTranslated(context, 'sign_up_using')!),
+                            Row(
+                              children: [
+                                Switch(
+                                  value: isPhoneSignup,
+                                  onChanged: (val) {
+                                    setState(() {
+                                      isPhoneSignup = val;
+                                    });
+                                  },
+                                ),
+                                Text(getTranslated(context,
+                                    isPhoneSignup ? 'phone' : 'email')!)
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
                       setUserName(),
-                      setEmail(),
-                      setPass(),
-                      setRefer(),
+                      if (isPhoneSignup) setMobile() else setEmail(),
+                      // setPass(),
+                      // setRefer(),
                       verifyBtn(),
                       loginTxt(),
                     ],
@@ -637,7 +685,11 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
       child: SizedBox(
         width: 100,
         height: 100,
-        child: SvgPicture.asset(getThemeColor(context)),
+        child: SvgPicture.asset(
+          getThemeColor(context),
+          colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.primarytheme, BlendMode.color),
+        ),
       ),
     );
   }
