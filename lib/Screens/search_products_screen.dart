@@ -1,5 +1,6 @@
 import 'package:elite_tiers/UI/widgets/product_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import '../Models/products_model.dart';
 import '../Providers/home_provider.dart';
@@ -94,11 +95,13 @@ class _SearchProductsScreenState extends State<SearchProductsScreen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Expanded(
-                          child: _productCard(context, firstProduct),
+                          child:
+                              _productCard(context, firstProduct, firstIndex),
                         ),
                         if (secondProduct != null)
                           Expanded(
-                            child: _productCard(context, secondProduct),
+                            child: _productCard(
+                                context, secondProduct, secondIndex),
                           )
                         else
                           Expanded(child: Container()),
@@ -111,7 +114,7 @@ class _SearchProductsScreenState extends State<SearchProductsScreen> {
     );
   }
 
-  Widget _productCard(BuildContext context, AllProducts product) {
+  Widget _productCard(BuildContext context, AllProducts product, int index) {
     final category = widget.allCategories.firstWhere(
       (cat) => cat.products.any((p) => p.id == product.id),
       orElse: () => ProductsCategories(
@@ -133,29 +136,40 @@ class _SearchProductsScreenState extends State<SearchProductsScreen> {
             : product.price);
     final double installment = (discountPriceValue ?? 0) / 4;
 
-    return ProductItem(
-      productImage: product.primaryImage,
-      productTag: product.tag,
-      productName: locale.languageCode == 'ar'
-          ? product.frProductName
-          : product.enProductName,
-      productDiscountPrice: product.discountPrice,
-      productPrice: product.price,
-      productOrigin: product.origin,
-      productYear: product.year,
-      productId: product.id,
-      productInstallment: installment,
-      productCategoryName: categoryName == getTranslated(context, 'tires')!
-          ? 'الإطارات'
-          : categoryName,
-      productPattern: product.pattern,
-      productWidth: product.width,
-      productRimSize: product.rimSize,
-      productRatio: product.ratio,
-      productDiameter: product.diameter,
-      productDescription: locale.languageCode == 'ar'
-          ? product.frDescription
-          : product.enDescription,
+    return AnimationConfiguration.staggeredGrid(
+      position: index,
+      duration: const Duration(milliseconds: 200),
+      columnCount: 2,
+      child: SlideAnimation(
+        verticalOffset: 50.0,
+        child: FadeInAnimation(
+          child: ProductItem(
+            productImage: product.primaryImage,
+            productTag: product.tag,
+            productName: locale.languageCode == 'ar'
+                ? product.frProductName
+                : product.enProductName,
+            productDiscountPrice: product.discountPrice,
+            productPrice: product.price,
+            productOrigin: product.origin,
+            productYear: product.year,
+            productId: product.id,
+            productInstallment: installment,
+            productCategoryName:
+                categoryName == getTranslated(context, 'tires')!
+                    ? 'الإطارات'
+                    : categoryName,
+            productPattern: product.pattern,
+            productWidth: product.width,
+            productRimSize: product.rimSize,
+            productRatio: product.ratio,
+            productDiameter: product.diameter,
+            productDescription: locale.languageCode == 'ar'
+                ? product.frDescription
+                : product.enDescription,
+          ),
+        ),
+      ),
     );
   }
 }

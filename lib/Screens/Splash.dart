@@ -1,17 +1,15 @@
 import 'dart:async';
-import 'package:elite_tiers/App/routes.dart';
 import 'package:elite_tiers/Helpers/Color.dart';
+import 'package:elite_tiers/Helpers/Constant.dart';
+import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Helpers/String.dart';
-import 'package:elite_tiers/Providers/settings_provider.dart';
 import 'package:elite_tiers/Screens/Dashboard.dart';
-import 'package:elite_tiers/Screens/Intro_Slider.dart';
+import 'package:elite_tiers/Screens/SignInUpAcc.dart';
 import 'package:elite_tiers/utils/blured_router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
-//splash screen of app
 class Splash extends StatefulWidget {
   const Splash({super.key});
   static route(RouteSettings settings) {
@@ -23,14 +21,19 @@ class Splash extends StatefulWidget {
   }
 
   @override
-  _SplashScreen createState() => _SplashScreen();
+  SplashScreen createState() => SplashScreen();
 }
 
-class _SplashScreen extends State<Splash> {
+class SplashScreen extends State<Splash> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Offset> _logoAnimation;
+
   bool from = false;
+
   @override
   void initState() {
     super.initState();
+
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.top]);
     SystemChrome.setSystemUIOverlayStyle(
@@ -39,60 +42,24 @@ class _SplashScreen extends State<Splash> {
         statusBarIconBrightness: Brightness.light,
       ),
     );
-    // apiBaseHelper.postAPICall(getSettingApi, {}).then((value) {
-    //   isCityWiseDelivery = (value['data'] as Map)['system_settings'][0]
-    //           ['city_wise_deliverability'] ==
-    //       "1";
 
-    //   isFirebaseAuth = (value['data'] as Map)['authentication_settings'][0]
-    //           ['authentication_method'] ==
-    //       "firebase";
-    // });
-    //setToken();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+
+    _logoAnimation = Tween<Offset>(
+      begin: const Offset(0, 5.0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOut,
+    ));
+
+    _controller.forward();
+
     startTime();
   }
-
-  // void setToken() async {
-  //   FirebaseMessaging.instance.getToken().then(
-  //     (token) async {
-  //       SettingProvider settingsProvider =
-  //           Provider.of<SettingProvider>(context, listen: false);
-
-  //       String getToken = await settingsProvider.getPrefrence(FCMTOKEN) ?? '';
-  //       print("fcm token****$token");
-  //       if (token != getToken && token != null) {
-  //         print("register token***$token");
-  //         registerToken(token);
-  //       }
-  //     },
-  //   );
-  // }
-
-  // void registerToken(String? token) async {
-  //   SettingProvider settingsProvider =
-  //       Provider.of<SettingProvider>(context, listen: false);
-  //   var parameter = {
-  //     FCM_ID: token,
-  //   };
-  //   if (context.read<UserProvider>().userId != "") {
-  //     parameter[USER_ID] = context.read<UserProvider>().userId;
-  //   }
-
-  //   Response response =
-  //       await post(updateFcmApi, body: parameter, headers: headers)
-  //           .timeout(const Duration(seconds: timeOut));
-
-  //   var getdata = json.decode(response.body);
-
-  //   print("param noti fcm***$parameter");
-
-  //   print("value notification****$getdata");
-
-  //   if (getdata['error'] == false) {
-  //     print("fcm token****$token");
-  //     settingsProvider.setPrefrence(FCMTOKEN, token!);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -106,17 +73,22 @@ class _SplashScreen extends State<Splash> {
             width: double.infinity,
             height: double.infinity,
             color: Theme.of(context).colorScheme.primarytheme,
-            child: const Center(
-                child: Image(
-                    height: 200,
-                    color: Colors.white,
-                    image: AssetImage('assets/images/logo.png'))),
           ),
           Image.asset(
             'assets/images/doodle.png',
             fit: BoxFit.fill,
             width: double.infinity,
             height: double.infinity,
+          ),
+          Center(
+            child: SlideTransition(
+              position: _logoAnimation,
+              child: const Image(
+                height: 200,
+                color: Colors.white,
+                image: AssetImage('assets/images/logo.png'),
+              ),
+            ),
           ),
         ],
       ),
@@ -129,42 +101,33 @@ class _SplashScreen extends State<Splash> {
   }
 
   Future<void> navigationPage() async {
-    SettingsProvider settingsProvider =
-        Provider.of<SettingsProvider>(context, listen: false);
+    //String? token = await getPrefrence(AUTH_TOKEN);
 
-    bool isFirstTime = await settingsProvider.getPrefrenceBool(ISFIRSTTIME);
-
-    if (isFirstTime) {
-      setState(() {
-        from = true;
-      });
-
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (context) {
-        Dashboard.dashboardScreenKey = GlobalKey<HomePageState>();
-        return Dashboard(
-          key: Dashboard.dashboardScreenKey,
-        );
-      }));
-      Navigator.pushReplacementNamed(context, Routers.dashboardScreen);
-    } else {
-      setState(() {
-        from = false;
-      });
-
-      Navigator.pushReplacement(
-          context,
-          CupertinoPageRoute(
-            builder: (context) => const IntroSlider(),
-          ));
-      Navigator.pushReplacementNamed(context, Routers.signInUpAcc);
-
-      //
+    //if (token != null && token.isNotEmpty) {
+    if (mounted) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) {
+            Dashboard.dashboardScreenKey = GlobalKey<HomePageState>();
+            return Dashboard(key: Dashboard.dashboardScreenKey);
+          },
+        ),
+      );
     }
+    //}
+    //else if (token == null || token.isEmpty) {
+    //   if (mounted) {
+    //     Navigator.pushReplacement(
+    //       context,
+    //       CupertinoPageRoute(builder: (context) => const SignInUpAcc()),
+    //     );
+    //   }
+    // }
   }
 
   @override
   void dispose() {
+    _controller.dispose();
     if (from) {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
           overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);

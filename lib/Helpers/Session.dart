@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:elite_tiers/App/languages.dart';
+import 'package:elite_tiers/Helpers/Constant.dart';
 import 'package:elite_tiers/Models/language_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +9,34 @@ import '../app/app_Localization.dart';
 import 'String.dart';
 import 'package:http/http.dart' as http;
 
+Future<void> setPrefrence(String key, String value) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString(key, value);
+}
+
+Future<String?> getPrefrence(String key) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getString(key);
+}
+
+Future<void> removePrefrence(String key) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.remove(key);
+}
+
 setPrefrenceBool(String key, bool value) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setBool(key, value);
+}
+
+Future<bool> getPrefrenceBool(String key) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getBool(key) ?? false;
+}
+
+Future<bool> isDemoUser() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getBool(IS_DEMO) ?? true;
 }
 
 Future<Locale> setLocale(String languageCode) async {

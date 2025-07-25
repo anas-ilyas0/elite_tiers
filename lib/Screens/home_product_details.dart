@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:provider/provider.dart';
 
-class HomeProductDetails extends StatefulWidget {
+class HomeProductDetails extends StatelessWidget {
   final int id, actualPrice, discountedPrice;
   final String? categoryName;
   final String productImage,
@@ -41,12 +41,7 @@ class HomeProductDetails extends StatefulWidget {
       required this.diameter,
       required this.description});
 
-  @override
-  State<HomeProductDetails> createState() => _HomeProductDetailsState();
-}
-
-class _HomeProductDetailsState extends State<HomeProductDetails> {
-  Widget row(String firstText, String secText) {
+  Widget row(String firstText, String secText, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
       child: Row(
@@ -70,7 +65,7 @@ class _HomeProductDetailsState extends State<HomeProductDetails> {
     }
 
     return Scaffold(
-      appBar: getSimpleAppBar(widget.productName, context),
+      appBar: getSimpleAppBar(productName, context),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -90,8 +85,8 @@ class _HomeProductDetailsState extends State<HomeProductDetails> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: NetworkImage(widget.productImage)),
+                                fit: BoxFit.contain,
+                                image: NetworkImage(productImage)),
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -108,7 +103,7 @@ class _HomeProductDetailsState extends State<HomeProductDetails> {
                               padding: const EdgeInsets.all(4.0),
                               child: Center(
                                 child: Text(
-                                  widget.tag,
+                                  tag,
                                   style: const TextStyle(color: Colors.white),
                                 ),
                               ),
@@ -118,11 +113,11 @@ class _HomeProductDetailsState extends State<HomeProductDetails> {
                       ],
                     ),
                     const SizedBox(height: 4),
-                    if (widget.categoryName!.toLowerCase() == 'الإطارات')
-                      row('origin', widget.origin),
-                    if (widget.categoryName!.toLowerCase() == 'الإطارات')
-                      row('year_of_production', widget.yearOfProduction),
-                    if (widget.categoryName!.toLowerCase() == 'الإطارات')
+                    if (categoryName!.toLowerCase() == 'الإطارات')
+                      row('origin', origin, context),
+                    if (categoryName!.toLowerCase() == 'الإطارات')
+                      row('year_of_production', yearOfProduction, context),
+                    if (categoryName!.toLowerCase() == 'الإطارات')
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 4, horizontal: 4),
@@ -134,48 +129,53 @@ class _HomeProductDetailsState extends State<HomeProductDetails> {
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            Expanded(child: Text(widget.pattern)),
+                            Expanded(child: Text(pattern)),
                           ],
                         ),
                       ),
-                    if (widget.categoryName!.toLowerCase() == 'الإطارات')
-                      row('width', widget.width),
-                    if (widget.categoryName!.toLowerCase() == 'الإطارات')
-                      row('rim_size', widget.rimSize),
-                    if (widget.categoryName!.toLowerCase() == 'الإطارات')
-                      row('ratio', widget.ratio),
-                    if (widget.categoryName!.toLowerCase() == 'الإطارات')
-                      row('diameter', widget.diameter),
+                    if (categoryName!.toLowerCase() == 'الإطارات')
+                      row('width', width, context),
+                    if (categoryName!.toLowerCase() == 'الإطارات')
+                      row('rim_size', rimSize, context),
+                    if (categoryName!.toLowerCase() == 'الإطارات')
+                      row('ratio', ratio, context),
+                    if (categoryName!.toLowerCase() == 'الإطارات')
+                      row('diameter', diameter, context),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                          onPressed: () {
-                            if (isDemoApp) {
-                              setSnackbar(
-                                getTranslated(context, 'SIGNIN_DETAILS')!,
-                                context,
-                              );
+                          onPressed: () async {
+                            String? token = await getPrefrence(AUTH_TOKEN);
+                            if (token == null || token.isEmpty) {
+                              if (context.mounted) {
+                                setSnackbar(
+                                  getTranslated(context, 'SIGNIN_DETAILS')!,
+                                  context,
+                                );
+                              }
                             } else {
-                              bool productAdded = Provider.of<MyCartProvider>(
-                                      context,
-                                      listen: false)
-                                  .addItem(CartItem(
-                                      id: widget.id,
-                                      image: widget.productImage,
-                                      tag: widget.tag,
-                                      title: widget.productName,
-                                      actualPrice: widget.actualPrice,
-                                      discountedPrice: widget.discountedPrice));
-                              if (productAdded) {
-                                setSnackbar(
-                                    getTranslated(
-                                        context, 'product_added_to_cart')!,
-                                    context);
-                              } else {
-                                setSnackbar(
-                                    getTranslated(
-                                        context, 'product_already_in_cart')!,
-                                    context);
+                              if (context.mounted) {
+                                bool productAdded = Provider.of<MyCartProvider>(
+                                        context,
+                                        listen: false)
+                                    .addItem(CartItem(
+                                        id: id,
+                                        image: productImage,
+                                        tag: tag,
+                                        title: productName,
+                                        actualPrice: actualPrice,
+                                        discountedPrice: discountedPrice));
+                                if (productAdded) {
+                                  setSnackbar(
+                                      getTranslated(
+                                          context, 'product_added_to_cart')!,
+                                      context);
+                                } else {
+                                  setSnackbar(
+                                      getTranslated(
+                                          context, 'product_already_in_cart')!,
+                                      context);
+                                }
                               }
                             }
                           },
@@ -195,9 +195,7 @@ class _HomeProductDetailsState extends State<HomeProductDetails> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    HtmlWidget(widget.description.isNotEmpty
-                        ? widget.description
-                        : 'N/A')
+                    HtmlWidget(description.isNotEmpty ? description : 'N/A')
                   ],
                 ),
               ),

@@ -1,10 +1,17 @@
 import 'package:elite_tiers/Helpers/Color.dart';
+import 'package:elite_tiers/utils/page_transition.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: false,
   canvasColor: ThemeData().colorScheme.lightWhite,
   cardColor: colors.cardColor,
+  pageTransitionsTheme: const PageTransitionsTheme(
+    builders: {
+      TargetPlatform.android: FadeThroughPageTransitionsBuilder(),
+      TargetPlatform.iOS: FadeThroughPageTransitionsBuilder(),
+    },
+  ),
   dialogBackgroundColor: ThemeData().colorScheme.white,
   iconTheme: ThemeData().iconTheme.copyWith(color: colors.primary),
   primarySwatch: colors.primary_app,

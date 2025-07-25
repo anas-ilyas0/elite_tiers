@@ -15,6 +15,7 @@ import 'package:elite_tiers/UI/widgets/product_item.dart';
 import 'package:elite_tiers/ui/styles/DesignConfig.dart';
 import 'package:elite_tiers/ui/widgets/AppBtn.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
@@ -65,6 +66,9 @@ class HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   _waitForDealsThenShowPopup();
+    // });
     filteredProducts = productsList;
     buttonController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
@@ -89,6 +93,183 @@ class HomeScreenState extends State<HomeScreen>
     buttonController.dispose();
     super.dispose();
   }
+
+  // void _showDealPopup() {
+  //   final dealList = Provider.of<HomeProvider>(context, listen: false).dealList;
+  //   final locale = Localizations.localeOf(context);
+
+  //   if (dealList.isEmpty) return;
+
+  //   final deal = dealList[0];
+
+  //   showDialog(
+  //     context: context,
+  //     barrierDismissible: false,
+  //     builder: (context) {
+  //       return Align(
+  //         alignment: Alignment.topCenter,
+  //         child: Animate(
+  //           effects: [
+  //             SlideEffect(
+  //               begin: const Offset(0, -1),
+  //               end: Offset.zero,
+  //               duration: 1500.ms,
+  //               curve: Curves.easeOutCubic,
+  //             ),
+  //             FadeEffect(duration: 1500.ms),
+  //           ],
+  //           child: Dismissible(
+  //             key: const Key('deal_popup'),
+  //             direction: DismissDirection.up,
+  //             onDismissed: (_) => Navigator.pop(context),
+  //             child: Container(
+  //               margin: const EdgeInsets.only(top: 100),
+  //               width: MediaQuery.of(context).size.width * 0.85,
+  //               padding: const EdgeInsets.all(16),
+  //               decoration: BoxDecoration(
+  //                 color: Theme.of(context).cardColor,
+  //                 borderRadius: BorderRadius.circular(16),
+  //                 boxShadow: [
+  //                   BoxShadow(
+  //                     color: Colors.black.withValues(alpha: 0.2),
+  //                     blurRadius: 12,
+  //                   ),
+  //                 ],
+  //               ),
+  //               child: Stack(
+  //                 clipBehavior: Clip.none,
+  //                 children: [
+  //                   Column(
+  //                     mainAxisSize: MainAxisSize.min,
+  //                     children: [
+  //                       ClipRRect(
+  //                         borderRadius: BorderRadius.circular(10),
+  //                         child: Image.network(
+  //                           deal.primaryImage,
+  //                           height: 150,
+  //                           fit: BoxFit.cover,
+  //                         ),
+  //                       ),
+  //                       const SizedBox(height: 12),
+  //                       Text(
+  //                         locale.languageCode == 'ar'
+  //                             ? deal.frProductName
+  //                             : deal.enProductName,
+  //                         style: const TextStyle(
+  //                             fontSize: 18, fontWeight: FontWeight.bold),
+  //                       ),
+  //                       const SizedBox(height: 8),
+  //                       Row(
+  //                         mainAxisAlignment: MainAxisAlignment.center,
+  //                         children: [
+  //                           if (deal.discountPrice.isNotEmpty)
+  //                             Text(
+  //                               locale.languageCode == 'ar'
+  //                                   ? '${deal.discountPrice} ر.س'
+  //                                   : 'SAR ${deal.discountPrice}',
+  //                               style: const TextStyle(
+  //                                   color: Colors.green,
+  //                                   fontSize: 16,
+  //                                   fontWeight: FontWeight.bold),
+  //                             ),
+  //                           if (deal.discountPrice.isNotEmpty)
+  //                             const SizedBox(width: 6),
+  //                           Text(
+  //                             locale.languageCode == 'ar'
+  //                                 ? '${deal.price} ر.س'
+  //                                 : 'SAR ${deal.price}',
+  //                             style: TextStyle(
+  //                                 decoration: deal.discountPrice.isNotEmpty
+  //                                     ? TextDecoration.lineThrough
+  //                                     : TextDecoration.none,
+  //                                 color: Colors.grey),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                       const SizedBox(height: 16),
+  //                       ElevatedButton.icon(
+  //                         icon: const Icon(Icons.shopping_cart),
+  //                         label: Text(getTranslated(context, 'ADD_CART2')!),
+  //                         onPressed: () {
+  //                           if (isDemoApp) {
+  //                             setSnackbar(
+  //                               getTranslated(context, 'SIGNIN_DETAILS')!,
+  //                               context,
+  //                             );
+  //                           } else {
+  //                             Navigator.pop(context);
+  //                             final added = Provider.of<MyCartProvider>(context,
+  //                                     listen: false)
+  //                                 .addItem(CartItem(
+  //                               id: deal.id,
+  //                               image: deal.primaryImage,
+  //                               tag: deal.tag,
+  //                               title: locale.languageCode == 'ar'
+  //                                   ? deal.frProductName
+  //                                   : deal.enProductName,
+  //                               actualPrice:
+  //                                   double.tryParse(deal.price)?.toInt() ?? 0,
+  //                               discountedPrice: deal.discountPrice.isNotEmpty
+  //                                   ? double.tryParse(deal.discountPrice)
+  //                                           ?.toInt() ??
+  //                                       0
+  //                                   : 0,
+  //                             ));
+  //                             setSnackbar(
+  //                               added
+  //                                   ? getTranslated(
+  //                                       context, 'product_added_to_cart')!
+  //                                   : getTranslated(
+  //                                       context, 'product_already_in_cart')!,
+  //                               context,
+  //                             );
+  //                           }
+  //                         },
+  //                       ),
+  //                     ],
+  //                   ),
+  //                   Positioned(
+  //                     top: -5,
+  //                     right: -5,
+  //                     child: GestureDetector(
+  //                       onTap: () => Navigator.pop(context),
+  //                       child: Container(
+  //                         padding: const EdgeInsets.all(6),
+  //                         decoration: BoxDecoration(
+  //                           shape: BoxShape.circle,
+  //                           color: Colors.grey.shade300,
+  //                         ),
+  //                         child: const Icon(
+  //                           Icons.close,
+  //                           size: 20,
+  //                           color: Colors.black,
+  //                         ),
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
+  // void _waitForDealsThenShowPopup() async {
+  //   final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+  //   int retries = 0;
+
+  //   while (homeProvider.dealList.isEmpty && retries < 10) {
+  //     await Future.delayed(const Duration(milliseconds: 300));
+  //     retries++;
+  //   }
+  //   if (!mounted) return;
+  //   if (homeProvider.dealList.isNotEmpty) {
+  //     _showDealPopup();
+  //   }
+  // }
 
   void filteredProductsFunc() {
     setState(() {
@@ -487,12 +668,10 @@ class HomeScreenState extends State<HomeScreen>
                                       selectedFrontWidth!.isEmpty) &&
                                   (selectedFrontRatio == null ||
                                       selectedFrontRatio!.isEmpty)) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                        'Please select at least one filter'),
-                                  ),
-                                );
+                                setSnackbar(
+                                    getTranslated(context,
+                                        'please_select_at_least_one_filter')!,
+                                    context);
                                 return;
                               }
                               // Show loading dialog
@@ -1222,353 +1401,389 @@ class HomeScreenState extends State<HomeScreen>
             child: Column(
               children: List.generate(dealList.length, (index) {
                 return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => HomeProductDetails(
-                              categoryName: categoryName.toString(),
-                              id: dealList[index].id,
-                              productImage: dealList[index].primaryImage,
-                              tag: dealList[index].tag,
-                              productName: locale.languageCode == 'ar'
-                                  ? dealList[index].frProductName
-                                  : dealList[index].enProductName,
-                              actualPrice:
-                                  double.tryParse(dealList[index].price)
-                                          ?.toInt() ??
-                                      0,
-                              discountedPrice:
-                                  double.tryParse(dealList[index].discountPrice)
-                                          ?.toInt() ??
-                                      0,
-                              origin: dealList[index].origin,
-                              yearOfProduction: dealList[index].year,
-                              pattern: dealList[index].pattern,
-                              width: dealList[index].width,
-                              rimSize: dealList[index].rimSize,
-                              ratio: dealList[index].ratio,
-                              diameter: dealList[index].diameter,
-                              description: locale.languageCode == 'ar'
-                                  ? dealList[index].frDescription
-                                  : dealList[index].enDescription)),
-                    );
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.primarytheme,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => HomeProductDetails(
+                                categoryName: categoryName.toString(),
+                                id: dealList[index].id,
+                                productImage: dealList[index].primaryImage,
+                                tag: dealList[index].tag,
+                                productName: locale.languageCode == 'ar'
+                                    ? dealList[index].frProductName
+                                    : dealList[index].enProductName,
+                                actualPrice:
+                                    double.tryParse(dealList[index].price)
+                                            ?.toInt() ??
+                                        0,
+                                discountedPrice: double.tryParse(
+                                            dealList[index].discountPrice)
+                                        ?.toInt() ??
+                                    0,
+                                origin: dealList[index].origin,
+                                yearOfProduction: dealList[index].year,
+                                pattern: dealList[index].pattern,
+                                width: dealList[index].width,
+                                rimSize: dealList[index].rimSize,
+                                ratio: dealList[index].ratio,
+                                diameter: dealList[index].diameter,
+                                description: locale.languageCode == 'ar'
+                                    ? dealList[index].frDescription
+                                    : dealList[index].enDescription)),
+                      );
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.primarytheme,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Column(
-                      children: [
-                        Stack(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 4.5),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 10),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 4),
-                                            child: Container(
-                                              height: 170,
-                                              width: 150,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: dealList[index]
-                                                          .primaryImage
-                                                          .isNotEmpty
-                                                      ? NetworkImage(
-                                                          dealList[index]
-                                                              .primaryImage)
-                                                      : AssetImage(
-                                                          'assets/images/noimage.png'),
+                      child: Column(
+                        children: [
+                          Stack(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4.5),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 10),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Stack(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 4),
+                                              child: Container(
+                                                height: 170,
+                                                width: 150,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: dealList[index]
+                                                            .primaryImage
+                                                            .isNotEmpty
+                                                        ? NetworkImage(
+                                                            dealList[index]
+                                                                .primaryImage)
+                                                        : AssetImage(
+                                                            'assets/images/noimage.png'),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Positioned(
-                                            left: isRtl(context) ? null : 5,
-                                            right: isRtl(context) ? 5 : null,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.red,
-                                                borderRadius:
-                                                    BorderRadius.circular(2),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(1.0),
-                                                child: FittedBox(
-                                                  child: Center(
-                                                    child: Text(
-                                                      dealList[index].tag,
-                                                      style: const TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.white),
+                                            Positioned(
+                                              left: isRtl(context) ? null : 5,
+                                              right: isRtl(context) ? 5 : null,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.red,
+                                                  borderRadius:
+                                                      BorderRadius.circular(2),
+                                                ),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(1.0),
+                                                  child: FittedBox(
+                                                    child: Center(
+                                                      child: Text(
+                                                        dealList[index].tag,
+                                                        style: const TextStyle(
+                                                            fontSize: 12,
+                                                            color:
+                                                                Colors.white),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const SizedBox(height: 14),
-                                            RatingBar.builder(
-                                              glow: true,
-                                              initialRating: 3,
-                                              minRating: 1,
-                                              itemSize: 20,
-                                              direction: Axis.horizontal,
-                                              allowHalfRating: true,
-                                              itemCount: 5,
-                                              itemBuilder: (context, _) => Icon(
-                                                Icons.star,
-                                                size: 12,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primary,
+                                          ],
+                                        ),
+                                        const SizedBox(width: 5),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(height: 14),
+                                              RatingBar.builder(
+                                                glow: true,
+                                                initialRating: 3,
+                                                minRating: 1,
+                                                itemSize: 20,
+                                                direction: Axis.horizontal,
+                                                allowHalfRating: true,
+                                                itemCount: 5,
+                                                itemBuilder: (context, _) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  size: 12,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
+                                                ),
+                                                onRatingUpdate: (rating) {},
                                               ),
-                                              onRatingUpdate: (rating) {},
-                                            ),
-                                            FittedBox(
-                                              child: Text(
-                                                locale.languageCode == 'ar'
-                                                    ? dealList[index]
-                                                        .frProductName
-                                                    : dealList[index]
-                                                        .enProductName,
-                                                style: const TextStyle(
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                                overflow: TextOverflow.ellipsis,
+                                              FittedBox(
+                                                child: Text(
+                                                  locale.languageCode == 'ar'
+                                                      ? dealList[index]
+                                                          .frProductName
+                                                      : dealList[index]
+                                                          .enProductName,
+                                                  style: const TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
                                               ),
-                                            ),
-                                            FittedBox(
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    dealList[index]
-                                                            .discountPrice
-                                                            .isNotEmpty
-                                                        ? locale.languageCode ==
-                                                                'ar'
-                                                            ? '${dealList[index].discountPrice} ر.س'
-                                                            : 'SAR ${dealList[index].discountPrice}'
-                                                        : locale.languageCode ==
-                                                                'ar'
-                                                            ? '${dealList[index].price} ر.س'
-                                                            : 'SAR ${dealList[index].price}',
-                                                    style: const TextStyle(
-                                                        color:
-                                                            Color(0xff22A4BE),
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  SizedBox(
-                                                      width: dealList[index]
+                                              FittedBox(
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      dealList[index]
                                                               .discountPrice
                                                               .isNotEmpty
-                                                          ? 7
-                                                          : 0),
-                                                  if (dealList[index]
-                                                      .discountPrice
-                                                      .isNotEmpty)
-                                                    Text(
-                                                      dealList[index].price,
-                                                      style: TextStyle(
-                                                          decoration: dealList[
-                                                                      index]
-                                                                  .discountPrice
-                                                                  .isNotEmpty
-                                                              ? TextDecoration
-                                                                  .lineThrough
-                                                              : TextDecoration
-                                                                  .none,
-                                                          color: dealList[index]
-                                                                  .discountPrice
-                                                                  .isNotEmpty
-                                                              ? Colors.grey
-                                                              : Theme.of(
-                                                                      context)
-                                                                  .colorScheme
-                                                                  .primary),
+                                                          ? locale.languageCode ==
+                                                                  'ar'
+                                                              ? '${dealList[index].discountPrice} ر.س'
+                                                              : 'SAR ${dealList[index].discountPrice}'
+                                                          : locale.languageCode ==
+                                                                  'ar'
+                                                              ? '${dealList[index].price} ر.س'
+                                                              : 'SAR ${dealList[index].price}',
+                                                      style: const TextStyle(
+                                                          color:
+                                                              Color(0xff22A4BE),
+                                                          fontWeight:
+                                                              FontWeight.bold),
                                                     ),
-                                                ],
+                                                    SizedBox(
+                                                        width: dealList[index]
+                                                                .discountPrice
+                                                                .isNotEmpty
+                                                            ? 7
+                                                            : 0),
+                                                    if (dealList[index]
+                                                        .discountPrice
+                                                        .isNotEmpty)
+                                                      Text(
+                                                        dealList[index].price,
+                                                        style: TextStyle(
+                                                            decoration: dealList[
+                                                                        index]
+                                                                    .discountPrice
+                                                                    .isNotEmpty
+                                                                ? TextDecoration
+                                                                    .lineThrough
+                                                                : TextDecoration
+                                                                    .none,
+                                                            color: dealList[
+                                                                        index]
+                                                                    .discountPrice
+                                                                    .isNotEmpty
+                                                                ? Colors.grey
+                                                                : Theme.of(
+                                                                        context)
+                                                                    .colorScheme
+                                                                    .primary),
+                                                      ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            Text(
-                                              getTranslated(
-                                                  context, 'tax_included')!,
-                                              style: const TextStyle(
-                                                  color: Color(0xff22A4BE),
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  right: locale.languageCode ==
-                                                          'ar'
-                                                      ? 0
-                                                      : 33,
-                                                  left: locale.languageCode ==
-                                                          'ar'
-                                                      ? 33
-                                                      : 0),
-                                              child: ElevatedButton(
-                                                onPressed: () {
-                                                  if (isDemoApp) {
-                                                    setSnackbar(
-                                                      getTranslated(context,
-                                                          'SIGNIN_DETAILS')!,
-                                                      context,
-                                                    );
-                                                  } else {
-                                                    bool productAdded = Provider
-                                                            .of<MyCartProvider>(
-                                                                context,
-                                                                listen: false)
-                                                        .addItem(CartItem(
-                                                      id: dealList[index].id,
-                                                      image: dealList[index]
-                                                          .primaryImage,
-                                                      tag: dealList[index].tag,
-                                                      title:
-                                                          locale.languageCode ==
+                                              Text(
+                                                getTranslated(
+                                                    context, 'tax_included')!,
+                                                style: const TextStyle(
+                                                    color: Color(0xff22A4BE),
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    right:
+                                                        locale.languageCode ==
+                                                                'ar'
+                                                            ? 0
+                                                            : 33,
+                                                    left: locale.languageCode ==
+                                                            'ar'
+                                                        ? 33
+                                                        : 0),
+                                                child: ElevatedButton(
+                                                  onPressed: () async {
+                                                    String? token =
+                                                        await getPrefrence(
+                                                            AUTH_TOKEN);
+                                                    if (token == null ||
+                                                        token.isEmpty) {
+                                                      if (context.mounted) {
+                                                        setSnackbar(
+                                                          getTranslated(context,
+                                                              'SIGNIN_DETAILS')!,
+                                                          context,
+                                                        );
+                                                      }
+                                                    } else {
+                                                      if (context.mounted) {
+                                                        bool productAdded =
+                                                            Provider.of<MyCartProvider>(
+                                                                    context,
+                                                                    listen:
+                                                                        false)
+                                                                .addItem(
+                                                                    CartItem(
+                                                          id: dealList[index]
+                                                              .id,
+                                                          image: dealList[index]
+                                                              .primaryImage,
+                                                          tag: dealList[index]
+                                                              .tag,
+                                                          title: locale
+                                                                      .languageCode ==
                                                                   'ar'
                                                               ? dealList[index]
                                                                   .frProductName
                                                               : dealList[index]
                                                                   .enProductName,
-                                                      actualPrice: double.tryParse(
-                                                                  dealList[
-                                                                          index]
-                                                                      .price)
-                                                              ?.toInt() ??
-                                                          0,
-                                                      discountedPrice: dealList[
-                                                                  index]
-                                                              .discountPrice
-                                                              .isNotEmpty
-                                                          ? double.tryParse(dealList[
-                                                                          index]
-                                                                      .discountPrice)
+                                                          actualPrice: double.tryParse(
+                                                                      dealList[
+                                                                              index]
+                                                                          .price)
                                                                   ?.toInt() ??
-                                                              0
-                                                          : 0,
-                                                    ));
-                                                    if (productAdded) {
-                                                      setSnackbar(
-                                                          getTranslated(context,
-                                                              'product_added_to_cart')!,
-                                                          context);
-                                                    } else {
-                                                      setSnackbar(
-                                                          getTranslated(context,
-                                                              'product_already_in_cart')!,
-                                                          context);
+                                                              0,
+                                                          discountedPrice: dealList[
+                                                                      index]
+                                                                  .discountPrice
+                                                                  .isNotEmpty
+                                                              ? double.tryParse(
+                                                                          dealList[index]
+                                                                              .discountPrice)
+                                                                      ?.toInt() ??
+                                                                  0
+                                                              : 0,
+                                                        ));
+                                                        if (productAdded) {
+                                                          setSnackbar(
+                                                              getTranslated(
+                                                                  context,
+                                                                  'product_added_to_cart')!,
+                                                              context);
+                                                        } else {
+                                                          setSnackbar(
+                                                              getTranslated(
+                                                                  context,
+                                                                  'product_already_in_cart')!,
+                                                              context);
+                                                        }
+                                                      }
                                                     }
-                                                  }
-                                                },
-                                                child: FittedBox(
-                                                  child: Row(
-                                                    children: [
-                                                      const Icon(
-                                                          Icons.add_circle,
-                                                          size: 18),
-                                                      const SizedBox(width: 5),
-                                                      Text(getTranslated(
-                                                          context,
-                                                          'ADD_CART2')!)
-                                                    ],
+                                                  },
+                                                  child: FittedBox(
+                                                    child: Row(
+                                                      children: [
+                                                        const Icon(
+                                                            Icons.add_circle,
+                                                            size: 18),
+                                                        const SizedBox(
+                                                            width: 5),
+                                                        Text(getTranslated(
+                                                            context,
+                                                            'ADD_CART2')!)
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                            FittedBox(
-                                              child: Row(
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        getTranslated(context,
-                                                            'units_sold')!,
-                                                        style: const TextStyle(
-                                                            color: Colors.grey),
-                                                      ),
-                                                      Text(
-                                                        getTranslated(context,
-                                                            'available')!,
-                                                        style: const TextStyle(
-                                                            color: Colors.grey),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(width: 28),
-                                                  const Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text('10'),
-                                                      Text('334'),
-                                                    ],
-                                                  ),
-                                                ],
+                                              FittedBox(
+                                                child: Row(
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          getTranslated(context,
+                                                              'units_sold')!,
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .grey),
+                                                        ),
+                                                        Text(
+                                                          getTranslated(context,
+                                                              'available')!,
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .grey),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(width: 28),
+                                                    const Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text('10'),
+                                                        Text('334'),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Positioned(
-                              top: 2,
-                              left: isRtl(context) ? 6 : null,
-                              right: isRtl(context) ? null : 6,
-                              child: Row(
-                                children: [
-                                  Text(getTranslated(context, 'sec')!),
-                                  const SizedBox(width: 5),
-                                  Text(getTranslated(context, 'mins')!),
-                                  const SizedBox(width: 5),
-                                  Text(getTranslated(context, 'hours')!),
-                                  const SizedBox(width: 5),
-                                  Text(getTranslated(context, 'days')!),
-                                ],
+                              Positioned(
+                                top: 2,
+                                left: isRtl(context) ? 6 : null,
+                                right: isRtl(context) ? null : 6,
+                                child: Row(
+                                  children: [
+                                    Text(getTranslated(context, 'sec')!),
+                                    const SizedBox(width: 5),
+                                    Text(getTranslated(context, 'mins')!),
+                                    const SizedBox(width: 5),
+                                    Text(getTranslated(context, 'hours')!),
+                                    const SizedBox(width: 5),
+                                    Text(getTranslated(context, 'days')!),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                        .animate(
+                            onInit: (controller) => controller.forward(),
+                            autoPlay: true)
+                        .fadeIn(duration: 600.ms)
+                        .slideY(
+                            begin: 0.4, curve: Curves.easeOut, duration: 600.ms)
+                        .scaleXY(
+                            begin: 0.95,
+                            end: 1.0,
+                            duration: 600.ms,
+                            curve: Curves.easeOut));
               }),
             ),
           );

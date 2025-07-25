@@ -166,103 +166,221 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
                     return getUserImage(
                         profileImage, () => openEditBottomSheet(context));
                   }),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Selector<UserProvider, String>(
-                      selector: (_, provider) => provider.curUserName,
-                      builder: (context, userName, child) {
-                        nameController = TextEditingController(text: userName);
-                        return Text(
-                          userName == ""
-                              ? getTranslated(
-                                  context, isDemoApp ? 'GUEST' : 'USER')!
-                              : userName,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(
-                                color: Theme.of(context).colorScheme.fontColor,
+              FutureBuilder<bool>(
+                future: isDemoUser(),
+                builder: (context, snapshot) {
+                  final isDemo = snapshot.data ?? true;
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Selector<UserProvider, String>(
+                        selector: (_, provider) => '',
+                        builder: (context, userName, child) {
+                          nameController =
+                              TextEditingController(text: userName);
+                          //Future<String?> name = getPrefrence(USER_NAME);
+                          return FutureBuilder<String?>(
+                            future: getPrefrence(USER_NAME),
+                            builder: (context, snapshot) {
+                              String name = snapshot.data ?? '';
+
+                              return Text(
+                                isDemo
+                                    ? getTranslated(context, 'GUEST')!
+                                    : name,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .fontColor,
+                                    ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                      Selector<UserProvider, String>(
+                        selector: (_, provider) => provider.mob,
+                        builder: (context, userMobile, child) {
+                          mobileController =
+                              TextEditingController(text: userMobile);
+                          return userMobile.isNotEmpty
+                              ? Text(
+                                  userMobile,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .fontColor,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                )
+                              : const SizedBox.shrink();
+                        },
+                      ),
+                      Selector<UserProvider, String>(
+                        selector: (_, provider) => provider.email,
+                        builder: (context, userEmail, child) {
+                          emailController =
+                              TextEditingController(text: userEmail);
+                          return userEmail.isNotEmpty
+                              ? Text(
+                                  userEmail,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .fontColor,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                )
+                              : const SizedBox.shrink();
+                        },
+                      ),
+                      Consumer<MyCartProvider>(
+                        builder: (context, userProvider, _) {
+                          return Padding(
+                            padding: const EdgeInsetsDirectional.only(top: 7),
+                            child: InkWell(
+                              child: Text(
+                                getTranslated(context,
+                                    isDemo ? 'LOGIN_REGISTER_LBL' : 'LOGOUT')!,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall!
+                                    .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .primarytheme,
+                                      decoration: TextDecoration.underline,
+                                    ),
                               ),
-                        );
-                      }),
-                  Selector<UserProvider, String>(
-                      selector: (_, provider) => provider.mob,
-                      builder: (context, userMobile, child) {
-                        mobileController =
-                            TextEditingController(text: userMobile);
-                        return userMobile != ""
-                            ? Text(
-                                userMobile,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .fontColor,
-                                        fontWeight: FontWeight.normal),
-                              )
-                            : Container(
-                                height: 0,
-                              );
-                      }),
-                  Selector<UserProvider, String>(
-                      selector: (_, provider) => provider.email,
-                      builder: (context, userEmail, child) {
-                        emailController =
-                            TextEditingController(text: userEmail);
-                        return userEmail != ""
-                            ? Text(
-                                userEmail,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .fontColor,
-                                        fontWeight: FontWeight.normal),
-                              )
-                            : Container(
-                                height: 0,
-                              );
-                      }),
-                  Consumer<MyCartProvider>(builder: (context, userProvider, _) {
-                    return Padding(
-                        padding: const EdgeInsetsDirectional.only(top: 7),
-                        child: InkWell(
-                          child: Text(
-                              getTranslated(context,
-                                  isDemoApp ? 'LOGIN_REGISTER_LBL' : 'LOGOUT')!,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .primarytheme,
-                                    decoration: TextDecoration.underline,
-                                  )),
-                          onTap: () {
-                            if (isDemoApp) {
-                              Navigator.pushNamed(
-                                context,
-                                Routers.loginScreen,
-                                arguments: {
-                                  "isPop": true,
-                                  "classType": const MyProfile()
-                                },
-                              );
-                            } else {
-                              logOutDailog(context);
-                            }
-                          },
-                        ));
-                  }),
-                ],
-              ),
+                              onTap: () {
+                                if (isDemo) {
+                                  Navigator.pushNamed(
+                                    context,
+                                    Routers.loginScreen,
+                                    arguments: {
+                                      "isPop": true,
+                                      "classType": const MyProfile()
+                                    },
+                                  );
+                                } else {
+                                  logOutDailog(context);
+                                }
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  );
+                },
+              )
+
+              // Column(
+              //   mainAxisSize: MainAxisSize.min,
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //     Selector<UserProvider, String>(
+              //         selector: (_, provider) => provider.curUserName,
+              //         builder: (context, userName, child) {
+              //           nameController = TextEditingController(text: userName);
+              //           return Text(
+              //             userName == ""
+              //                 ? getTranslated(
+              //                     context, isDemoApp ? 'GUEST' : 'USER')!
+              //                 : userName,
+              //             style: Theme.of(context)
+              //                 .textTheme
+              //                 .titleMedium!
+              //                 .copyWith(
+              //                   color: Theme.of(context).colorScheme.fontColor,
+              //                 ),
+              //           );
+              //         }),
+              //     Selector<UserProvider, String>(
+              //         selector: (_, provider) => provider.mob,
+              //         builder: (context, userMobile, child) {
+              //           mobileController =
+              //               TextEditingController(text: userMobile);
+              //           return userMobile != ""
+              //               ? Text(
+              //                   userMobile,
+              //                   style: Theme.of(context)
+              //                       .textTheme
+              //                       .titleSmall!
+              //                       .copyWith(
+              //                           color: Theme.of(context)
+              //                               .colorScheme
+              //                               .fontColor,
+              //                           fontWeight: FontWeight.normal),
+              //                 )
+              //               : Container(
+              //                   height: 0,
+              //                 );
+              //         }),
+              //     Selector<UserProvider, String>(
+              //         selector: (_, provider) => provider.email,
+              //         builder: (context, userEmail, child) {
+              //           emailController =
+              //               TextEditingController(text: userEmail);
+              //           return userEmail != ""
+              //               ? Text(
+              //                   userEmail,
+              //                   style: Theme.of(context)
+              //                       .textTheme
+              //                       .titleSmall!
+              //                       .copyWith(
+              //                           color: Theme.of(context)
+              //                               .colorScheme
+              //                               .fontColor,
+              //                           fontWeight: FontWeight.normal),
+              //                 )
+              //               : Container(
+              //                   height: 0,
+              //                 );
+              //         }),
+              //     Consumer<MyCartProvider>(builder: (context, userProvider, _) {
+              //       return Padding(
+              //           padding: const EdgeInsetsDirectional.only(top: 7),
+              //           child: InkWell(
+              //             child: Text(
+              //                 getTranslated(context,
+              //                     isDemoApp ? 'LOGIN_REGISTER_LBL' : 'LOGOUT')!,
+              //                 style: Theme.of(context)
+              //                     .textTheme
+              //                     .bodySmall!
+              //                     .copyWith(
+              //                       color: Theme.of(context)
+              //                           .colorScheme
+              //                           .primarytheme,
+              //                       decoration: TextDecoration.underline,
+              //                     )),
+              //             onTap: () {
+              //               if (isDemoApp) {
+              //                 Navigator.pushNamed(
+              //                   context,
+              //                   Routers.loginScreen,
+              //                   arguments: {
+              //                     "isPop": true,
+              //                     "classType": const MyProfile()
+              //                   },
+              //                 );
+              //               } else {
+              //                 logOutDailog(context);
+              //               }
+              //             },
+              //           ));
+              //     }),
+              //   ],
+              // ),
             ],
           ),
         ));
@@ -847,8 +965,7 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
                                         setStater(() {
                                           from = 1;
                                         });
-                                      } else {
-                                      }
+                                      } else {}
                                     }
                                   : null,
                               child: Container(
@@ -946,7 +1063,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
                 Provider.of<SettingsProvider>(context, listen: false);
             settingProvider.clearUserSession(context);
             Future.delayed(Duration.zero, () {
-
               Navigator.pushNamedAndRemoveUntil(
                   context,
                   Routers.loginScreen,
@@ -997,7 +1113,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
                 Provider.of<SettingsProvider>(context, listen: false);
             settingProvider.clearUserSession(context);
             Future.delayed(Duration.zero, () {
-
               Navigator.pushNamedAndRemoveUntil(
                   context,
                   Routers.loginScreen,
@@ -1145,7 +1260,6 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
     //ISDARK = isDark.toString();
   }
 
-
   logOutDailog(BuildContext context) async {
     await dialogAnimate(
         context,
@@ -1187,6 +1301,9 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
                       userProvider.clearCart();
                     });
                     Navigator.of(context).pop(false);
+                    removePrefrence(AUTH_TOKEN);
+                    await setPrefrenceBool(IS_DEMO, true);
+
                     // SettingProvider settingProvider =
                     //     Provider.of<SettingProvider>(context, listen: false);
 
@@ -1474,9 +1591,7 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
             title: title,
             btnAnim: buttonSqueezeanimation1,
             btnCntrl: buttonController1,
-            onBtnSelected:
-                onBtnSelected)
-        );
+            onBtnSelected: onBtnSelected));
   }
 
   Future<bool> validateAndSave(GlobalKey<FormState> key) async {

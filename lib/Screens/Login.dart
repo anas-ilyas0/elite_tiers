@@ -247,18 +247,20 @@ class LoginPageState extends State<LoginScreen> with TickerProviderStateMixin {
       if (res['status'] == 'success') {
         String userId = res['user_id'].toString();
         setSnackbar(getTranslated(context, 'otp_sent_success')!, context);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => VerifyOtp(
-              userId: userId,
-              email: isPhoneLogin ? emailController.text : null,
-              mobile: !isPhoneLogin ? emailController.text : null,
+        if (mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => VerifyOtp(
+                userId: userId,
+                email: isPhoneLogin ? emailController.text : null,
+                mobile: !isPhoneLogin ? emailController.text : null,
+              ),
             ),
-          ),
-        );
+          );
+        }
       } else {
-        setSnackbar(getTranslated(context, 'user_does`nt_exist')!, context);
+        setSnackbar(getTranslated(context, 'user_doesn`t_exist')!, context);
       }
     } catch (error) {
       print('no otp $error');

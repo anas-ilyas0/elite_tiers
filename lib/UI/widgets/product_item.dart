@@ -107,6 +107,7 @@ class ProductItem extends StatelessWidget {
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
+                                  fit: BoxFit.contain,
                                   image: NetworkImage(productImage),
                                 ),
                               ),
@@ -292,39 +293,44 @@ class ProductItem extends StatelessWidget {
                         backgroundColor:
                             Theme.of(context).colorScheme.primarytheme,
                       ),
-                      onPressed: () {
-                        if (isDemoApp) {
-                          setSnackbar(
-                            getTranslated(context, 'SIGNIN_DETAILS')!,
-                            context,
-                          );
+                      onPressed: () async {
+                        String? token = await getPrefrence(AUTH_TOKEN);
+                        if (token == null || token.isEmpty) {
+                          if (context.mounted) {
+                            setSnackbar(
+                              getTranslated(context, 'SIGNIN_DETAILS')!,
+                              context,
+                            );
+                          }
                         } else {
-                          bool productAdded = Provider.of<MyCartProvider>(
-                                  context,
-                                  listen: false)
-                              .addItem(CartItem(
-                            id: productId,
-                            image: productImage,
-                            tag: productTag,
-                            title: productName,
-                            actualPrice:
-                                double.tryParse(productPrice)?.toInt() ?? 0,
-                            discountedPrice: productDiscountPrice.isNotEmpty
-                                ? double.tryParse(productDiscountPrice)
-                                        ?.toInt() ??
-                                    0
-                                : 0,
-                          ));
-                          if (productAdded) {
-                            setSnackbar(
-                                getTranslated(
-                                    context, 'product_added_to_cart')!,
-                                context);
-                          } else {
-                            setSnackbar(
-                                getTranslated(
-                                    context, 'product_already_in_cart')!,
-                                context);
+                          if (context.mounted) {
+                            bool productAdded = Provider.of<MyCartProvider>(
+                                    context,
+                                    listen: false)
+                                .addItem(CartItem(
+                              id: productId,
+                              image: productImage,
+                              tag: productTag,
+                              title: productName,
+                              actualPrice:
+                                  double.tryParse(productPrice)?.toInt() ?? 0,
+                              discountedPrice: productDiscountPrice.isNotEmpty
+                                  ? double.tryParse(productDiscountPrice)
+                                          ?.toInt() ??
+                                      0
+                                  : 0,
+                            ));
+                            if (productAdded) {
+                              setSnackbar(
+                                  getTranslated(
+                                      context, 'product_added_to_cart')!,
+                                  context);
+                            } else {
+                              setSnackbar(
+                                  getTranslated(
+                                      context, 'product_already_in_cart')!,
+                                  context);
+                            }
                           }
                         }
                       },

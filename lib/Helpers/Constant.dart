@@ -38,6 +38,8 @@ const double allowableTotalFileSizesInChatMediaInMB =
 //Token ExpireTime in minutes & issuer name
 const int tokenExpireTime = 5;
 const String issuerName = 'eshop'; //do not change it
+const String AUTH_TOKEN = 'auth_token';
+String IS_DEMO = 'is_demo';
 const String tamaraToken =
     'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhY2NvdW50SWQiOiIwYzk1ZjM4Mi0xZjNjLTQ5M2QtOTk2MS1lZDEwZjEwYTE3MWUiLCJ0eXBlIjoibWVyY2hhbnQiLCJzYWx0IjoiMDFmOTIwNjg1ZjEwM2IzZTQ5Y2Y2ZTA0NmMzNDYyNTciLCJyb2xlcyI6WyJST0xFX01FUkNIQU5UIl0sImlhdCI6MTcyNTc0MzcyMywiaXNzIjoiVGFtYXJhIFBQIn0.BiPUs3h7zb14x01JUTX8ueWxmbqHD6xZt4Z0LmdeCMUphw1cu4Rf5XelunIc_amTzJD5e322Bo2sMnOYhFxwOtIH8X0lqr6z8EHgtdrKBXmcPIsODcLv4h7G2KgUpKEgSLE6Vy5-cuhIyWMJ4Aq4TLgfRQvyXulBQKNOPlM8AYN3KBbHfzFCrg04GJQ6tFiJ5ru-L7ZzWdcq5A2eoKO077BSSNn1l5vBC6uKTsyHmPeH7F_hsFKfgil_XQaOrYlJyn7miQ5RXWeT5wUIBgCeKAEJyuWt7m9pkoEM16YP-0jmgLSEA_Z4-z42qYhglTWl2vn8Q0dmMe8SN6Ly7ECp7Q';
 const String fatoorahToken =

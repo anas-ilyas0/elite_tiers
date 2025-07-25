@@ -2,11 +2,14 @@ import 'package:elite_tiers/Helpers/Color.dart';
 import 'package:elite_tiers/Helpers/Session.dart';
 import 'package:elite_tiers/Models/brands_model.dart';
 import 'package:elite_tiers/Models/products_model.dart';
+import 'package:elite_tiers/Providers/home_provider.dart';
 import 'package:elite_tiers/UI/styles/DesignConfig.dart';
 import 'package:elite_tiers/UI/widgets/SimpleAppBar.dart';
 import 'package:elite_tiers/UI/widgets/product_item.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ShowMoreHomeProducts extends StatefulWidget {
   final String categoryName;
@@ -28,69 +31,6 @@ class _ShowMoreHomeProductsState extends State<ShowMoreHomeProducts> {
   String? selectedFrontDiameter;
   String? selectedFrontRatio;
   String? selectedFrontWidth;
-  List<String> diameters = [
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
-    '22',
-    '23',
-    '24'
-  ];
-  List<String> ratios = [
-    '10',
-    '15',
-    '20',
-    '25',
-    '30',
-    '35',
-    '40',
-    '45',
-    '50',
-    '55',
-    '60',
-    '65',
-    '70',
-    '75',
-    '80',
-    '85',
-    '90',
-    '95',
-    '100',
-  ];
-  List<String> widths = [
-    '125',
-    '135',
-    '145',
-    '155',
-    '165',
-    '175',
-    '185',
-    '195',
-    '205',
-    '215',
-    '225',
-    '235',
-    '245',
-    '255',
-    '265',
-    '275',
-    '285',
-    '295',
-    '305',
-    '315',
-    '325',
-    '335',
-    '345',
-    '355',
-    '365'
-  ];
   final _searchController = TextEditingController();
   final _minPriceController = TextEditingController();
   final _maxPriceController = TextEditingController();
@@ -153,6 +93,25 @@ class _ShowMoreHomeProductsState extends State<ShowMoreHomeProducts> {
   @override
   Widget build(BuildContext context) {
     Locale locale = Localizations.localeOf(context);
+    var provider = Provider.of<HomeProvider>(context);
+    final allProducts = provider.allProducts;
+    List<String> diameters = allProducts
+        .map((product) => product.diameter)
+        .where((d) => d.isNotEmpty)
+        .toSet()
+        .toList();
+
+    List<String> ratios = allProducts
+        .map((product) => product.ratio)
+        .where((r) => r.isNotEmpty)
+        .toSet()
+        .toList();
+
+    List<String> widths = allProducts
+        .map((product) => product.width)
+        .where((w) => w.isNotEmpty)
+        .toSet()
+        .toList();
     return Scaffold(
       appBar: getSimpleAppBar(widget.categoryName, context),
       body: widget.productsList.isEmpty
@@ -251,10 +210,16 @@ class _ShowMoreHomeProductsState extends State<ShowMoreHomeProducts> {
                                             ),
                                           ),
                                           if (widget.categoryName != 'إطار' ||
-                                              widget.categoryName != 'الإطارات')
+                                              widget.categoryName !=
+                                                  'الإطارات' ||
+                                              widget.categoryName != 'Tire' ||
+                                              widget.categoryName != 'Tires')
                                             const SizedBox(height: 10),
                                           if (widget.categoryName == 'إطار' ||
-                                              widget.categoryName == 'الإطارات')
+                                              widget.categoryName ==
+                                                  'الإطارات' ||
+                                              widget.categoryName == 'Tire' ||
+                                              widget.categoryName == 'Tires')
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
@@ -315,7 +280,7 @@ class _ShowMoreHomeProductsState extends State<ShowMoreHomeProducts> {
                                                                   hint: Text(
                                                                     getTranslated(
                                                                         context,
-                                                                        'diameter')!,
+                                                                        'rim_size')!,
                                                                     style: const TextStyle(
                                                                         fontSize:
                                                                             14),
@@ -364,7 +329,7 @@ class _ShowMoreHomeProductsState extends State<ShowMoreHomeProducts> {
                                                                   hint: Text(
                                                                     getTranslated(
                                                                         context,
-                                                                        'ratio')!,
+                                                                        'height')!,
                                                                     style: const TextStyle(
                                                                         fontSize:
                                                                             14),
@@ -413,7 +378,7 @@ class _ShowMoreHomeProductsState extends State<ShowMoreHomeProducts> {
                                                                   hint: Text(
                                                                     getTranslated(
                                                                         context,
-                                                                        'width')!,
+                                                                        'offer')!,
                                                                     style: const TextStyle(
                                                                         fontSize:
                                                                             14),
@@ -461,7 +426,10 @@ class _ShowMoreHomeProductsState extends State<ShowMoreHomeProducts> {
                                               ),
                                             ),
                                           if (widget.categoryName == 'إطار' ||
-                                              widget.categoryName == 'الإطارات')
+                                              widget.categoryName ==
+                                                  'الإطارات' ||
+                                              widget.categoryName == 'Tire' ||
+                                              widget.categoryName == 'Tires')
                                             const SizedBox(height: 20),
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
@@ -833,11 +801,13 @@ class _ShowMoreHomeProductsState extends State<ShowMoreHomeProducts> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Expanded(
-                                child: _productCard(context, firstProduct),
+                                child: _productCard(
+                                    context, firstProduct, firstIndex),
                               ),
                               if (secondProduct != null)
                                 Expanded(
-                                  child: _productCard(context, secondProduct),
+                                  child: _productCard(
+                                      context, secondProduct, secondIndex),
                                 )
                               else
                                 Expanded(child: Container()),
@@ -853,37 +823,47 @@ class _ShowMoreHomeProductsState extends State<ShowMoreHomeProducts> {
     );
   }
 
-  Widget _productCard(BuildContext context, AllProducts product) {
+  Widget _productCard(BuildContext context, AllProducts product, int index) {
     Locale locale = Localizations.localeOf(context);
     final double? discountPriceValue = double.tryParse(
         product.discountPrice.isNotEmpty
             ? product.discountPrice
             : product.price);
     final double installment = (discountPriceValue ?? 0) / 4;
-    return ProductItem(
-      productImage: product.primaryImage,
-      productTag: product.tag,
-      productName: locale.languageCode == 'ar'
-          ? product.frProductName
-          : product.enProductName,
-      productDiscountPrice: product.discountPrice,
-      productPrice: product.price,
-      productOrigin: product.origin,
-      productYear: product.year,
-      productId: product.id,
-      productInstallment: installment,
-      productCategoryName:
-          widget.categoryName == getTranslated(context, 'tires')!
-              ? 'الإطارات'
-              : widget.categoryName,
-      productPattern: product.pattern,
-      productWidth: product.width,
-      productRimSize: product.rimSize,
-      productRatio: product.ratio,
-      productDiameter: product.diameter,
-      productDescription: locale.languageCode == 'ar'
-          ? product.frDescription
-          : product.enDescription,
+    return AnimationConfiguration.staggeredGrid(
+      position: index,
+      duration: const Duration(milliseconds: 200),
+      columnCount: 2,
+      child: SlideAnimation(
+        verticalOffset: 50.0,
+        child: FadeInAnimation(
+          child: ProductItem(
+            productImage: product.primaryImage,
+            productTag: product.tag,
+            productName: locale.languageCode == 'ar'
+                ? product.frProductName
+                : product.enProductName,
+            productDiscountPrice: product.discountPrice,
+            productPrice: product.price,
+            productOrigin: product.origin,
+            productYear: product.year,
+            productId: product.id,
+            productInstallment: installment,
+            productCategoryName:
+                widget.categoryName == getTranslated(context, 'tires')!
+                    ? 'الإطارات'
+                    : widget.categoryName,
+            productPattern: product.pattern,
+            productWidth: product.width,
+            productRimSize: product.rimSize,
+            productRatio: product.ratio,
+            productDiameter: product.diameter,
+            productDescription: locale.languageCode == 'ar'
+                ? product.frDescription
+                : product.enDescription,
+          ),
+        ),
+      ),
     );
   }
 }

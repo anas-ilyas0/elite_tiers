@@ -17,10 +17,10 @@ class VerifyOtp extends StatefulWidget {
       {super.key, required this.userId, required this.email, this.mobile});
 
   @override
-  _MobileOTPState createState() => _MobileOTPState();
+  MobileOTPState createState() => MobileOTPState();
 }
 
-class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
+class MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final otpController = TextEditingController();
   late AnimationController buttonController;
@@ -102,62 +102,48 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
   }
 
   Future<void> otpProcess() async {
+    final api = (widget.email != null && widget.email!.contains("@"))
+        ? verifyOtpFromEmailApi
+        : verifyOtpFromPhoneApi;
+
     Map<String, String> data = {
       "otp": otpController.text,
       "user_id": widget.userId ?? '',
     };
 
-    if (widget.email != null && widget.email!.isNotEmpty) {
+    if (widget.email != null && widget.email!.contains("@")) {
       data["email"] = widget.email!;
     } else if (widget.mobile != null && widget.mobile!.isNotEmpty) {
       data["mobile"] = widget.mobile!;
     }
 
-    final api =
-        widget.email != null ? verifyOtpFromEmailApi : verifyOtpFromPhoneApi;
-
     try {
-      await apiBaseHelper.postAPICall(api, data);
+      var res = await apiBaseHelper.postAPICall(api, data);
       await buttonController.reverse();
       if (!mounted) return;
 
-      setSnackbar(
-        '${getTranslated(context, 'OTPMSG')} & ${getTranslated(context, 'logged_in_success')}',
-        context,
-      );
-
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => const Dashboard()));
+      if (mounted) {
+        setSnackbar(
+          '${getTranslated(context, 'OTPMSG')} & ${getTranslated(context, 'logged_in_success')}',
+          context,
+        );
+        isDemoApp = false;
+        String userName = res['user']['name'] ?? '';
+        String token = res['token'] ?? '';
+        await setPrefrence(USER_NAME, userName);
+        await setPrefrence(AUTH_TOKEN, token);
+        await setPrefrenceBool(IS_DEMO, false);
+        if (mounted) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => const Dashboard()));
+        }
+      }
     } catch (error) {
       await buttonController.reverse();
       if (!mounted) return;
       setSnackbar('Error $error', context);
     }
   }
-
-  // Future<void> otpProcess() async {
-  //   Map<String, String> data = {
-  //     "email": widget.email ?? '',
-  //     "otp": otpController.text,
-  //     "user_id": widget.userId ?? '',
-  //   };
-  //   print(data);
-  //   try {
-  //     await apiBaseHelper.postAPICall(verifyOtpFromEmailApi, data);
-  //     await buttonController.reverse();
-  //     if (!mounted) return;
-  //     isDemoApp = false;
-  //     setSnackbar(
-  //         '${getTranslated(context, 'OTPMSG')} & ${getTranslated(context, 'logged_in_success')}',
-  //         context);
-  //     Navigator.pushReplacement(
-  //         context, MaterialPageRoute(builder: (_) => const Dashboard()));
-  //   } catch (error) {
-  //     await buttonController.reverse();
-  //     if (!mounted) return;
-  //     setSnackbar('Error $error', context);
-  //   }
-  // }
 
   Future<void> _playAnimation() async {
     try {
@@ -239,7 +225,7 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
                     padding: const EdgeInsetsDirectional.only(
                         top: 15.0, bottom: 5.0, start: 12),
                     child: Text(
-                      '${getTranslated(context, 'SENT_VERIFY_CODE_TO_NO_LBL')!}: ${widget.email}',
+                      '${getTranslated(context, 'SENT_VERIFY_CODE_TO_NO_LBL')!}: ${widget.email ?? widget.mobile}',
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
                             color: Theme.of(context).colorScheme.fontColor,
                             fontWeight: FontWeight.normal,

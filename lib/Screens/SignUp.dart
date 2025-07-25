@@ -28,10 +28,10 @@ class SignUp extends StatefulWidget {
   }
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  SignUpPageState createState() => SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
+class SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
   bool? _showPassword = false;
   bool visible = false;
   bool isPhoneSignup = false;
@@ -108,6 +108,12 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    mobileController.dispose();
+    ccodeController.dispose();
+    passwordController.dispose();
+    referController.dispose();
     buttonController!.dispose();
     super.dispose();
   }
@@ -131,14 +137,15 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
           btnCntrl: buttonController,
           onBtnSelected: () async {
             _playAnimation();
-
             Future.delayed(const Duration(seconds: 2)).then((_) async {
               _isNetworkAvail = await isNetworkAvailable();
               if (_isNetworkAvail) {
-                Navigator.pushReplacement(
-                    context,
-                    CupertinoPageRoute(
-                        builder: (BuildContext context) => super.widget));
+                if (context.mounted) {
+                  Navigator.pushReplacement(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (BuildContext context) => super.widget));
+                }
               } else {
                 await buttonController!.reverse();
                 if (mounted) setState(() {});
@@ -330,6 +337,7 @@ class _SignUpPageState extends State<SignUp> with TickerProviderStateMixin {
       }
     } catch (error) {
       print('error signup $error');
+      setSnackbar(getTranslated(context, 'user_exist')!, context);
       await buttonController!.reverse();
       if (!mounted) return;
       setSnackbar('${getTranslated(context, 'error')!}: $error', context);

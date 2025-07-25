@@ -1,5 +1,5 @@
 name: elite_tiers
-description: "A new Flutter project."
+description: "Ecommerce app for Elite Tiers"
 
 publish_to: 'none'
 
@@ -46,6 +46,11 @@ dependencies:
   webview_flutter_android: ^4.7.0
   crypto: any
   hive: ^2.2.3
+  flutter_animate: ^4.5.2
+  confetti: ^0.8.0
+  lottie: ^3.3.1
+  animations: ^2.0.11
+  flutter_staggered_animations: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +68,7 @@ flutter:
   assets:
     - assets/images/
     - assets/animation/maintenance.json
+    - assets/lottie/fireworks.json
     - lib/Language/
 
   fonts:
