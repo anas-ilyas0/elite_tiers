@@ -48,13 +48,13 @@ class HomePageState extends State<Dashboard>
   StreamSubscription<Uri>? _linkSubscription;
 
   @override
-void dispose() {
-  WidgetsBinding.instance.removeObserver(this);
-  _linkSubscription?.cancel();
-  _pageController.dispose();
-  navigationContainerAnimationController.dispose();
-  super.dispose();
-}
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _linkSubscription?.cancel();
+    _pageController.dispose();
+    navigationContainerAnimationController.dispose();
+    super.dispose();
+  }
 
   void loadData() async {
     final settingsProvider =

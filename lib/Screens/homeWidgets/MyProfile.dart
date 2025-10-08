@@ -394,12 +394,14 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
               index,
               InkWell(
                 onTap: () {
-                  if (mounted) {
-                    selectLan = index;
-                    _changeLan(langCode[index], ctx);
-                    // });
-                    //  });
-                  }
+                  selectLan = index;
+                  Navigator.pop(ctx);
+                  WidgetsBinding.instance.addPostFrameCallback((_) async {
+                    final locale = await setLocale(langCode[index]);
+                    if (ctx.mounted) {
+                      MyApp.setLocale(ctx, locale);
+                    }
+                  });
                 },
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10),
@@ -412,10 +414,10 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: selectLan == index
-                                    ? Theme.of(context).colorScheme.primarytheme
+                                    ? Theme.of(ctx).colorScheme.primarytheme
                                     : Theme.of(ctx).colorScheme.white,
                                 border: Border.all(
-                                    color: Theme.of(context)
+                                    color: Theme.of(ctx)
                                         .colorScheme
                                         .primarytheme)),
                             child: Padding(
@@ -474,9 +476,10 @@ class StateProfile extends State<MyProfile> with TickerProviderStateMixin {
   }
 
   void _changeLan(String language, BuildContext ctx) async {
-    Locale locale = await setLocale(language);
-
-    MyApp.setLocale(ctx, locale);
+    final locale = await setLocale(language);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      MyApp.setLocale(ctx, locale);
+    });
   }
 
   Future<void> setUpdateUser(String userID,

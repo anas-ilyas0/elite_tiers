@@ -130,7 +130,6 @@ class HomeProvider extends ChangeNotifier {
         }
       }
     }
-
     return result;
   }
 

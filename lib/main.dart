@@ -46,7 +46,7 @@ void main() async {
                 ISDARK = "false";
               }
 
-              if (theme == null || theme == "" || theme == DEFAULT_SYSTEM) {
+              if (theme == "" || theme == DEFAULT_SYSTEM) {
                 prefs.setString(APP_THEME, DEFAULT_SYSTEM);
                 var brightness = SchedulerBinding
                     .instance.platformDispatcher.platformBrightness;

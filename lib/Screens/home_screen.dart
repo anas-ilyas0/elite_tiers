@@ -726,6 +726,7 @@ class HomeScreenState extends State<HomeScreen>
                               ],
                             )),
                       ),
+
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: Text(
